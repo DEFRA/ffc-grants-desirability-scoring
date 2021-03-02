@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  ffc-template-node:
+  ffc-grants-desirability-scoring:
     build:
       context: .
       target: production
-    image: ffc-template-node
-    container_name: ffc-template-node
+    image: ffc-grants-desirability-scoring
+    container_name: ffc-grants-desirability-scoring
     environment: {}
