@@ -1,0 +1,8 @@
+{{- include "ffc-helm-library.deployment" (list . "ffc-grants-desirability-scoring.deployment") -}}
+{{- define "ffc-grants-desirability-scoring.deployment" -}}
+spec:
+  template:
+    spec:
+      containers:
+      - {{ include "ffc-helm-library.container" (list . "ffc-grants-desirability-scoring.container") }}
+{{- end -}}

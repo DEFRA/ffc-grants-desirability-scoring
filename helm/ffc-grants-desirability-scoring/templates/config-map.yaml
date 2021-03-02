@@ -1,0 +1,6 @@
+{{- include "ffc-helm-library.container-config-map" (list . "ffc-grants-desirability-scoring.config-map") -}}
+{{- define "ffc-grants-desirability-scoring.config-map" -}}
+data:
+  NODE_ENV: {{ quote .Values.environment }}
+  PORT: {{ quote .Values.container.port }}
+{{- end -}}
