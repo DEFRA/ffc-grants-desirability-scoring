@@ -2,4 +2,4 @@ resources:
   queues:
     - name: calculateScore
   topics:
-    - name: desirabilityScore
+    - name: desireScore
