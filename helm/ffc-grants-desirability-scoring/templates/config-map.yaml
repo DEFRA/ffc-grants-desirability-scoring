@@ -3,4 +3,7 @@
 data:
   NODE_ENV: {{ quote .Values.environment }}
   PORT: {{ quote .Values.container.port }}
+  DESIRABILITY_SCORE_TOPIC_ADDRESS: {{ quote .Values.container.desirabilityScoreTopicAddress }}
+  CALCULATE_SCORE_QUEUE_ADDRESS: {{ quote .Values.container.calculateScoreQueueAddress }}
+  SERVICE_BUS_HOST: {{ quote .Values.container.messageQueueHost }}
 {{- end -}}

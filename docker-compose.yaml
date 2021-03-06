@@ -7,4 +7,9 @@ services:
       target: production
     image: ffc-grants-desirability-scoring
     container_name: ffc-grants-desirability-scoring
-    environment: {}
+    environment:
+      SERVICE_BUS_HOST: ${SERVICE_BUS_HOST:-notset}
+      SERVICE_BUS_PASSWORD: ${SERVICE_BUS_PASSWORD:-notset}
+      SERVICE_BUS_USER: ${SERVICE_BUS_USER:-notset}
+      DESIRABILITY_SCORE_TOPIC_ADDRESS: ${DESIRABILITY_SCORE_TOPIC_ADDRESS:-notset}
+      CALCULATE_SCORE_QUEUE_ADDRESS: ${CALCULATE_SCORE_QUEUE_ADDRESS:-notset}

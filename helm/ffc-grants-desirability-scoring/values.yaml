@@ -6,6 +6,10 @@ image: ffc-grants-desirability-scoring
 
 labels: {}
 
+azureIdentity:
+  clientID: not-a-real-clientID
+  resourceID: not-a-real-resourceID
+
 containerConfigMap:
   name: ffc-grants-desirability-scoring-config-map
 
@@ -27,6 +31,9 @@ container:
   readOnlyRootFilesystem: true
   allowPrivilegeEscalation: false
   port: 3000
+  messageQueueHost: dummy
+  calculateScoreQueueAddress: calculate-score
+  desirabilityScoreTopicAddress: desirability-score
 
 livenessProbe:
   path: /healthz
