@@ -31,6 +31,9 @@ container:
   readOnlyRootFilesystem: true
   allowPrivilegeEscalation: false
   port: 3000
+  messageQueueHost: dummy
+  calculateScoreQueueAddress: calculate-score
+  desirabilityScoreTopicAddress: desirability-score
 
 livenessProbe:
   path: /healthz

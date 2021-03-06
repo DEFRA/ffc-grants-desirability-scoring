@@ -6,15 +6,17 @@ const sharedConfig = {
   useCredentialChain: process.env.NODE_ENV === 'production'
 }
 
-const msgTypePrefix = 'uk.gov.ffc.grants'
-
 module.exports = {
-  fixmeQueue: {
-    address: process.env.FIXME_QUEUE_ADDRESS,
-    type: FIXME,
+  calculateScoreQueue: {
+    address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
+    type: 'queue',
     ...sharedConfig
   },
-  fixmeMsgType: `${msgTypePrefix}.fixme.fixme`,
+  desirabilityScoreTopic: {
+    address: process.env.DESIRABILITY_SCORE_TOPIC_ADDRESS,
+    type: 'topic',
+    ...sharedConfig
+  },
+  desirabilityScoreType: 'uk.gov.ffc.grants.score.calculated',
   msgSrc: 'ffc-grants-desirability-scoring'
 }
-
