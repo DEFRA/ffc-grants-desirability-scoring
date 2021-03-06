@@ -17,6 +17,6 @@ module.exports = {
     type: 'topic',
     ...sharedConfig
   },
-  desirabilityScoreType: 'uk.gov.ffc.grants.score.calculated',
+  desirabilityScoreMsgType: 'uk.gov.ffc.grants.score.calculated',
   msgSrc: 'ffc-grants-desirability-scoring'
 }
