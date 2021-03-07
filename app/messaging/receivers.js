@@ -18,8 +18,8 @@ process.on('SIGINT', async () => {
 })
 
 module.exports = {
-  startCalculateRequestReceived: async function (calculateRequestReceived) {
-    const updateAction = msg => calculateRequestReceived(msg, calculateScoreReceiver)
+  startCalculateScoreReceiver: async function (calculateScoreReceived) {
+    const updateAction = msg => calculateScoreReceived(msg, calculateScoreReceiver)
     calculateScoreReceiver = new MessageReceiver(msgCfg.calculateScoreQueue, updateAction)
     await calculateScoreReceiver.subscribe()
   }

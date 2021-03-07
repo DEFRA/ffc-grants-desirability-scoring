@@ -30,7 +30,7 @@ async function sendMsg (sender, msgData, msgType) {
 }
 
 module.exports = {
-  scoreCalculated: async function (desirabilityScoreData) {
+  sendScoreCalculated: async function (desirabilityScoreData) {
     await sendMsg(scoreCalculatedSender, desirabilityScoreData, msgCfg.desirabilityScoreMsgType)
   }
 }

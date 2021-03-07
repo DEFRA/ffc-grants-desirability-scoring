@@ -2,7 +2,7 @@ const server = require('./server')
 
 const init = async () => {
   const calculateScoreAction = require('./messaging/calculate-score')
-  require('./messaging/receivers').startCalculateRequestReceived(calculateScoreAction)
+  require('./messaging/receivers').startCalculateScoreReceiver(calculateScoreAction)
 
   await server.start()
   console.log('Server running on %s', server.info.uri)
