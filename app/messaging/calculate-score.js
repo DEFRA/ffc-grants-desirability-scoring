@@ -10,8 +10,8 @@ module.exports = async function (msg, calculateScoreReceiver) {
 
     await calculateScoreReceiver.completeMessage(msg)
   } catch (err) {
-    console.err('Unable to process message')
-    console.err(err)
+    console.error('Unable to process message')
+    console.error(err)
     await calculateScoreReceiver.abandonMessage(msg)
   }
 }
