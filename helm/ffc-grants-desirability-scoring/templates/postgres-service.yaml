@@ -1,0 +1,5 @@
+{{- if .Values.postgresService.postgresExternalName }}
+{{- include "ffc-helm-library.postgres-service" (list . "ffc-grants-desirability-scoring.postgres-service") -}}
+{{- end }}
+{{- define "ffc-sfi-desirability-scoring.postgres-service" -}}
+{{- end -}}
