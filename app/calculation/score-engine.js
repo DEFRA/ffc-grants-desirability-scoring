@@ -6,8 +6,8 @@ const bandMedium = 'Medium'
 
 class ScoreEngine {
   constructor (desirabilityAssessment) {
-    this.scoringData = require('./score-data.json')// score-data.json
-    this.desirabilityAssessment = desirabilityAssessment// grant-scheme.json
+    this.scoringData = require('./score-data.json')
+    this.desirabilityAssessment = desirabilityAssessment
   }
 
   getScore () {
@@ -34,12 +34,12 @@ class ScoreEngine {
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))
 
     // get overall rating band
-    this.desirabilityAssessment.desirability.overallRating.band = GetOverAllRatingBand(bandScore, this.scoringData.desirability)
+    this.desirabilityAssessment.desirability.overallRating.band = getOverAllRatingBand(bandScore, this.scoringData.desirability)
     return this.desirabilityAssessment
   }
 }
 
-function GetOverAllRatingBand (bandScore, sectionScoringData) {
+function getOverAllRatingBand (bandScore, sectionScoringData) {
   if (bandScore >=
     first(
       sectionScoringData.overallRatingScoreData
