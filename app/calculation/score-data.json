@@ -1,0 +1,630 @@
+{
+    "grantScheme": {
+        "key": "WM001",
+        "name": "Water Management"
+    },
+    "desirability": {
+        "overallRatingScoreData":[
+            {
+                "name": "High",
+                "value": "75",
+                "type": "numeric"
+            },
+            {
+                "name": "Low",
+                "value": "55",
+                "type": "numeric"
+            },
+            {
+                "name": "Medium",
+                "value": null,
+                "type": "else"
+            }
+        ],
+        "questions": [
+            {
+                "key": "Q14",
+                "title": "Project Details",
+                "maxScore": 4,
+                "weight": 0.8,
+                "showResult":true,
+                "scoreType": "DualSumWeightBand",
+                "answer": [
+                    {
+                        "key": "Q14-A1",
+                        "weight": 3,
+                        "value": "Change water source"
+                    },
+                    {
+                        "key": "Q14-A2",
+                        "weight": 2,
+                        "value": "Improve irrigation efficiency"
+                    },
+                    {
+                        "key": "Q14-A3",
+                        "weight": 1,
+                        "value": "Introduce Irrigation"
+                    },
+                    {
+                        "key": "Q14-A4",
+                        "weight": 1,
+                        "value": "Increase Irrigation"
+                    },
+                    {
+                        "key": "Q14-A5",
+                        "weight": 0,
+                        "value": "None of the above"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                            "name": "High",
+                            "value": "0.8",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Low",
+                            "value": "0.5",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Medium",
+                            "value": null,
+                            "type": "else"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "Q15",
+                "title": "What main crops will be irrigated?",
+                "scoreType": "AnswerValNoBand",
+                "maxScore": 0,
+                "showResult":false,
+                "group": "Q16",
+                "answer": [
+                    {
+                        "key": "Q15-A1",
+                        "desc": "Protected cropping (eg glass house or poly tunnel)",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q15-A2",
+                        "desc": "Fruit (eg top fruit, bush fruit)",
+                        "weight": 2
+                    },
+                    {
+                        "key": "Q15-A3",
+                        "desc": "Field-scale crops (eg potatoes, onions, carrots)",
+                        "weight": 1
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                }
+            },
+            {
+                "key": "Q16",
+                "title": "How much land will be irrigated in total per year under the grant?",
+                "group": "Q16",
+                "scoreType": "DualQuestionHectorScore",
+                "dependentQuestions":["Q15"],
+                "maxScore": 9,
+                "weight": 3,
+                "showResult":true,
+                "answer": [
+                    {
+                        "key": "Q16a-A",
+                        "value": 100
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                },
+                "scoreData": {
+                    "scoreMatrix": [
+                        {
+                            "crop": 1,
+                            "low": 10,
+                            "medium": 0,
+                            "high": 40
+                        },
+                        {
+                            "crop": 2,
+                            "low": 2,
+                            "medium": 0,
+                            "high": 5
+                        },
+                        {
+                            "crop": 3,
+                            "low": 0.1,
+                            "medium": 0,
+                            "high": 1
+                        }
+                    ],
+                    "scoreBand": [
+                        {
+                            "name": "High",
+                            "value": "3",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Low",
+                            "value": "1",
+                            "type": "else"
+                        },
+                        {
+                            "name": "Medium",
+                            "value": "2",
+                            "type": "numeric"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "Q17",
+                "title": "Where will the water used for irrigation come from?",
+                "group": "Q17",
+                "scoreType": "DualAvgMatrix",
+                "maxScore": 50,
+                "weight": 1,
+                "showResult":true,
+                "answer": [
+                    {
+                        "key": "Q17a-A1",
+                        "desc": "Peak flow surface water",
+                        "weight": 7
+                    },
+                    {
+                        "key": "Q17a-A2",
+                        "desc": "Rain water harvesting",
+                        "weight": 6
+                    },
+                    {
+                        "key": "Q17a-A3",
+                        "desc": "Bore hole / aquifer",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q17a-A4",
+                        "desc": "Summer water surface abstraction",
+                        "weight": 2
+                    },
+                    {
+                        "key": "Q17a-A5",
+                        "desc": "Mains",
+                        "weight": 0
+                    },
+                    {
+                        "key": "Q17a-A6",
+                        "desc": "Not currently irrigating",
+                        "weight": 0
+                    },
+                    
+                    {
+                        "key": "Q17b-A1",
+                        "desc": "Peak flow surface water",
+                        "weight": 7
+                    },
+                    {
+                        "key": "Q17b-A2",
+                        "desc": "Rain water harvesting",
+                        "weight": 6
+                    },
+                    {
+                        "key": "Q17b-A3",
+                        "desc": "Bore hole / aquifer",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q17b-A4",
+                        "desc": "Summer water surface abstraction",
+                        "weight": 2
+                    },
+                    {
+                        "key": "Q17b-A5",
+                        "desc": "Mains",
+                        "weight": 0
+                    },
+                    {
+                        "key": "Q17b-A6",
+                        "desc": "Not currently irrigating",
+                        "weight": 0
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                },
+                "scoreData": {
+                    "scoreMatrix": [
+                        {
+                            "id": "7",
+                            "7": "45.00",
+                            "6": "40.00",
+                            "5": "0.00",
+                            "4": "0.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "6",
+                            "7": "45.00",
+                            "6": "45.00",
+                            "5": "0.00",
+                            "4": "0.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "5",
+                            "7": "40.00",
+                            "6": "35.00",
+                            "5": "25.00",
+                            "4": "0.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "4",
+                            "7": "40.00",
+                            "6": "35.00",
+                            "5": "30.00",
+                            "4": "25.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "3",
+                            "7": "45.00",
+                            "6": "40.00",
+                            "5": "30.00",
+                            "4": "25.00",
+                            "3": "10.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "2",
+                            "7": "50.00",
+                            "6": "45.00",
+                            "5": "40.00",
+                            "4": "30.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "1",
+                            "7": "50.00",
+                            "6": "40.00",
+                            "5": "30.00",
+                            "4": "25.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "0",
+                            "7": "50.00",
+                            "6": "40.00",
+                            "5": "10.00",
+                            "4": "10.00",
+                            "3": "10.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        }
+                    ],
+                    "scoreBand": [
+                        {
+                            "name": "High",
+                            "value": "0.7",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Low",
+                            "value": "0.3",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Medium",
+                            "value": "",
+                            "type": "else"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "Q18",
+                "title": "What systems will be used to irrigate?",
+                "group": "Q18",
+                "scoreType": "DualAvgMatrix",
+                "maxScore": 30,
+                "weight": 1,
+                "showResult":true,
+                "answer": [
+                    
+                    {
+                        "key": "Q18a-A1",
+                        "desc": "Trickle",
+                        "weight": 6
+                    },
+                    {
+                        "key": "Q18a-A2",
+                        "desc": "Mist",
+                        "weight": 5
+                    },
+                    {
+                        "key": "Q18a-A3",
+                        "desc": "Ebb and flow",
+                        "weight": 4
+                    },
+                    {
+                        "key": "Q18a-A4",
+                        "desc": "Sprinklers",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q18a-A5",
+                        "desc": "Capillary Bed",
+                        "weight": 2
+                    },
+                    {
+                        "key": "Q18a-A6",
+                        "desc": "Boom",
+                        "weight": 1
+                    },
+                    {
+                        "key": "Q18a-A7",
+                        "desc": "Rain Gun / Not currently irrigating",
+                        "weight": 0
+                    },
+                    {
+                        "key": "Q18b-A1",
+                        "desc": "Trickle",
+                        "weight": 6
+                    },
+                    {
+                        "key": "Q18b-A2",
+                        "desc": "Mist",
+                        "weight": 5
+                    },
+                    {
+                        "key": "Q18b-A3",
+                        "desc": "Ebb and flow",
+                        "weight": 4
+                    },
+                    {
+                        "key": "Q18b-A4",
+                        "desc": "Sprinklers",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q18b-A5",
+                        "desc": "Capillary Bed",
+                        "weight": 2
+                    },
+                    {
+                        "key": "Q18b-A6",
+                        "desc": "Boom",
+                        "weight": 1
+                    },
+                    {
+                        "key": "Q18b-A7",
+                        "desc": "Rain Gun / Not currently irrigating",
+                        "weight": 0
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                },
+                "scoreData": {
+                    "scoreMatrix": [
+                        {
+                            "id": "6",
+                            "6": "20.00",
+                            "5": "20.00",
+                            "4": "20.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "5",
+                            "6": "20.00",
+                            "5": "20.00",
+                            "4": "20.00",
+                            "3": "15.00",
+                            "2": "10.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "4",
+                            "6": "30.00",
+                            "5": "30.00",
+                            "4": "15.00",
+                            "3": "15.00",
+                            "2": "10.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "3",
+                            "6": "30.00",
+                            "5": "30.00",
+                            "4": "20.00",
+                            "3": "15.00",
+                            "2": "10.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "2",
+                            "6": "30.00",
+                            "5": "30.00",
+                            "4": "20.00",
+                            "3": "20.00",
+                            "2": "15.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "1",
+                            "6": "30.00",
+                            "5": "30.00",
+                            "4": "25.00",
+                            "3": "20.00",
+                            "2": "1500",
+                            "1": "15.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "0",
+                            "6": "30.00",
+                            "5": "30.00",
+                            "4": "25.00",
+                            "3": "20.00",
+                            "2": "20.00",
+                            "1": "15.00",
+                            "0": "0.00"
+                        }
+                    ],
+                    "scoreBand": [
+                        {
+                            "name": "High",
+                            "value": "0.7",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Low",
+                            "value": "0.2",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Medium",
+                            "value": "",
+                            "type": "else"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "Q19",
+                "title": "How will the project improve productivity",
+                "scoreType": "DualSum",
+                "maxScore": 3,
+                "weight": 0.5,
+                "showResult":true,
+                "answer": [
+                    {
+                        "key": "Q19-A1",
+                        "desc": "Introduce or expand high Value Crops",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q19-A2",
+                        "desc": "Introduce or expand protected Crops",
+                        "weight": 3
+                    },
+                    {
+                        "key": "Q19-A3",
+                        "desc": "Improved Yield per Ha",
+                        "weight": 1
+                    },
+                    {
+                        "key": "Q19-A4",
+                        "desc": "Improved Quality",
+                        "weight": 1
+                    },
+                    {
+                        "key": "Q19-A5",
+                        "desc": "Maintain productivity",
+                        "weight": 0
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                            "name": "High",
+                            "value": "0.8",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Low",
+                            "value": "0.3",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Medium",
+                            "value": "",
+                            "type": "else"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "Q20",
+                "title": "Will water be supplied to other farm [businesses]?",
+                "scoreType": "BoolWeightScore",
+                "maxScore": 4,
+                "weight": 4,
+                "showResult":true,
+                "answer": [
+                    {
+                        "key": "Q20-A1",
+                        "desc": "Yes",
+                        "weight": 1
+                    },
+                    {
+                        "key": "Q20-A2",
+                        "desc": "No",
+                        "weight": 0
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                            "name": "Low",
+                            "value": "0",
+                            "type": "numeric"
+                        }
+                    ]
+                }
+            }
+        ],
+        "overallRating": {
+            "score": null,
+            "band": null
+        }
+    }
+}

@@ -1,12 +1,15 @@
 const { sendScoreCalculated } = require('./senders')
-
+const ScoreEngine = require('../../app/calculation/score-engine')
 module.exports = async function (msg, calculateScoreReceiver) {
   try {
     const { body } = msg
     console.log('Received message:')
     console.log(body)
 
-    await sendScoreCalculated({ test: 'Desirability score has been calculated' })
+    const scoreEngine = new ScoreEngine(body)
+    const scoreResult = scoreEngine.getScore()
+
+    await sendScoreCalculated(scoreResult)
 
     await calculateScoreReceiver.completeMessage(msg)
   } catch (err) {
