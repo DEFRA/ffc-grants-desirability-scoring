@@ -229,9 +229,10 @@ function dualSum (question, answers) {
 }
 
 class ScoreResult {
-  constructor (score, band) {
+  constructor (score, band, importance = null) {
     this.score = score
     this.band = band
+    this.importance = importance
   }
 }
 
