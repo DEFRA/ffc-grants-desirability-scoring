@@ -210,7 +210,6 @@
                         "desc": "Not currently irrigating",
                         "weight": 0
                     },
-
                     {
                         "key": "Q17b-A1",
                         "desc": "Peak flow surface water",
@@ -366,7 +365,6 @@
                 "weight": 1,
                 "showResult":true,
                 "answer": [
-
                     {
                         "key": "Q18a-A1",
                         "desc": "Trickle",
