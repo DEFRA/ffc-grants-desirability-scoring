@@ -40,7 +40,7 @@ services:
       - ./changelog/:/liquibase/changelog/
       - ./scripts/:/scripts/
 
-  ffc-sfi-agreement-postgres:
+  ffc-grants-desirability-scoring-postgres:
     image: postgres:11.4-alpine
     environment: *common-postgres
     volumes:
