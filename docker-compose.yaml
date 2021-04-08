@@ -7,9 +7,29 @@ services:
       target: production
     image: ffc-grants-desirability-scoring
     container_name: ffc-grants-desirability-scoring
+    depends_on:
+      - ffc-grants-desirability-scoring-postgres
     environment:
+      POSTGRES_DB: ffc_grants_desirability_scoring
+      POSTGRES_PASSWORD: ppp
+      POSTGRES_USER: postgres
+      POSTGRES_HOST: ffc-grants-desirability-scoring-postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_SCHEMA_NAME: public
       SERVICE_BUS_HOST: ${SERVICE_BUS_HOST:-notset}
       SERVICE_BUS_PASSWORD: ${SERVICE_BUS_PASSWORD:-notset}
       SERVICE_BUS_USER: ${SERVICE_BUS_USER:-notset}
       DESIRABILITY_SCORE_TOPIC_ADDRESS: ${DESIRABILITY_SCORE_TOPIC_ADDRESS:-notset}
       CALCULATE_SCORE_QUEUE_ADDRESS: ${CALCULATE_SCORE_QUEUE_ADDRESS:-notset}
+
+  ffc-grants-desirability-scoring-postgres:
+    image: postgres:11.4-alpine
+    environment:
+      POSTGRES_DB: ffc_grants_desirability_scoring
+      POSTGRES_PASSWORD: ppp
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: {}

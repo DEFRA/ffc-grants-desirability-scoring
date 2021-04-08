@@ -13,6 +13,10 @@ azureIdentity:
 containerConfigMap:
   name: ffc-grants-desirability-scoring-config-map
 
+containerSecret:
+  name: ffc-grants-desirability-scoring-container-secret
+  type: Opaque
+
 deployment:
   restartPolicy: Always
   priorityClassName: default
@@ -34,6 +38,14 @@ container:
   messageQueueHost: dummy
   calculateScoreQueueAddress: calculate-score
   desirabilityScoreTopicAddress: desirability-score
+
+postgresService:
+  postgresDb: ffc_grants_desirability-scoring
+  postgresExternalName:
+  postgresHost: ffc-grants-desirability-scoring-postgres
+  postgresPort: 5432
+  postgresSchema: public
+  postgresUser: postgres
 
 livenessProbe:
   path: /healthz
