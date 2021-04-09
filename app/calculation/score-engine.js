@@ -1,8 +1,8 @@
 
 const { first } = require('lodash')
 const bandHigh = 'Strong'
-const bandLow = 'Average'
-const bandMedium = 'Weak'
+const bandLow = 'Weak'
+const bandMedium = 'Average'
 
 class ScoreEngine {
   constructor (desirabilityAssessment) {
