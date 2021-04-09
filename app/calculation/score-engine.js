@@ -1,8 +1,8 @@
 
 const { first } = require('lodash')
-const bandHigh = 'High'
-const bandLow = 'Low'
-const bandMedium = 'Medium'
+const bandHigh = 'Strong'
+const bandLow = 'Weak'
+const bandMedium = 'Average'
 
 class ScoreEngine {
   constructor (desirabilityAssessment) {
@@ -134,20 +134,14 @@ function answerValNoBand (question, answers) {
 
 // Q16
 function dualQuestionHectorScore (question, answers, dependentQuestionRatingScore) {
-  // Q15 Score
   const q15Score = first(dependentQuestionRatingScore)
-  // 16a
-  const q16aAnsVal = first(
-    first(answers.filter(x => x.key === `${question.key}a`)
-    ).input).value
-
   const q16bAnsVal = first(
     first(answers.filter(x => x.key === `${question.key}b`)).input).value
 
-  const hector = q16aAnsVal === q16bAnsVal ? q16bAnsVal : (q16aAnsVal + q16bAnsVal) / 2
-
+  const hector = q16bAnsVal
   const bandBoundary = first(question.scoreData.scoreMatrix.filter(e => e.crop === q15Score))
   let band = bandMedium
+
   if (hector <= bandBoundary.low) { band = bandLow }
   if (hector >= bandBoundary.high) { band = bandHigh }
 

@@ -2,7 +2,7 @@ module.exports = {
   get: () => (
     {
       grantScheme: {
-        key: 'WM001',
+        key: 'WM01',
         name: 'Water Management'
       },
       desirability: {
@@ -20,7 +20,7 @@ module.exports = {
                   },
                   {
                     key: 'Q14-A2',
-                    value: 'Change water source'
+                    value: 'Improve irrigation efficiency'
                   }
                 ]
               }
@@ -40,7 +40,7 @@ module.exports = {
                 input: [
                   {
                     key: 'Q15-A3',
-                    value: 'Fruit (eg top fruit, bush fruit)'
+                    value: 'Fruit'
                   }
                 ]
               }
