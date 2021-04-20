@@ -15,7 +15,7 @@ async function createScoreRecords (scoreDatas) {
 }
 
 async function close () {
-  await models.sequelize.close()
+  await sequelize.close()
 }
 
 module.exports = {

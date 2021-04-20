@@ -1,5 +1,6 @@
 const scoreDataRepository = require('../../../../app/services/score-repository')
 const dbHelper = require('../../../db-helper')
+
 describe('Score Repository test', () => {
   beforeAll(async () => {
     await dbHelper.createSchema()
@@ -17,9 +18,10 @@ describe('Score Repository test', () => {
     )
   })
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await dbHelper.truncate()
     await dbHelper.close()
+    done()
   }, 30000)
   test('test connection with db', async () => {
     expect(async () => await dbHelper.sequelize.authenticate()).not.toThrow()
