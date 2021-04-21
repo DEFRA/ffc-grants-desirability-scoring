@@ -20,7 +20,7 @@ module.exports = () => {
       model.associate(sequelize.models)
     }
   }
-  
+
   return {
     models: sequelize.models,
     sequelize

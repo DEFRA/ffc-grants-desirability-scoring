@@ -1,6 +1,6 @@
 const { models, sequelize } = require('../app/services/db-service')()
 
-async function createSchema () {
+function createSchema () {
   const queryInterface = sequelize.getQueryInterface()
   queryInterface.sequelize.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";')
   sequelize.sync()
