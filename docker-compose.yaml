@@ -29,7 +29,7 @@ services:
       POSTGRES_PASSWORD: ppp
       POSTGRES_USER: postgres
       APPINSIGHTS_CLOUDROLE: ffc-grants-desirability
-      APPINSIGHTS_INSTRUMENTATIONKEY: ""
+      APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY:-notset}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
