@@ -86,7 +86,7 @@
                 "title": "What main crops will be irrigated?",
                 "scoreType": "AnswerValNoBand",
                 "maxScore": 0,
-                "showResult":false,
+                "showResult":true,
                 "group": "Q16",
                 "answer": [
                     {
