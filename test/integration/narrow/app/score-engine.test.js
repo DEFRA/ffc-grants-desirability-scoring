@@ -61,7 +61,7 @@ describe('Score Engine Get Score test', () => {
   test('verify score for overall Ratings', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get())
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(97)
+    expect(scoreResult.desirability.overallRating.score).toBe(98)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 })
