@@ -7,5 +7,7 @@
   <changeSet author="Paul Andrews" id="1">
     <tagDatabase tag="v0.0.0" />
   </changeSet>
-  <include  file="changelog/db.changelog-1.0.xml"/>
+  <include  file="changelog/db.changelog-1.0.xml"/>  
+  <include  file="changelog/db.changelog-1.1.xml"/>
+  <include  file="changelog/db.changelog-1.2.xml"/>
 </databaseChangeLog>

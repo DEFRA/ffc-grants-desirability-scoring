@@ -4,7 +4,7 @@
      <sqlFile dbms="postgres"
         encoding="UTF-8"
         endDelimiter="\nGO"
-        path="https://github.com/DEFRA/ffc-grants-data/blob/master/db.changelog-1.0.sql"
+        path="https://github.com/DEFRA/ffc-grants-data/blob/master/db.changelog-1.2.sql"
         relativeToChangelogFile="true"
         splitStatements="true"
         stripComments="true"/>
