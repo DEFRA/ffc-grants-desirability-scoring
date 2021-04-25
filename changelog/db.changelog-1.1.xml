@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet author="SCHATAP (generated)" id="1618513558165-1">
-        <createTable tableName="scoredata">
+        <createTable tableName="scoreDatas">
             <column defaultValueComputed="uuid_generate_v1()" name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="scoredata_pkey"/>
             </column>
@@ -27,26 +27,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet author="SCHATAP (generated)" id="1618513558165-2">
-        <addColumn tableName="scoredata">
-            <column name="version" type="varchar(8 BYTE)">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
-    </changeSet>
-    <changeSet author="SCHATAP (generated)" id="1618513558165-3">
-        <addColumn tableName="scoredata">
-            <column name="schemetype" type="varchar(20 BYTE)">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
-    </changeSet>
-    <changeSet author="SCHATAP (generated)" id="1618513558165-4">
-        <addColumn tableName="scoredata">
-            <column defaultValueComputed="uuid_generate_v1()" name="id" type="uuid">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
+        <rollback>
+        <dropTable tableName="scoreDatas" schemaName="public" cascadeConstraints="true"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>
