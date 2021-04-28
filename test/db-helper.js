@@ -7,11 +7,11 @@ function createSchema () {
 }
 
 async function truncate () {
-  await models.scoreDatas.destroy({ truncate: { cascade: true } })
+  await models.scoredatas.destroy({ truncate: { cascade: true } })
 }
 
 async function createScoreRecords (scoreDatas) {
-  await models.scoreDatas.bulkCreate(scoreDatas)
+  await models.scoredatas.bulkCreate(scoreDatas)
 }
 
 async function close () {

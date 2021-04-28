@@ -7,13 +7,13 @@ describe('Score Repository test', () => {
     await dbHelper.truncate()
     await dbHelper.createScoreRecords(
       [{
-        schemeType: 'Water Grant',
+        scheme_type: 'Water Grant',
         data: '',
         version: '01.00.00',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        createdBy: 'Admin',
-        updatedBy: 'Admin'
+        created_at: new Date(),
+        updated_at: new Date(),
+        created_by: 'Admin',
+        updated_by: 'Admin'
       }]
     )
   })

@@ -24,7 +24,8 @@ async function sendMsg (sender, msgData, msgType, correlationId) {
     source: msgCfg.msgSrc,
     correlationId
   }
-
+  console.log('Sending Message:')
+  console.log(msg)
   await sender.sendMessage(msg)
 }
 

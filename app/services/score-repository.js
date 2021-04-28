@@ -2,13 +2,14 @@ const { models } = require('./db-service')()
 
 async function getScoreData (schemeType) {
   const existingscoreData =
-        await models.scoreDatas.findOne(
+        await models.scoredatas.findOne(
           {
-            where: { schemeType: schemeType },
+            attributes: ['score_data_id', 'data'],
+            where: { scheme_type: schemeType },
             order: [['version', 'DESC']]
           })
   if (existingscoreData) {
-    console.info(`Got scoreData: ${existingscoreData.scoreDataId}`)
+    console.info(`Got scoreData: ${existingscoreData.score_data_id}`)
   }
   return existingscoreData
 }

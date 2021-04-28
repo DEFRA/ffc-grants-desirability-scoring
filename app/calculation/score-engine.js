@@ -1,14 +1,12 @@
 
 const { first } = require('lodash')
-// const scoreDataRepository = require('../services/score-repository')
 const bandHigh = 'Strong'
 const bandLow = 'Weak'
 const bandMedium = 'Average'
 
 class ScoreEngine {
-  constructor (desirabilityAssessment) {
-    this.scoringData = require('./score-data.json')
-    // this.scoringData = await scoreDataRepository.getScoreData('Water Grant').data
+  constructor (desirabilityAssessment, scoreData) {
+    this.scoringData = scoreData
     this.desirabilityAssessment = desirabilityAssessment
   }
 
