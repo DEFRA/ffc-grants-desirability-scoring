@@ -103,14 +103,12 @@ function calculateQScore (question, answers, dependentQuestionRatingScore) {
 
 // Q14
 function dualSumWeightBand (question, answers) {
-  let score = question.answer
+  const score = question.answer
     .filter(itemX =>
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
 
   const scoreBand = score / question.maxScore
-
-  score = Math.round(score)
 
   let band = bandMedium
   if (scoreBand <= first(
