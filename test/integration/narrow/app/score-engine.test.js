@@ -1,6 +1,11 @@
 const { first } = require('lodash')
 const scoreData = require('../../../score-data.json')
 describe('Score Engine test', () => {
+  afterAll(async (done) => {
+    require('applicationinsights').dispose()
+    done()
+  }, 30000)
+
   test('createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')
     expect(scoreEngine).toBeDefined()

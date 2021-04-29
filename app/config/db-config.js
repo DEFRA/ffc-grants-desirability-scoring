@@ -38,7 +38,11 @@ const dbConfig = {
   logging: process.env.POSTGRES_LOGGING || false,
   retry,
   schema: process.env.POSTGRES_SCHEMA_NAME || 'public',
-  username: process.env.POSTGRES_USER
+  username: process.env.POSTGRES_USER,
+  define: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
 }
 
 const config = {}
