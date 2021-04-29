@@ -26,7 +26,7 @@ class ScoreEngine {
           .every(noShow => noShow.key !== question.key))
       .reduce(
         (total, question) =>
-          question.rating.score + total, 0)
+          Math.round(question.rating.score) + total, 0)
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     const bandScore = (actualScore / maxScore) * 100
 
