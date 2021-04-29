@@ -3,7 +3,6 @@ describe('Score Repository test', () => {
   const scoreDataRepository = require('../../../../app/services/score-repository')
   const dbHelper = require('../../../db-helper')
   beforeAll(async () => {
-    await dbHelper.createSchema()
     await dbHelper.truncate()
     await dbHelper.createScoreRecords(
       [{
