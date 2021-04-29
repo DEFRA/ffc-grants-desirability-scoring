@@ -6,4 +6,16 @@ ignore:
     - '*':
         reason: 'no fix, low availability'
         expires: 2021-10-01T00:00:00.000Z
+  SNYK-JS-VALIDATOR-1090600:
+    - '*':
+        reason: 'no fix, low availability'
+        expires: 2021-10-01T00:00:00.000Z
+  SNYK-JS-VALIDATOR-1090601:
+    - '*':
+        reason: 'no fix, low availability'
+        expires: 2021-10-01T00:00:00.000Z
+  SNYK-JS-VALIDATOR-1090602:
+    - '*':
+        reason: 'no fix, low availability'
+        expires: 2021-10-01T00:00:00.000Z
 patch: {}
