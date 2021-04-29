@@ -2,7 +2,9 @@
 describe('Score Repository test', () => {
   const scoreDataRepository = require('../../../../app/services/score-repository')
   const dbHelper = require('../../../db-helper')
+
   beforeAll(async () => {
+    await dbHelper.sequelize.sync()
     await dbHelper.truncate()
     await dbHelper.createScoreRecords(
       [{
