@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const scoreData = sequelize.define('scoredatas', {
     score_data_id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV1,
+      type: DataTypes.BIGINT,
+      defaultValue: DataTypes.BIGINT,
       primaryKey: true
     },
     scheme_type: { type: DataTypes.STRING, primaryKey: true },
