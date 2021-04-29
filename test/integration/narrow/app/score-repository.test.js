@@ -3,7 +3,7 @@ describe('Score Repository test', () => {
   const scoreDataRepository = require('../../../../app/services/score-repository')
   const dbHelper = require('../../../db-helper')
   beforeAll(async () => {
-    dbHelper.createSchema()
+    await dbHelper.createSchema()
     await dbHelper.truncate()
     await dbHelper.createScoreRecords(
       [{
@@ -16,16 +16,18 @@ describe('Score Repository test', () => {
         updated_by: 'Admin'
       }]
     )
-  })
+  }, 30000)
 
   afterAll(async (done) => {
     await dbHelper.truncate()
     await dbHelper.close()
     done()
   }, 30000)
+
   test('test connection with db', async () => {
-    expect(async () => await dbHelper.sequelize.authenticate()).not.toThrow()
+    expect(await (() => dbHelper.sequelize.authenticate())).not.toThrow()
   })
+
   test('getScoreData returns ScoreData', async () => {
     const scoreData = await scoreDataRepository.getScoreData('Water Grant')
     expect(scoreData).toBeDefined()
