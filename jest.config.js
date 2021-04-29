@@ -31,5 +31,8 @@ module.exports = {
   ],
   testEnvironment: 'node',
   testPathIgnorePatterns: [],
-  verbose: true
+  verbose: true,
+  setupFilesAfterEnv: [
+    '<rootDir>/test/teardown.js'
+  ]
 }

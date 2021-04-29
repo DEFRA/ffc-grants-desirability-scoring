@@ -5,8 +5,8 @@ const bandLow = 'Weak'
 const bandMedium = 'Average'
 
 class ScoreEngine {
-  constructor (desirabilityAssessment) {
-    this.scoringData = require('./score-data.json')
+  constructor (desirabilityAssessment, scoreData) {
+    this.scoringData = scoreData
     this.desirabilityAssessment = desirabilityAssessment
   }
 
@@ -26,7 +26,7 @@ class ScoreEngine {
           .every(noShow => noShow.key !== question.key))
       .reduce(
         (total, question) =>
-          question.rating.score + total, 0)
+          Math.round(question.rating.score) + total, 0)
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     const bandScore = (actualScore / maxScore) * 100
 
@@ -103,14 +103,12 @@ function calculateQScore (question, answers, dependentQuestionRatingScore) {
 
 // Q14
 function dualSumWeightBand (question, answers) {
-  let score = question.answer
+  const score = question.answer
     .filter(itemX =>
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
 
   const scoreBand = score / question.maxScore
-
-  score = Math.round(score)
 
   let band = bandMedium
   if (scoreBand <= first(
