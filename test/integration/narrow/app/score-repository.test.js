@@ -4,7 +4,6 @@ describe('Score Repository test', () => {
   const dbHelper = require('../../../db-helper')
 
   beforeAll(async () => {
-    await dbHelper.sequelize.sync()
     await dbHelper.truncate()
     await dbHelper.createScoreRecords(
       [{
