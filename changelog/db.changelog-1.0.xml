@@ -31,4 +31,7 @@
         <dropTable tableName="scoredatas" schemaName="public" cascadeConstraints="true"/>
         </rollback>
     </changeSet>
+    <changeSet author="Satish Chatap" id="1618513558165-2">
+        <tagDatabase tag="v1.0.0" />
+    </changeSet>
 </databaseChangeLog>
