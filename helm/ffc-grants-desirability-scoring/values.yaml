@@ -41,6 +41,7 @@ container:
   messageQueueHost: dummy
   calculateScoreQueueAddress: calculate-score
   desirabilityScoreTopicAddress: desirability-score
+  protectiveMonitoringUrl:
 
 postgresService:
   postgresDb: ffc_grants_desirability-scoring

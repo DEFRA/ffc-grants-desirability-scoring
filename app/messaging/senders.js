@@ -1,5 +1,6 @@
 const { MessageSender } = require('ffc-messaging')
 const msgCfg = require('../config/messaging')
+const protectiveMonitoringServiceSendEvent = require('../services/protective-monitoring-service')
 
 const scoreCalculatedSender = new MessageSender(msgCfg.desirabilityScoreTopic)
 
@@ -32,5 +33,6 @@ async function sendMsg (sender, msgData, msgType, correlationId) {
 module.exports = {
   sendScoreCalculated: async function (desirabilityScoreData, correlationId) {
     await sendMsg(scoreCalculatedSender, desirabilityScoreData, msgCfg.desirabilityScoreMsgType, correlationId)
+    await protectiveMonitoringServiceSendEvent(correlationId, 'FTF-DATA-SCORE-REQUESTED', '0703')
   }
 }

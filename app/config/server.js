@@ -2,6 +2,7 @@ const Joi = require('joi')
 
 // Define config schema
 const schema = Joi.object({
+  protectiveMonitoringUrl: Joi.string().allow(''),
   appInsights: {
     key: Joi.string(),
     role: Joi.string().default('ffc-grants-desirability-scoring')
@@ -10,6 +11,7 @@ const schema = Joi.object({
 
 // Build config
 const config = {
+  protectiveMonitoringUrl: process.env.PROTECTIVE_MONITORING_URL,
   appInsights: {
     key: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
     role: process.env.APPINSIGHTS_CLOUDROLE
