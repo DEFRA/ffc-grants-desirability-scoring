@@ -24,8 +24,8 @@ describe('Score Repository test', () => {
     done()
   }, 30000)
 
-  test('test connection with db', async () => {
-    expect(await (() => dbHelper.sequelize.authenticate())).not.toThrow()
+  test('test connection with db', () => {
+    expect(() => dbHelper.sequelize.authenticate()).not.toThrow()
   })
 
   test('getScoreData returns ScoreData', async () => {
