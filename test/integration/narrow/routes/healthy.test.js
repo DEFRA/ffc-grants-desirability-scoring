@@ -7,7 +7,6 @@ describe('Healthy test', () => {
   jest.mock('../../../../app/messaging/senders')
   jest.mock('../../../../app/messaging/receivers')
 
-
   test('GET /healthy returns 200', async () => {
     const options = {
       method: 'GET',
