@@ -36,10 +36,18 @@ describe('Calculate Score test', () => {
     const calScore = require('../../../../app/messaging/calculate-score')
     expect(calScore(msg, calculateScoreReceiver)).toBeDefined()
   })
-  test('createScoreEngine returns error n handle', () => {
+  test('createScoreEngine Invalid score-data returns error n handle', () => {
     scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
       console.log(schemeType)
       return { data: scoreData } // Just to make error passing object in place of string.
+    })
+    const calScore = require('../../../../app/messaging/calculate-score')
+    expect(calScore(msg, calculateScoreReceiver)).toBeDefined()
+  })
+  test('createScoreEngine NULL score-data returns error n handle', () => {
+    scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
+      console.log(schemeType)
+      return { data: null } // Just to make error passing object in place of string.
     })
     const calScore = require('../../../../app/messaging/calculate-score')
     expect(calScore(msg, calculateScoreReceiver)).toBeDefined()

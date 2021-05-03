@@ -27,9 +27,13 @@ describe('Score Repository test', () => {
   test('test connection with db', () => {
     expect(() => dbHelper.sequelize.authenticate()).not.toThrow()
   })
-
   test('getScoreData returns ScoreData', async () => {
     const scoreData = await scoreDataRepository.getScoreData('Water Grant')
     expect(scoreData).toBeDefined()
+  })
+  test('getScoreData returns ScoreData with data', async () => {
+    const scoreData = await scoreDataRepository.getScoreData('Water Grant')
+    expect(scoreData.score_data_id).toBeDefined()
+    expect(scoreData.data).toBeDefined()
   })
 })
