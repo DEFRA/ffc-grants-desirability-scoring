@@ -26,7 +26,7 @@ describe('messaging tests', () => {
     const receivers = require('../../../../app/messaging/receivers')
     expect(receivers).toBeDefined()
   })
-  test('Receiver Should be defined', async () => {
+  test('Receiver startCalculateScoreReceiver Should not throw error', async () => {
     const receivers = require('../../../../app/messaging/receivers')
     await expect(receivers.startCalculateScoreReceiver('')).resolves.not.toThrow()
   })
