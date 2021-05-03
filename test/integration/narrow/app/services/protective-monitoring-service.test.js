@@ -7,7 +7,7 @@ jest.mock('ffc-protective-monitoring', () => {
   }
 })
 
-const sendProtectiveMonitoringEvent = require('../../../../app/services/protective-monitoring-service')
+const sendProtectiveMonitoringEvent = require('../../../../../app/services/protective-monitoring-service')
 let request
 
 describe('send protective monitoring event', () => {

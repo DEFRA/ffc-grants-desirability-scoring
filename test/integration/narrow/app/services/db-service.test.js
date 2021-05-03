@@ -1,4 +1,4 @@
-const dbService = require('../../../../app/services/db-service')
+const dbService = require('../../../../../app/services/db-service')
 
 describe('Test dbService', () => {
   test('Should be defined', () => {

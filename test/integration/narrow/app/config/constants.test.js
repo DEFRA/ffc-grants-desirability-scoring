@@ -1,4 +1,4 @@
-const constants = require('../../../../app/config/constants')
+const constants = require('../../../../../app/config/constants')
 
 describe('get constants', () => {
   test('Should get constants', async () => {
