@@ -1,10 +1,7 @@
-const appInsight = require('../../../../app/services/app-insights')
+const scoreData = require('../../../../app/models/scoreData')
 
-describe('get appInsight setup defined', () => {
+describe('Test Score Data Model', () => {
   test('Should be defined', () => {
-    expect(appInsight).toBeDefined()
-  })
-  test('With now key Should not to throw', () => {
-    expect(appInsight.setup()).toBe(undefined)
+    expect(scoreData).toBeDefined()
   })
 })
