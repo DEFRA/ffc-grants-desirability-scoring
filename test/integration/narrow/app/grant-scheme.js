@@ -12,7 +12,7 @@ module.exports = {
             answers: [
               {
                 key: null,
-                title: 'Project Details',
+                title: 'The project will:',
                 input: [
                   {
                     key: 'Q14-A1',
@@ -96,7 +96,7 @@ module.exports = {
               },
               {
                 key: 'Q17b',
-                title: 'Where will the water used for irrigation come from?',
+                title: 'Where will your irrigation water come from?',
                 input: [
                   {
                     key: 'Q17b-A1',
