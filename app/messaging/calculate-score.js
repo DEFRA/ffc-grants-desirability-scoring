@@ -1,5 +1,5 @@
 const { sendScoreCalculated } = require('./senders')
-const appInsights = require('applicationinsights')
+const appInsights = require('../services/app-insights')
 const ScoreEngine = require('../../app/calculation/score-engine')
 const scoreDataRepository = require('../services/score-repository')
 module.exports = async function (msg, calculateScoreReceiver) {
@@ -22,7 +22,7 @@ module.exports = async function (msg, calculateScoreReceiver) {
   } catch (err) {
     console.error('Unable to process message')
     console.error(err)
-    appInsights.trackException(err)
+    appInsights.logException(err, msg.correlationId)
     await calculateScoreReceiver.abandonMessage(msg)
   }
 }
