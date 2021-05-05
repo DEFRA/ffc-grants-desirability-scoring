@@ -4,7 +4,7 @@
         "name": "Water Management"
     },
     "desirability": {
-        "overallRatingScoreData":[
+        "overallRatingScoreData": [
             {
                 "name": "Strong",
                 "value": "75",
@@ -113,10 +113,12 @@
             },
             {
                 "key": "Q16",
-                "title": "How much land will be irrigated in total per year under the grant?",
+                "title": "How much land will be irrigated after the project?",
                 "group": "Q16",
                 "scoreType": "DualQuestionHectorScore",
-                "dependentQuestions": ["Q15"],
+                "dependentQuestions": [
+                    "Q15"
+                ],
                 "maxScore": 9,
                 "weight": 3,
                 "showResult": true,

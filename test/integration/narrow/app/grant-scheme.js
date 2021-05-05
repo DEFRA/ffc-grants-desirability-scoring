@@ -66,7 +66,7 @@ module.exports = {
               },
               {
                 key: 'Q16b',
-                title: 'How much land will be irrigated in total per year under the grant?',
+                title: 'How much land will be irrigated after the project?',
                 input: [
                   {
                     key: null,
