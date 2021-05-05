@@ -4,10 +4,15 @@ describe('Calculate Score test', () => {
     done()
   }, 30000)
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
   jest.mock('../../../../../app/messaging/senders')
   jest.mock('../../../../../app/calculation/score-engine')
   jest.mock('../../../../../app/services/score-repository')
   jest.mock('ffc-messaging')
+  jest.mock('../../../../../app/services/app-insights')
+  const appInsights = require('../../../../../app/services/app-insights')
   const scoreData = require('../../../../score-data.json')
   const scoreDataRepository = require('../../../../../app/services/score-repository')
   const sender = require('../../../../../app/messaging/senders')
@@ -32,24 +37,29 @@ describe('Calculate Score test', () => {
     const calScore = require('../../../../../app/messaging/calculate-score')
     expect(calScore).toBeDefined()
   })
-  test('createScoreEngine returns no error', () => {
+  test('createScoreEngine returns no error', async () => {
     const calScore = require('../../../../../app/messaging/calculate-score')
-    expect(calScore(msg, calculateScoreReceiver)).toBeDefined()
+    await expect(calScore(msg, calculateScoreReceiver)).resolves.toBe(undefined)
+    expect(calculateScoreReceiver.completeMessage).toHaveBeenCalledTimes(1)
   })
-  test('createScoreEngine Invalid score-data returns error n handle', () => {
+  test('createScoreEngine Invalid score-data returns error n handle', async () => {
     scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
       console.log(schemeType)
       return { data: scoreData } // Just to make error passing object in place of string.
     })
     const calScore = require('../../../../../app/messaging/calculate-score')
-    expect(calScore(msg, calculateScoreReceiver)).toBeDefined()
+    await expect(calScore(msg, calculateScoreReceiver)).resolves.toBe(undefined)
+    expect(appInsights.logException).toHaveBeenCalledTimes(1)
+    expect(calculateScoreReceiver.abandonMessage).toHaveBeenCalledTimes(1)
   })
-  test('createScoreEngine NULL score-data returns error n handle', () => {
+  test('createScoreEngine NULL score-data returns error n handle', async () => {
     scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
       console.log(schemeType)
       return { data: null } // Just to make error passing object in place of string.
     })
     const calScore = require('../../../../../app/messaging/calculate-score')
-    expect(calScore(msg, calculateScoreReceiver)).toBeDefined()
+    await expect(calScore(msg, calculateScoreReceiver)).resolves.toBe(undefined)
+    expect(appInsights.logException).toHaveBeenCalledTimes(1)
+    expect(calculateScoreReceiver.abandonMessage).toHaveBeenCalledTimes(1)
   })
 })
