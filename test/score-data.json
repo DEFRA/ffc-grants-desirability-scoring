@@ -4,7 +4,7 @@
         "name": "Water Management"
     },
     "desirability": {
-        "overallRatingScoreData":[
+        "overallRatingScoreData": [
             {
                 "name": "Strong",
                 "value": "75",
@@ -24,10 +24,10 @@
         "questions": [
             {
                 "key": "Q14",
-                "title": "Project Details",
+                "title": "The project will:",
                 "maxScore": 4,
                 "weight": 0.8,
-                "showResult":true,
+                "showResult": true,
                 "scoreType": "DualSumWeightBand",
                 "answer": [
                     {
@@ -86,7 +86,7 @@
                 "title": "What main crops will be irrigated?",
                 "scoreType": "AnswerValNoBand",
                 "maxScore": 0,
-                "showResult":false,
+                "showResult": false,
                 "group": "Q16",
                 "answer": [
                     {
@@ -113,13 +113,15 @@
             },
             {
                 "key": "Q16",
-                "title": "How much land will be irrigated in total per year under the grant?",
+                "title": "How much land will be irrigated after the project?",
                 "group": "Q16",
                 "scoreType": "DualQuestionHectorScore",
-                "dependentQuestions":["Q15"],
+                "dependentQuestions": [
+                    "Q15"
+                ],
                 "maxScore": 9,
                 "weight": 3,
-                "showResult":true,
+                "showResult": true,
                 "answer": [
                     {
                         "key": "Q16a-A",
@@ -178,7 +180,7 @@
                 "scoreType": "DualAvgMatrix",
                 "maxScore": 50,
                 "weight": 1,
-                "showResult":true,
+                "showResult": true,
                 "answer": [
                     {
                         "key": "Q17a-A1",
@@ -363,7 +365,7 @@
                 "scoreType": "DualAvgMatrix",
                 "maxScore": 30,
                 "weight": 1,
-                "showResult":true,
+                "showResult": true,
                 "answer": [
                     {
                         "key": "Q18a-A1",
@@ -549,7 +551,7 @@
                 "scoreType": "DualSum",
                 "maxScore": 3,
                 "weight": 0.5,
-                "showResult":true,
+                "showResult": true,
                 "answer": [
                     {
                         "key": "Q19-A1",
@@ -608,7 +610,7 @@
                 "scoreType": "BoolWeightScore",
                 "maxScore": 4,
                 "weight": 4,
-                "showResult":true,
+                "showResult": true,
                 "answer": [
                     {
                         "key": "Q20-A1",
