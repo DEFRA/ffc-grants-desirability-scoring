@@ -1,4 +1,4 @@
-const { models, sequelize } = require('../app/services/db-service')()
+const { models, sequelize } = require('../app/services/db-service')
 
 async function truncate () {
   await models.scoredatas.destroy({ truncate: { cascade: true } })

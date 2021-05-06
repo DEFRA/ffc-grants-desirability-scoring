@@ -1,4 +1,4 @@
-const { models } = require('./db-service')()
+const { models } = require('./db-service')
 
 async function getScoreData (schemeType) {
   const existingscoreData =

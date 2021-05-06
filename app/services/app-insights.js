@@ -9,5 +9,13 @@ function setup () {
     appInsights.defaultClient.context.tags[cloudRoleTag] = appName
   }
 }
-
-module.exports = { setup }
+function logException (error, sessionId) {
+  const client = appInsights.defaultClient
+  client?.trackException({
+    exception: error ?? new Error('unknown'),
+    properties: {
+      sessionId: sessionId || ''
+    }
+  })
+}
+module.exports = { setup, logException }

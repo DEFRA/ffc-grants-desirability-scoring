@@ -1,12 +1,8 @@
 const { DefaultAzureCredential } = require('@azure/identity')
-const env = {
-  development: 'development',
-  production: 'production',
-  test: 'test'
-}
+const { environments } = require('./constants')
 
 function isProd () {
-  return process.env.NODE_ENV === env.production
+  return process.env.NODE_ENV === environments.production
 }
 
 const hooks = {
@@ -46,8 +42,8 @@ const dbConfig = {
 }
 
 const config = {}
-config[env.development] = dbConfig
-config[env.production] = dbConfig
-config[env.test] = dbConfig
+config[environments.development] = dbConfig
+config[environments.production] = dbConfig
+config[environments.test] = dbConfig
 
 module.exports = config

@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, DataTypes) => {
-  const scoreData = sequelize.define('scoredatas', {
+  return sequelize.define('scoredatas', {
     score_data_id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
@@ -17,5 +17,4 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'scoredatas'
   })
-  return scoreData
 }
