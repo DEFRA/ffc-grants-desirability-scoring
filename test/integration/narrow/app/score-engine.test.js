@@ -174,7 +174,7 @@ describe('Score Engine Get Score test', () => {
     })
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(40)
+    expect(scoreResult.desirability.overallRating.score).toBe(39)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
   test('verify score for overall Ratings is Medium', () => {
@@ -198,7 +198,7 @@ describe('Score Engine Get Score test', () => {
     })
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(63)
+    expect(scoreResult.desirability.overallRating.score).toBe(62)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
 })
