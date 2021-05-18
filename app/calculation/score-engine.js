@@ -20,15 +20,16 @@ class ScoreEngine {
     const noShowResultQuestions =
       this.scoringData.desirability.questions
         .filter(question => question.showResult === false)
-    const actualScore = this.desirabilityAssessment.desirability.questions
+    let actualScore = this.desirabilityAssessment.desirability.questions
       .filter(question =>
         noShowResultQuestions
           .every(noShow => noShow.key !== question.key))
       .reduce(
         (total, question) =>
           question.rating.score + total, 0)
-    this.desirabilityAssessment.desirability.overallRating.score = Math.round(actualScore)
-    const bandScore = (actualScore / maxScore) * 100
+    actualScore = Math.round(actualScore)
+    this.desirabilityAssessment.desirability.overallRating.score = actualScore
+    const bandScore = (actualScore / maxScore * 100)
 
     // remove noShowResult questions
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))

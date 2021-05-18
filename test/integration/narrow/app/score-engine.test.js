@@ -163,7 +163,7 @@ describe('Score Engine Get Score test', () => {
         const ansInputs = []
         const firstInputVal = mi.input[0]
         firstInputVal.key = firstInputVal.key === 'Q14-A1' ? 'Q14-A4' : firstInputVal.key
-        firstInputVal.value = (mi.key === 'Q16a' || mi.key === 'Q16b') ? 1 : firstInputVal.key
+        firstInputVal.value = (mi.key === 'Q16a' || mi.key === 'Q16b') ? 1 : firstInputVal.value
         firstInputVal.key = (mi.key === 'Q17a') ? 'Q17a-A5' : firstInputVal.key
         firstInputVal.key = (mi.key === 'Q17b') ? 'Q17b-A5' : firstInputVal.key
         ansInputs.push(firstInputVal)
@@ -184,8 +184,8 @@ describe('Score Engine Get Score test', () => {
         const ansInputs = []
         const firstInputVal = mi.input[0]
         firstInputVal.key = firstInputVal.key === 'Q14-A1' ? 'Q14-A4' : firstInputVal.key
-        firstInputVal.value = (mi.key === 'Q16a') ? 1 : firstInputVal.key
-        firstInputVal.value = (mi.key === 'Q16b') ? 20 : firstInputVal.key
+        firstInputVal.value = (mi.key === 'Q16a') ? 1 : firstInputVal.value
+        firstInputVal.value = (mi.key === 'Q16b') ? 20 : firstInputVal.value
         firstInputVal.key = (mi.key === 'Q17a') ? 'Q17a-A5' : firstInputVal.key
         firstInputVal.key = (mi.key === 'Q17b') ? 'Q17b-A1' : firstInputVal.key
         firstInputVal.key = (mi.key === 'Q18a') ? 'Q18a-A5' : firstInputVal.key
@@ -200,5 +200,46 @@ describe('Score Engine Get Score test', () => {
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult.desirability.overallRating.score).toBe(62)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
+  })
+  test('verify score for overall Ratings is High with decimal score', () => {
+    const msg = fakeMessage.get()
+    msg.desirability.questions.map(m => {
+      m.answers.map(mi => {
+        const ansInputs = []
+        const firstInputVal = mi.input[0]
+        firstInputVal.key = firstInputVal.key === 'Q14-A1' ? 'Q14-A4' : firstInputVal.key
+        firstInputVal.key = (firstInputVal.key === 'Q15-A3') ? 'Q15-A2' : firstInputVal.key
+        firstInputVal.value = (mi.key === 'Q16a') ? 20 : firstInputVal.value
+        firstInputVal.value = (mi.key === 'Q16b') ? 21 : firstInputVal.value
+        firstInputVal.key = (mi.key === 'Q17a') ? 'Q17a-A4' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'Q17b') ? 'Q17b-A1' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'Q18a') ? 'Q18a-A5' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'Q18b') ? 'Q18b-A1' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'Q19') ? 'Q19-A3' : firstInputVal.key
+        ansInputs.push(firstInputVal)
+        if (mi.key === 'Q17a') {
+          ansInputs.push({ key: 'Q17a-A5' })
+        }
+        if (mi.key === 'Q17b') {
+          ansInputs.push({ key: 'Q17b-A3' })
+        }
+        if (mi.key === 'Q18a') {
+          ansInputs.push({ key: 'Q18a-A6' })
+        }
+        if (mi.key === 'Q18b') {
+          ansInputs.push({ key: 'Q18b-A2' })
+        }
+        if (mi.input[0].key === 'Q19-A1') {
+          ansInputs.push({ key: 'Q19-A4' })
+        }
+        mi.input = ansInputs
+        return mi
+      })
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, scoreData)
+    const scoreResult = scoreEngine.getScore()
+    expect(scoreResult.desirability.overallRating.score).toBe(76)
+    expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 })
