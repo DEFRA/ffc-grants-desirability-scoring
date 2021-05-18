@@ -44,7 +44,6 @@ describe('Calculate Score test', () => {
   })
   test('createScoreEngine Invalid score-data returns error n handle', async () => {
     scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
-      console.log(schemeType)
       return { data: scoreData } // Just to make error passing object in place of string.
     })
     const calScore = require('../../../../../app/messaging/calculate-score')
@@ -54,7 +53,6 @@ describe('Calculate Score test', () => {
   })
   test('createScoreEngine NULL score-data returns error n handle', async () => {
     scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
-      console.log(schemeType)
       return { data: null } // Just to make error passing object in place of string.
     })
     const calScore = require('../../../../../app/messaging/calculate-score')
