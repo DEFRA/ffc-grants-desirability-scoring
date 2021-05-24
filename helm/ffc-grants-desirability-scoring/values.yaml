@@ -23,11 +23,15 @@ containerSecret:
 deployment:
   restartPolicy: Always
   priorityClassName: default
-  replicas: 1
   minReadySeconds: 0
   redeployOnChange: update this field to force a change
   runAsNonRoot: true
-  runAsUser: 1000
+  runAsUser: 30304
+  replicas: 2
+  minReplicas: 2
+  maxReplicas: 3
+  cpuThreshold: 80
+  memoryThreshold: 80
 
 container:
   imagePullPolicy: IfNotPresent
