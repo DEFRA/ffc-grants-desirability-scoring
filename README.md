@@ -52,13 +52,13 @@ overridden by build and release pipelines.
 | REDIS_PASSWORD                            | Redis password                            | no        | password           |                            |                                                                                   |
 | REDIS_PARTITION                           | Redis partion                             | no        | password           |                            |                                                                                   |
 | PROTECTIVE_MONITORING_URL                 | protective monitoring url                 | no        | url                |                             |                                                                                   |
-| POSTGRES_DB                               | queue subscription address           | no        |                    |                             |                                                                                   |
-| POSTGRES_HOST                             | queue topic address                  | no        |                    |                             |                                                                                   |
-| POSTGRES_PASSWORD                         | queue topic address                | no        |                    |                             |                                                                                   |
-| POSTGRES_PORT                             | service queue address                     | no        |                    |                             |                                                                                   |
+| POSTGRES_DB                               | queue subscription address                | yes       |                    |                             |                                                                                   |
+| POSTGRES_HOST                             | queue topic address                       | yes       |                    |                             |                                                                                   |
+| POSTGRES_PASSWORD                         | queue topic address                       | yes       |                    |                             |                                                                                   |
+| POSTGRES_PORT                             | service queue address                     | yes       |                    |                             |                                                                                   |
 | POSTGRES_LOGGING                          | service queue address                     | no        |                    |                             |                                                                                   |
 | POSTGRES_SCHEMA_NAME                      | service queue address                     | no        |                    |                             |                                                                                    |
-| POSTGRES_USER                             | service queue address                     | no        |                    |                             |                                                                                   |
+| POSTGRES_USER                             | service queue address                     | yes       |                    |                             |                                                                                   |
 
 Running the integration tests locally requires access to ASB, this can be
 achieved by setting the following environment variables:
