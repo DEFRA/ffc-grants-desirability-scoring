@@ -1,6 +1,6 @@
 # FFC Grants Desirability Scoring
 
-FFC Grants desirability scoring microservice
+FFC Grants desirability scoring microservice - service will get message for scroing and calculated the score for application. After successfull cacluation, score will be available to poll from frontend service.
 
 ## Prerequisites
 
@@ -29,9 +29,9 @@ and
 
 | Name                   | Description                                                                                |
 | ----                   | -----------                                                                                |
-| MESSAGE_QUEUE_HOST     | Azure Service Bus hostname, e.g. `myservicebus.servicebus.windows.net`                     |
-| MESSAGE_QUEUE_PASSWORD | Azure Service Bus SAS policy key                                                           |
-| MESSAGE_QUEUE_USER     | Azure Service Bus SAS policy name, e.g. `RootManageSharedAccessKey`                        |
+| SERVICE_BUS_HOST       | Azure Service Bus hostname, e.g. `myservicebus.servicebus.windows.net`                     |
+| SERVICE_BUS_PASSWORD   | Azure Service Bus SAS policy key                                                           |
+| SERVICE_BUS_USER       | Azure Service Bus SAS policy name, e.g. `RootManageSharedAccessKey`                        |
 
 ## Environment variables
 
@@ -52,13 +52,13 @@ overridden by build and release pipelines.
 | REDIS_PASSWORD                            | Redis password                            | no        | password           |                            |                                                                                   |
 | REDIS_PARTITION                           | Redis partion                             | no        | password           |                            |                                                                                   |
 | PROTECTIVE_MONITORING_URL                 | protective monitoring url                 | no        | url                |                             |                                                                                   |
-| POSTGRES_DB                               | queue subscription address                | yes       |                    |                             |                                                                                   |
-| POSTGRES_HOST                             | queue topic address                       | yes       |                    |                             |                                                                                   |
-| POSTGRES_PASSWORD                         | queue topic address                       | yes       |                    |                             |                                                                                   |
-| POSTGRES_PORT                             | service queue address                     | yes       |                    |                             |                                                                                   |
-| POSTGRES_LOGGING                          | service queue address                     | no        |                    |                             |                                                                                   |
-| POSTGRES_SCHEMA_NAME                      | service queue address                     | no        |                    |                             |                                                                                    |
-| POSTGRES_USER                             | service queue address                     | yes       |                    |                             |                                                                                   |
+| POSTGRES_DB                               | postress db name                          | no        | ffc_grants_desirability_scoring                   |                             |                                                                                   |
+| POSTGRES_HOST                             | postress db host name                     | no        |ffc-grants-desirability-scoring-postgres                   |                             |                                                                                   |
+| POSTGRES_PASSWORD                         | postress db password                      | yes       |                    |                             |                                                                                   |
+| POSTGRES_PORT                             | postress db port                          | no        | 5432                    |                             |                                                                                   |
+| POSTGRES_LOGGING                          | postress db  logging                      | no        | false                   |                             |                                                                                   |
+| POSTGRES_SCHEMA_NAME                      | postress db schema name                   | no        | public                   |                             |                                                                                    |
+| POSTGRES_USER                             | postress db user                          | yes       |                    |                             |                                                                                   |
 
 Running the integration tests locally requires access to ASB, this can be
 achieved by setting the following environment variables:
