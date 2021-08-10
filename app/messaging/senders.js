@@ -31,8 +31,9 @@ async function sendMsg (sender, msgData, msgType, correlationId) {
 }
 
 module.exports = {
-  sendScoreCalculated: async function (desirabilityScoreData, correlationId) {
-    await sendMsg(scoreCalculatedSender, desirabilityScoreData, msgCfg.desirabilityScoreMsgType, correlationId)
+  sendScoreCalculated: async function (desirabilityScoreData, correlationId, messageType = null) {
+    messageType = messageType ?? msgCfg.desirabilityScoreMsgType
+    await sendMsg(scoreCalculatedSender, desirabilityScoreData, messageType, correlationId)
     await protectiveMonitoringServiceSendEvent(correlationId, 'FTF-DATA-SCORE-REQUESTED', '0703')
   }
 }
