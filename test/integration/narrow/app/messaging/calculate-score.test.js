@@ -27,7 +27,10 @@ describe('Calculate Score test', () => {
 
   const msg = {
     body: '',
-    correlationId: '1234567890'
+    correlationId: '1234567890',
+    applicationProperties: {
+      type: 'uk.gov.ffc.grants.desirability.calculate'
+    }
   }
   const calculateScoreReceiver = {
     completeMessage: jest.fn(async (message) => { return null }),
