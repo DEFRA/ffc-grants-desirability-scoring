@@ -47,7 +47,8 @@ function getOverAllRatingBand (bandScore, sectionScoringData) {
         .filter(x => x.name === bandHigh)).value) {
     return bandHigh
   }
-  if (bandScore <
+  if (sectionScoringData.overallRatingScoreData
+    .filter(x => x.name === bandLow).length > 0 && bandScore <
     first(
       sectionScoringData.overallRatingScoreData
         .filter(x => x.name === bandLow)).value) {
@@ -157,10 +158,13 @@ function boolWeightScore (question, answers) {
       .filter(x =>
         first(answers).input
           .some(y => y.key === x.key))).weight * question.weight
-  let band = bandHigh
-  if (score <= first(
-    question.scoreData.scoreBand
-      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  let band = ''
+  if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
+    band = bandHigh
+    if (score <= first(
+      question.scoreData.scoreBand
+        .filter(r => r.name === bandLow)).value) { band = bandLow }
+  }
   return new ScoreResult(score, band)
 }
 

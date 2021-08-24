@@ -1,0 +1,82 @@
+{
+    "grantScheme": {
+        "key": "PROD001",
+        "name": "Productivity Management Slurry"
+    },
+    "desirability": {
+        "overallRatingScoreData": [
+            {
+                "name": "Strong",
+                "value": "60",
+                "type": "numeric"
+            },
+            {
+                "name": "Average",
+                "value": null,
+                "type": "else"
+            }
+        ],
+        "questions": [
+            {
+                "key": "project-subject",
+                "title": "The project will:",
+                "maxScore": 20,
+                "weight": 10,
+                "showResult": true,
+                "scoreType": "boolWeightScore",
+                "answer": [
+                    {
+                        "key": "project-subject-A1",
+                        "weight": 2,
+                        "value": "Robotics and innovation"
+                    },
+                    {
+                        "key": "project-subject-A2",
+                        "weight": 1,
+                        "value": "Slurry acidification"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": []
+                }
+            },
+            {
+                "key": "First Adoption",
+                "title": "The project will:",
+                "maxScore": 80,
+                "weight": 40,
+                "showResult": true,
+                "scoreType": "boolWeightScore",
+                "answer": [
+                    {
+                        "key": "First Adoption-A1",
+                        "weight": 2,
+                        "value": "Introducing Acidification"
+                    },
+                    {
+                        "key": "First Adoption-A2",
+                        "weight": 1,
+                        "value": "Increasing Acidification"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": []
+                }
+            }
+        ],
+        "overallRating": {
+            "score": null,
+            "band": null
+        }
+    }
+}
