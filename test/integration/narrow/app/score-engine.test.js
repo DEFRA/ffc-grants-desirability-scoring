@@ -177,7 +177,8 @@ describe('Score Engine Get Score test', () => {
     expect(scoreResult.desirability.overallRating.score).toBe(39)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
-  test('verify score for overall Ratings is Medium', () => {
+
+  const getMediumMessage = () => {
     const msg = fakeMessage.get()
     msg.desirability.questions.map(m => {
       m.answers.map(mi => {
@@ -196,12 +197,16 @@ describe('Score Engine Get Score test', () => {
       })
       return m
     })
+    return msg
+  }
+  test('verify score for overall Ratings is Medium', () => {
+    const msg = getMediumMessage()
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult.desirability.overallRating.score).toBe(62)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
-  test('verify score for overall Ratings is High with decimal score', () => {
+  const getHighMessage = () => {
     const msg = fakeMessage.get()
     msg.desirability.questions.map(m => {
       m.answers.map(mi => {
@@ -237,6 +242,10 @@ describe('Score Engine Get Score test', () => {
       })
       return m
     })
+    return msg
+  }
+  test('verify score for overall Ratings is High with decimal score', () => {
+    const msg = getHighMessage()
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult.desirability.overallRating.score).toBe(76)

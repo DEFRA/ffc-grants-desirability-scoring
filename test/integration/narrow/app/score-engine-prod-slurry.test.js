@@ -1,4 +1,3 @@
-const { first } = require('lodash')
 const scoreData = require('../../../score-data-prod-slurry.json')
 describe('Score Engine test', () => {
   afterAll(async (done) => {
