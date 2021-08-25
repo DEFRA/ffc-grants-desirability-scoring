@@ -95,14 +95,34 @@ function calculateQScore (question, answers, dependentQuestionRatingScore) {
     case 'dualsum':
       result = dualSum(question, answers)
       break
-
     case 'boolweightscore':
       result = boolWeightScore(question, answers)
+      break
+    case 'dualsumweightavgband':
+      result = dualSumWeightAvgBand(question, answers)
       break
   }
   return result
 }
 
+function dualSumWeightAvgBand (question, answers) {
+  let score = question.answer
+    .filter(itemX =>
+      first(answers).input.some(itemY => itemY.key === itemX.key))
+    .reduce((total, answer) => answer.weight + total, 0) * question.weight
+  score = score / answers.length
+  const scoreBand = score
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(x => x.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(x => x.name === bandHigh)).value) { band = bandHigh }
+
+  return new ScoreResult(score, band)
+}
 // Q14
 function dualSumWeightBand (question, answers) {
   const score = question.answer

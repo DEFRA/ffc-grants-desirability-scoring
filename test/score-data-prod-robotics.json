@@ -141,7 +141,7 @@
                 "maxScore": 25,
                 "weight": 5,
                 "showResult": true,
-                "scoreType": "boolWeightScore",
+                "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
                         "key": "Energy Source-A1",

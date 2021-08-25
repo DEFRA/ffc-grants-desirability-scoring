@@ -64,6 +64,16 @@ module.exports = {
                     value: 'Electricity – derived from renewable generation on farm'
                   }
                 ]
+              },
+              {
+                key: 'Energy Source-A2',
+                value: 'Biofuels',
+                input: [
+                  {
+                    key: 'Energy Source-A2',
+                    value: 'Biofuels'
+                  }
+                ]
               }
             ]
           },
