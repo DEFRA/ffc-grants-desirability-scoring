@@ -1,0 +1,260 @@
+{
+    "grantScheme": {
+        "key": "PROD002",
+        "name": "Productivity Management Robotics"
+    },
+    "desirability": {
+        "overallRatingScoreData": [
+            {
+                "name": "Strong",
+                "value": "65",
+                "type": "numeric"
+            },
+            {
+                "name": "Average",
+                "value": null,
+                "type": "else"
+            },
+            {
+                "name": "Weak",
+                "value": 40,
+                "type": "numeric"
+            }
+        ],
+        "questions": [
+            {
+                "key": "project-subject",
+                "title": "The project will:",
+                "maxScore": 20,
+                "weight": 10,
+                "showResult": true,
+                "scoreType": "boolWeightScore",
+                "answer": [
+                    {
+                        "key": "project-subject-A1",
+                        "weight": 1,
+                        "value": "Robotics and innovation"
+                    },
+                    {
+                        "key": "project-subject-A2",
+                        "weight": 2,
+                        "value": "Slurry acidification"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": []
+                }
+            },
+            {
+                "key": "First Adoption",
+                "title": "The project will:",
+                "maxScore": 10,
+                "weight": 10,
+                "showResult": true,
+                "scoreType": "boolWeightScore",
+                "answer": [
+                    {
+                        "key": "First Adoption-A1",
+                        "weight": 1,
+                        "value": "Yes"
+                    },
+                    {
+                        "key": "First Adoption-A2",
+                        "weight": 0,
+                        "value": "No"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [{
+                        "name": "Weak",
+                        "value": "0",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "10",
+                        "type": "numeric"
+                        }]
+                }
+            },
+            {
+                "key": "Data Collection & Monitoring",
+                "title": "The project will:",
+                "maxScore": 10,
+                "weight": 5,
+                "showResult": true,
+                "scoreType": "boolWeightScore",
+                "answer": [
+                    {
+                        "key": "Data Collection & Monitoring-A1",
+                        "weight": 1,
+                        "value": "Yes, we have the technology already"
+                    },
+                    {
+                        "key": "Data Collection & Monitoring-A2",
+                        "weight": 2,
+                        "value": "Yes, we’ll buy the technology as part of the project"
+                    },
+                    {
+                        "key": "Data Collection & Monitoring-A3",
+                        "weight": 0,
+                        "value": "No, we will not use any data analytics"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": "10",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": "5",
+                        "type": "numeric"
+                        }]
+                }
+            },
+            {
+                "key": "Energy Source",
+                "title": "The project will:",
+                "maxScore": 25,
+                "weight": 5,
+                "showResult": true,
+                "scoreType": "dualsumWeightavgband",
+                "answer": [
+                    {
+                        "key": "Energy Source-A1",
+                        "weight": 3,
+                        "value": "Electricity – derived from renewable generation on farm"
+                    },
+                    {
+                        "key": "Energy Source-A2",
+                        "weight": 2,
+                        "value": "Biofuels"
+                    },
+                    {
+                        "key": "Energy Source-A3",
+                        "weight": 1,
+                        "value": "Mains Electricity"
+                    },
+                    {
+                        "key": "Energy Source-A4",
+                        "weight": 0,
+                        "value": "Fossil fuels"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": "10",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": "5",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "15",
+                        "type": "numeric"
+                    }]
+                }
+            },
+            {
+                "key": "Agricultural Sector",
+                "title": "The project will:",
+                "maxScore": 45,
+                "weight": 15,
+                "showResult": true,
+                "scoreType": "boolWeightScore",
+                "answer": [
+                    {
+                        "key": "Agricultural Sector-A1",
+                        "weight": 3,
+                        "value": "Horticulture"
+                    },
+                    {
+                        "key": "Agricultural Sector-A2",
+                        "weight": 2,
+                        "value": "Arable"
+                    },
+                    {
+                        "key": "Agricultural Sector-A3",
+                        "weight": 1,
+                        "value": "Livestock (non-diary)"
+                    },
+                    {
+                        "key": "Agricultural Sector-A4",
+                        "weight": 0,
+                        "value": "Livestock (diary)"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": "30",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": "15",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "45",
+                        "type": "numeric"
+                    }]
+                }
+            }
+        ],
+        "overallRating": {
+            "score": null,
+            "band": null
+        }
+    }
+}

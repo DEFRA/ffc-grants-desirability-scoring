@@ -47,7 +47,8 @@ function getOverAllRatingBand (bandScore, sectionScoringData) {
         .filter(x => x.name === bandHigh)).value) {
     return bandHigh
   }
-  if (bandScore <
+  if (sectionScoringData.overallRatingScoreData
+    .filter(x => x.name === bandLow).length > 0 && bandScore <
     first(
       sectionScoringData.overallRatingScoreData
         .filter(x => x.name === bandLow)).value) {
@@ -94,14 +95,34 @@ function calculateQScore (question, answers, dependentQuestionRatingScore) {
     case 'dualsum':
       result = dualSum(question, answers)
       break
-
     case 'boolweightscore':
       result = boolWeightScore(question, answers)
+      break
+    case 'dualsumweightavgband':
+      result = dualSumWeightAvgBand(question, answers)
       break
   }
   return result
 }
 
+function dualSumWeightAvgBand (question, answers) {
+  let score = question.answer
+    .filter(itemX =>
+      first(answers).input.some(itemY => itemY.key === itemX.key))
+    .reduce((total, answer) => answer.weight + total, 0) * question.weight
+  score = score / answers.length
+  const scoreBand = score
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(x => x.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(x => x.name === bandHigh)).value) { band = bandHigh }
+
+  return new ScoreResult(score, band)
+}
 // Q14
 function dualSumWeightBand (question, answers) {
   const score = question.answer
@@ -157,10 +178,13 @@ function boolWeightScore (question, answers) {
       .filter(x =>
         first(answers).input
           .some(y => y.key === x.key))).weight * question.weight
-  let band = bandHigh
-  if (score <= first(
-    question.scoreData.scoreBand
-      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  let band = ''
+  if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
+    band = bandHigh
+    if (score <= first(
+      question.scoreData.scoreBand
+        .filter(r => r.name === bandLow)).value) { band = bandLow }
+  }
   return new ScoreResult(score, band)
 }
 
