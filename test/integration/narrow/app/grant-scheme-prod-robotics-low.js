@@ -3,7 +3,7 @@ module.exports = {
     {
       grantScheme: {
         key: 'PROD02',
-        name: 'Productivity Management Robotics'
+        name: 'Prod Grant Robotics'
       },
       desirability: {
         questions: [
@@ -23,14 +23,14 @@ module.exports = {
             ]
           },
           {
-            key: 'First Adoption',
+            key: 'robotics-technology',
             answers: [
               {
-                key: 'First Adoption-A1',
+                key: 'robotics-technology-A1',
                 value: 'Yes',
                 input: [
                   {
-                    key: 'First Adoption-A1',
+                    key: 'robotics-technology-A1',
                     value: 'Yes'
                   }
                 ]
@@ -38,14 +38,14 @@ module.exports = {
             ]
           },
           {
-            key: 'Data Collection & Monitoring',
+            key: 'robotics-data-analytics',
             answers: [
               {
-                key: 'Data Collection & Monitoring-A3',
+                key: 'robotics-data-analytics-A3',
                 value: 'No, we will not use any data analytics',
                 input: [
                   {
-                    key: 'Data Collection & Monitoring-A3',
+                    key: 'robotics-data-analytics-A3',
                     value: 'No, we will not use any data analytics'
                   }
                 ]
@@ -53,14 +53,14 @@ module.exports = {
             ]
           },
           {
-            key: 'Energy Source',
+            key: 'robotics-energy-source',
             answers: [
               {
-                key: 'Energy Source-A1',
+                key: 'robotics-energy-source-A1',
                 value: 'Electricity – derived from renewable generation on farm',
                 input: [
                   {
-                    key: 'Energy Source-A1',
+                    key: 'robotics-energy-source-A1',
                     value: 'Electricity – derived from renewable generation on farm'
                   }
                 ]
@@ -68,14 +68,14 @@ module.exports = {
             ]
           },
           {
-            key: 'Agricultural Sector',
+            key: 'robotics-agricultural-sector',
             answers: [
               {
-                key: 'Agricultural Sector-A4',
+                key: 'robotics-agricultural-sector-A4',
                 value: 'Livestock (diary)',
                 input: [
                   {
-                    key: 'Agricultural Sector-A4',
+                    key: 'robotics-agricultural-sector-A4',
                     value: 'Livestock (diary)'
                   }
                 ]

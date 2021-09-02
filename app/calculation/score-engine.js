@@ -181,9 +181,18 @@ function boolWeightScore (question, answers) {
   let band = ''
   if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
     band = bandHigh
-    if (score <= first(
-      question.scoreData.scoreBand
-        .filter(r => r.name === bandLow)).value) { band = bandLow }
+    if (question.scoreData.scoreBand
+      .filter(r => r.name === bandMedium).length > 0) {
+      if (score <= first(
+        question.scoreData.scoreBand
+          .filter(r => r.name === bandMedium)).value) { band = bandMedium }
+    }
+    if (question.scoreData.scoreBand
+      .filter(r => r.name === bandLow).length > 0) {
+      if (score <= first(
+        question.scoreData.scoreBand
+          .filter(r => r.name === bandLow)).value) { band = bandLow }
+    }
   }
   return new ScoreResult(score, band)
 }

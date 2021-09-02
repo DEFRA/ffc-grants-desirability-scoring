@@ -3,7 +3,7 @@ module.exports = {
     {
       grantScheme: {
         key: 'PROD01',
-        name: 'Productivity Management Slurry'
+        name: 'Prod Grant Slurry'
       },
       desirability: {
         questions: [
@@ -23,14 +23,14 @@ module.exports = {
             ]
           },
           {
-            key: 'First Adoption',
+            key: 'project-impacts',
             answers: [
               {
-                key: 'First Adoption-A2',
+                key: 'project-impacts-A2',
                 value: 'Increasing Acidification',
                 input: [
                   {
-                    key: 'First Adoption-A2',
+                    key: 'project-impacts-A2',
                     value: 'Increasing Acidification'
                   }
                 ]
