@@ -4,6 +4,7 @@
         "name": "Prod Grant Slurry"
     },
     "desirability": {
+        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",

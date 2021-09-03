@@ -29,7 +29,9 @@ class ScoreEngine {
           question.rating.score + total, 0)
     actualScore = Math.round(actualScore)
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
-    const bandScore = (actualScore / maxScore * 100)
+    let bandScore = actualScore
+    const overallRatingHave = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
+    if (overallRatingHave.toLowerCase() === 'percentile') { bandScore = (actualScore / maxScore * 100) }
 
     // remove noShowResult questions
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))
@@ -41,6 +43,7 @@ class ScoreEngine {
 }
 
 function getOverAllRatingBand (bandScore, sectionScoringData) {
+  console.log(sectionScoringData.overallRatingScoreData, 'overallRatingScoreData', bandScore)
   if (bandScore >=
     first(
       sectionScoringData.overallRatingScoreData
@@ -110,7 +113,7 @@ function dualSumWeightAvgBand (question, answers) {
     .filter(itemX =>
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
-  score = score / answers.length
+  score = score / first(answers).input.length
   const scoreBand = score
 
   let band = bandMedium

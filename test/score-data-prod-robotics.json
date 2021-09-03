@@ -4,6 +4,7 @@
         "name": "Prod Grant Robotics"
     },
     "desirability": {
+        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",
@@ -139,7 +140,7 @@
             {
                 "key": "robotics-energy-source",
                 "title": "Robotics Energy Source",
-                "maxScore": 20,
+                "maxScore": 10,
                 "weight": 4,
                 "showResult": true,
                 "scoreType": "dualsumWeightavgband",
