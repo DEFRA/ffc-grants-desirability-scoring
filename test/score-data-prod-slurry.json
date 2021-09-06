@@ -1,9 +1,10 @@
 {
     "grantScheme": {
         "key": "PROD001",
-        "name": "Productivity Management Slurry"
+        "name": "Prod Grant Slurry"
     },
     "desirability": {
+        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",
@@ -11,7 +12,7 @@
                 "type": "numeric"
             },
             {
-                "name": "Average",
+                "name": "Strong",
                 "value": null,
                 "type": "else"
             }
@@ -19,7 +20,7 @@
         "questions": [
             {
                 "key": "project-subject",
-                "title": "The project will:",
+                "title": "Project Subject",
                 "maxScore": 20,
                 "weight": 10,
                 "showResult": true,
@@ -27,12 +28,12 @@
                 "answer": [
                     {
                         "key": "project-subject-A1",
-                        "weight": 2,
+                        "weight": 1,
                         "value": "Robotics and innovation"
                     },
                     {
                         "key": "project-subject-A2",
-                        "weight": 1,
+                        "weight": 2,
                         "value": "Slurry acidification"
                     }
                 ],
@@ -46,21 +47,21 @@
                 }
             },
             {
-                "key": "First Adoption",
-                "title": "The project will:",
+                "key": "project-impacts",
+                "title": "Project Impacts",
                 "maxScore": 80,
                 "weight": 40,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
-                        "key": "First Adoption-A1",
+                        "key": "project-impacts-A1",
                         "weight": 2,
                         "value": "Introducing Acidification"
                     },
                     {
-                        "key": "First Adoption-A2",
-                        "weight": 1,
+                        "key": "project-impacts-A2",
+                        "weight": 1.5,
                         "value": "Increasing Acidification"
                     }
                 ],

@@ -29,7 +29,9 @@ class ScoreEngine {
           question.rating.score + total, 0)
     actualScore = Math.round(actualScore)
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
-    const bandScore = (actualScore / maxScore * 100)
+    let bandScore = actualScore
+    const overallRatingHave = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
+    if (overallRatingHave.toLowerCase() === 'percentile') { bandScore = (actualScore / maxScore * 100) }
 
     // remove noShowResult questions
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))
@@ -110,13 +112,16 @@ function dualSumWeightAvgBand (question, answers) {
     .filter(itemX =>
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
-  score = score / answers.length
+  score = score / first(answers).input.length
   const scoreBand = score
 
   let band = bandMedium
-  if (scoreBand <= first(
-    question.scoreData.scoreBand
-      .filter(x => x.name === bandLow)).value) { band = bandLow }
+  if (question.scoreData.scoreBand
+    .filter(r => r.name === bandLow).length > 0) {
+    if (scoreBand <= first(
+      question.scoreData.scoreBand
+        .filter(x => x.name === bandLow)).value) { band = bandLow }
+  }
   if (scoreBand >= first(
     question.scoreData.scoreBand
       .filter(x => x.name === bandHigh)).value) { band = bandHigh }
@@ -181,9 +186,18 @@ function boolWeightScore (question, answers) {
   let band = ''
   if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
     band = bandHigh
-    if (score <= first(
-      question.scoreData.scoreBand
-        .filter(r => r.name === bandLow)).value) { band = bandLow }
+    if (question.scoreData.scoreBand
+      .filter(r => r.name === bandMedium).length > 0) {
+      if (score <= first(
+        question.scoreData.scoreBand
+          .filter(r => r.name === bandMedium)).value) { band = bandMedium }
+    }
+    if (question.scoreData.scoreBand
+      .filter(r => r.name === bandLow).length > 0) {
+      if (score <= first(
+        question.scoreData.scoreBand
+          .filter(r => r.name === bandLow)).value) { band = bandLow }
+    }
   }
   return new ScoreResult(score, band)
 }

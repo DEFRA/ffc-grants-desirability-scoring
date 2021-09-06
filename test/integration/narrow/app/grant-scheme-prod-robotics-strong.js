@@ -3,7 +3,7 @@ module.exports = {
     {
       grantScheme: {
         key: 'PROD02',
-        name: 'Productivity Management Robotics'
+        name: 'Prod Grant Robotics'
       },
       desirability: {
         questions: [
@@ -23,14 +23,14 @@ module.exports = {
             ]
           },
           {
-            key: 'First Adoption',
+            key: 'robotics-technology',
             answers: [
               {
-                key: 'First Adoption-A2',
+                key: 'robotics-technology-A2',
                 value: 'No',
                 input: [
                   {
-                    key: 'First Adoption-A2',
+                    key: 'robotics-technology-A2',
                     value: 'No'
                   }
                 ]
@@ -38,14 +38,14 @@ module.exports = {
             ]
           },
           {
-            key: 'Data Collection & Monitoring',
+            key: 'robotics-data-analytics',
             answers: [
               {
-                key: 'Data Collection & Monitoring-A2',
+                key: 'robotics-data-analytics-A2',
                 value: 'Yes, we’ll buy the technology as part of the project',
                 input: [
                   {
-                    key: 'Data Collection & Monitoring-A2',
+                    key: 'robotics-data-analytics-A2',
                     value: 'Yes, we’ll buy the technology as part of the project'
                   }
                 ]
@@ -53,24 +53,24 @@ module.exports = {
             ]
           },
           {
-            key: 'Energy Source',
+            key: 'robotics-energy-source',
             answers: [
               {
-                key: 'Energy Source-A1',
+                key: 'robotics-energy-source-A1',
                 value: 'Electricity – derived from renewable generation on farm',
                 input: [
                   {
-                    key: 'Energy Source-A1',
+                    key: 'robotics-energy-source-A1',
                     value: 'Electricity – derived from renewable generation on farm'
                   }
                 ]
               },
               {
-                key: 'Energy Source-A2',
+                key: 'robotics-energy-source-A2',
                 value: 'Biofuels',
                 input: [
                   {
-                    key: 'Energy Source-A2',
+                    key: 'robotics-energy-source-A2',
                     value: 'Biofuels'
                   }
                 ]
@@ -78,14 +78,14 @@ module.exports = {
             ]
           },
           {
-            key: 'Agricultural Sector',
+            key: 'robotics-agricultural-sector',
             answers: [
               {
-                key: 'Agricultural Sector-A1',
+                key: 'robotics-agricultural-sector-A1',
                 value: 'Horticulture',
                 input: [
                   {
-                    key: 'Agricultural Sector-A1',
+                    key: 'robotics-agricultural-sector-A1',
                     value: 'Horticulture'
                   }
                 ]

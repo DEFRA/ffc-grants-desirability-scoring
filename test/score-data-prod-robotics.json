@@ -1,13 +1,14 @@
 {
     "grantScheme": {
         "key": "PROD002",
-        "name": "Productivity Management Robotics"
+        "name": "Prod Grant Robotics"
     },
     "desirability": {
+        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",
-                "value": "65",
+                "value": "80",
                 "type": "numeric"
             },
             {
@@ -17,14 +18,14 @@
             },
             {
                 "name": "Weak",
-                "value": 40,
+                "value": 50,
                 "type": "numeric"
             }
         ],
         "questions": [
             {
                 "key": "project-subject",
-                "title": "The project will:",
+                "title": "Project Subject",
                 "maxScore": 20,
                 "weight": 10,
                 "showResult": true,
@@ -51,22 +52,27 @@
                 }
             },
             {
-                "key": "First Adoption",
-                "title": "The project will:",
-                "maxScore": 10,
-                "weight": 10,
+                "key": "robotics-technology",
+                "title": "Robotics Technology",
+                "maxScore": 22,
+                "weight": 22,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
-                        "key": "First Adoption-A1",
+                        "key": "robotics-technology-A1",
                         "weight": 1,
-                        "value": "Yes"
+                        "value": "Yes, we’re using it now"
                     },
                     {
-                        "key": "First Adoption-A2",
+                        "key": "robotics-technology-A2",
+                        "weight": 1,
+                        "value": "Yes, as a pilot, demonstration or trial"
+                    },
+                    {
+                        "key": "robotics-technology-A3",
                         "weight": 0,
-                        "value": "No"
+                        "value": "No, we haven’t used it yet"
                     }
                 ],
                 "rating": {
@@ -82,31 +88,31 @@
                         },
                         {
                         "name": "Strong",
-                        "value": "10",
+                        "value": "22",
                         "type": "numeric"
                         }]
                 }
             },
             {
-                "key": "Data Collection & Monitoring",
-                "title": "The project will:",
-                "maxScore": 10,
-                "weight": 5,
+                "key": "robotics-data-analytics",
+                "title": "Robotics Data Analytics",
+                "maxScore": 7,
+                "weight": 7,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
-                        "key": "Data Collection & Monitoring-A1",
+                        "key": "robotics-data-analytics-A1",
                         "weight": 1,
                         "value": "Yes, we have the technology already"
                     },
                     {
-                        "key": "Data Collection & Monitoring-A2",
-                        "weight": 2,
+                        "key": "robotics-data-analytics-A2",
+                        "weight": 1,
                         "value": "Yes, we’ll buy the technology as part of the project"
                     },
                     {
-                        "key": "Data Collection & Monitoring-A3",
+                        "key": "robotics-data-analytics-A3",
                         "weight": 0,
                         "value": "No, we will not use any data analytics"
                     }
@@ -124,42 +130,38 @@
                         "type": "numeric"
                         },
                         {
-                        "name": "Average",
-                        "value": "10",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Average",
+                        "name": "Strong",
                         "value": "5",
                         "type": "numeric"
-                        }]
+                        }
+                    ]
                 }
             },
             {
-                "key": "Energy Source",
-                "title": "The project will:",
-                "maxScore": 25,
-                "weight": 5,
+                "key": "robotics-energy-source",
+                "title": "Robotics Energy Source",
+                "maxScore": 16,
+                "weight": 4,
                 "showResult": true,
                 "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
-                        "key": "Energy Source-A1",
-                        "weight": 3,
+                        "key": "robotics-energy-source-A1",
+                        "weight": 4,
                         "value": "Electricity – derived from renewable generation on farm"
                     },
                     {
-                        "key": "Energy Source-A2",
-                        "weight": 2,
+                        "key": "robotics-energy-source-A2",
+                        "weight": 1,
                         "value": "Biofuels"
                     },
                     {
-                        "key": "Energy Source-A3",
+                        "key": "robotics-energy-source-A3",
                         "weight": 1,
                         "value": "Mains Electricity"
                     },
                     {
-                        "key": "Energy Source-A4",
+                        "key": "robotics-energy-source-A4",
                         "weight": 0,
                         "value": "Fossil fuels"
                     }
@@ -178,46 +180,41 @@
                         },
                         {
                         "name": "Average",
-                        "value": "10",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Average",
-                        "value": "5",
+                        "value": "4",
                         "type": "numeric"
                         },
                         {
                         "name": "Strong",
-                        "value": "15",
+                        "value": "16",
                         "type": "numeric"
                     }]
                 }
             },
             {
-                "key": "Agricultural Sector",
-                "title": "The project will:",
+                "key": "robotics-agricultural-sector",
+                "title": "Robotics Agricultural Sector",
                 "maxScore": 45,
                 "weight": 15,
                 "showResult": true,
-                "scoreType": "boolWeightScore",
+                "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
-                        "key": "Agricultural Sector-A1",
+                        "key": "robotics-agricultural-sector-A1",
                         "weight": 3,
                         "value": "Horticulture"
                     },
                     {
-                        "key": "Agricultural Sector-A2",
+                        "key": "robotics-agricultural-sector-A2",
                         "weight": 2,
                         "value": "Arable"
                     },
                     {
-                        "key": "Agricultural Sector-A3",
-                        "weight": 1,
+                        "key": "robotics-agricultural-sector-A3",
+                        "weight": 2,
                         "value": "Livestock (non-diary)"
                     },
                     {
-                        "key": "Agricultural Sector-A4",
+                        "key": "robotics-agricultural-sector-A4",
                         "weight": 0,
                         "value": "Livestock (diary)"
                     }
@@ -230,18 +227,13 @@
                 "scoreData": {
                     "scoreBand": [
                         {
-                        "name": "Weak",
+                        "name": "Average",
                         "value": "0",
                         "type": "numeric"
                         },
                         {
                         "name": "Average",
                         "value": "30",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Average",
-                        "value": "15",
                         "type": "numeric"
                         },
                         {

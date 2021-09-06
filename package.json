@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-desirability-scoring",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "FFC Grants desirability scoring microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-desirability-scoring",
   "main": "app/index.js",
@@ -15,7 +15,7 @@
   "dependencies": {
     "@hapi/hapi": "^20.0.3",
     "applicationinsights": "^1.8.10",
-    "ffc-messaging": "^2.1.1",
+    "ffc-messaging": "^2.3.1",
     "ffc-protective-monitoring": "^1.0.0",
     "lodash": "^4.17.21",
     "pg": "^8.6.0",

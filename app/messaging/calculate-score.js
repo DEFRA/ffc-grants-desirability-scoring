@@ -7,15 +7,13 @@ const msgTypePrefix = 'uk.gov.ffc.grants'
 module.exports = async function (msg, calculateScoreReceiver) {
   try {
     const { body, correlationId, applicationProperties } = msg
-    console.log('Received message of type:', applicationProperties)
-    console.log(JSON.stringify(body, null, 2))
     const scoreMsgType = applicationProperties.type.replace(msgTypePrefix, '')
     let scoreDataType = null
     let senderMsgType = null
     switch (scoreMsgType) {
-      case '.productivity.desirability.calculate':
+      case '.prod.desirability.calculate':
         senderMsgType = msgCfg.desirabilityProductivityScoreMsgType
-        scoreDataType = 'Productivity Grant'
+        scoreDataType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Slurry' : 'Prod Grant Robotics'
         break
       case 'xyz.desirability.calculate':
         senderMsgType = msgCfg.desirabilityProductivityScoreMsgType
@@ -28,6 +26,7 @@ module.exports = async function (msg, calculateScoreReceiver) {
     }
     const scoreData = await scoreDataRepository.getScoreData(scoreDataType)
     if (scoreData && scoreData.data) {
+      console.log('body', body)
       const scoreEngine = new ScoreEngine(body, JSON.parse(scoreData.data))
       const scoreResult = scoreEngine.getScore()
       console.log('Score result:')
