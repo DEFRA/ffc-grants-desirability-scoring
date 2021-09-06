@@ -96,8 +96,8 @@
             {
                 "key": "robotics-data-analytics",
                 "title": "Robotics Data Analytics",
-                "maxScore": 5,
-                "weight": 5,
+                "maxScore": 7,
+                "weight": 7,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
@@ -140,7 +140,7 @@
             {
                 "key": "robotics-energy-source",
                 "title": "Robotics Energy Source",
-                "maxScore": 10,
+                "maxScore": 16,
                 "weight": 4,
                 "showResult": true,
                 "scoreType": "dualsumWeightavgband",
@@ -196,7 +196,7 @@
                 "maxScore": 45,
                 "weight": 15,
                 "showResult": true,
-                "scoreType": "boolWeightScore",
+                "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
                         "key": "robotics-agricultural-sector-A1",

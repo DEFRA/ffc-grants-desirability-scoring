@@ -43,7 +43,6 @@ class ScoreEngine {
 }
 
 function getOverAllRatingBand (bandScore, sectionScoringData) {
-  console.log(sectionScoringData.overallRatingScoreData, 'overallRatingScoreData', bandScore)
   if (bandScore >=
     first(
       sectionScoringData.overallRatingScoreData
@@ -117,9 +116,12 @@ function dualSumWeightAvgBand (question, answers) {
   const scoreBand = score
 
   let band = bandMedium
-  if (scoreBand <= first(
-    question.scoreData.scoreBand
-      .filter(x => x.name === bandLow)).value) { band = bandLow }
+  if (question.scoreData.scoreBand
+    .filter(r => r.name === bandLow).length > 0) {
+    if (scoreBand <= first(
+      question.scoreData.scoreBand
+        .filter(x => x.name === bandLow)).value) { band = bandLow }
+  }
   if (scoreBand >= first(
     question.scoreData.scoreBand
       .filter(x => x.name === bandHigh)).value) { band = bandHigh }
