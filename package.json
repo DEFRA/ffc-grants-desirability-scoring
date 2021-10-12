@@ -13,7 +13,7 @@
   "contributors": [],
   "license": "OGL-UK-3.0",
   "dependencies": {
-    "@hapi/hapi": "^20.0.3",
+    "@hapi/hapi": "^20.2.0",
     "applicationinsights": "^1.8.10",
     "ffc-messaging": "^2.3.1",
     "ffc-protective-monitoring": "^1.0.0",
