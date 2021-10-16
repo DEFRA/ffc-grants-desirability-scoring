@@ -23,9 +23,9 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
-    "jest-junit": "^12.0.0",
-    "lint": "^0.7.0",
+    "jest": "^27.2.5",
+    "jest-junit": "^13.0.0",
+    "lint": "^1.1.2",
     "liquibase": "^1.0.1",
     "nodemon": "^2.0.7",
     "standard": "^16.0.3"
