@@ -15,9 +15,9 @@ module.exports = async function (msg, calculateScoreReceiver) {
         senderMsgType = msgCfg.desirabilityProductivityScoreMsgType
         scoreDataType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Slurry' : 'Prod Grant Robotics'
         break
-      case 'xyz.desirability.calculate':
+      case '.addvalue.desirability.calculate':
         senderMsgType = msgCfg.desirabilityProductivityScoreMsgType
-        scoreDataType = 'XYZ Grant'
+        scoreDataType = 'Adding Value Grant'
         break
       default:
         senderMsgType = msgCfg.desirabilityScoreMsgType
