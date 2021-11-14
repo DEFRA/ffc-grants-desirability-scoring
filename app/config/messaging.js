@@ -19,5 +19,6 @@ module.exports = {
   },
   desirabilityScoreMsgType: 'uk.gov.ffc.grants.score.calculated',
   desirabilityProductivityScoreMsgType: 'uk.gov.ffc.grants.prod.score.calculated',
+  desirabilityAddingValueScoreMsgType: 'uk.gov.ffc.grants.av.score.calculated',
   msgSrc: 'ffc-grants-desirability-scoring'
 }
