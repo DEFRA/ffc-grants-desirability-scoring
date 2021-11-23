@@ -15,8 +15,8 @@ module.exports = {
                 title: 'What type of products are being processed?',
                 input: [
                   {
-                    key: 'products-processed-A1',
-                    value: 'Arable crops'
+                    key: 'products-processed-A2',
+                    value: 'Horticultural crops'
                   }
                 ]
               }
@@ -36,7 +36,7 @@ module.exports = {
                 input: [
                   {
                     key: 'how-adding-value-A1',
-                    value: 'Processing or preparing primary product'
+                    value: 'Dynamic controlled-atmosphere storage'
                   }
                 ]
               }
@@ -56,31 +56,7 @@ module.exports = {
                 input: [
                   {
                     key: 'project-impact-A1',
-                    value: 'Diversifying into creating added-value products'
-                  }
-                ]
-              }
-            ],
-            rating: {
-              score: null,
-              band: null,
-              importance: null
-            }
-          },
-          {
-            key: 'current-customers',
-            answers: [
-              {
-                key: 'current-customers',
-                title: 'Who are your current customers?',
-                input: [
-                  {
-                    key: 'current-customers-A1',
-                    value: 'Processors'
-                  },
-                  {
-                    key: 'current-customers-A2',
-                    value: 'Wholesalers'
+                    value: 'Creating added-value products for the first time'
                   }
                 ]
               }
@@ -96,15 +72,19 @@ module.exports = {
             answers: [
               {
                 key: 'future-customers',
-                title: 'Who are your current customers?',
+                title: 'Who will your customers be after the project?',
                 input: [
-                  {
-                    key: 'future-customers-A1',
-                    value: 'Processors'
-                  },
                   {
                     key: 'future-customers-A2',
                     value: 'Wholesalers'
+                  },
+                  {
+                    key: 'future-customers-A3',
+                    value: 'Retailers'
+                  },
+                  {
+                    key: 'future-customers-A4',
+                    value: 'Selling direct to consumers'
                   }
                 ]
               }
@@ -120,11 +100,51 @@ module.exports = {
             answers: [
               {
                 key: 'collaboration',
-                title: 'Who are your current customers?',
+                title: 'Will you buy materials from other farmers?',
                 input: [
                   {
                     key: 'collaboration-A1',
                     value: 'Yes'
+                  }
+                ]
+              }
+            ],
+            rating: {
+              score: null,
+              band: null,
+              importance: null
+            }
+          },
+          {
+            key: 'products-coming-from',
+            answers: [
+              {
+                key: 'products-coming-from',
+                title: 'Where are the primary products coming from?',
+                input: [
+                  {
+                    key: 'products-coming-from-A1',
+                    value: 'Within 1 mile'
+                  }
+                ]
+              }
+            ],
+            rating: {
+              score: null,
+              band: null,
+              importance: null
+            }
+          },
+          {
+            key: 'processed-sold',
+            answers: [
+              {
+                key: 'processed-sold',
+                title: 'Where are the processed products being sold?',
+                input: [
+                  {
+                    key: 'processed-sold-A1',
+                    value: 'Within 1 mile'
                   }
                 ]
               }
@@ -147,12 +167,8 @@ module.exports = {
                     value: 'Energy efficiency'
                   },
                   {
-                    key: 'environmental-impact-A2',
-                    value: 'Water efficiency'
-                  },
-                  {
-                    key: 'environmental-impact-A3',
-                    value: 'Waste efficiency'
+                    key: 'environmental-impact-A4',
+                    value: 'Reduce single-use plastics'
                   }
                 ]
               }

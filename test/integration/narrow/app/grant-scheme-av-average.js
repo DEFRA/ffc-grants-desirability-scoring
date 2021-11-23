@@ -68,30 +68,6 @@ module.exports = {
             }
           },
           {
-            key: 'current-customers',
-            answers: [
-              {
-                key: 'current-customers',
-                title: 'Who are your current customers?',
-                input: [
-                  {
-                    key: 'current-customers-A1',
-                    value: 'Processors'
-                  },
-                  {
-                    key: 'current-customers-A2',
-                    value: 'Wholesalers'
-                  }
-                ]
-              }
-            ],
-            rating: {
-              score: null,
-              band: null,
-              importance: null
-            }
-          },
-          {
             key: 'future-customers',
             answers: [
               {
@@ -125,6 +101,46 @@ module.exports = {
                   {
                     key: 'collaboration-A1',
                     value: 'Yes'
+                  }
+                ]
+              }
+            ],
+            rating: {
+              score: null,
+              band: null,
+              importance: null
+            }
+          },
+          {
+            key: 'products-coming-from',
+            answers: [
+              {
+                key: 'products-coming-from',
+                title: 'Where are the primary products coming from?',
+                input: [
+                  {
+                    key: 'products-coming-from-A5',
+                    value: 'from outside the UK'
+                  }
+                ]
+              }
+            ],
+            rating: {
+              score: null,
+              band: null,
+              importance: null
+            }
+          },
+          {
+            key: 'processed-sold',
+            answers: [
+              {
+                key: 'processed-sold',
+                title: 'Where are the processed products being sold?',
+                input: [
+                  {
+                    key: 'processed-sold-A5',
+                    value: 'from outside the UK'
                   }
                 ]
               }

@@ -23,7 +23,6 @@ describe('Prod Slurry - Score Engine Get Score test', () => {
   test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult Average', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
-    console.log(scoreResult, 'scoreResult')
     expect(scoreResult).toBeDefined()
     expect(scoreResult.desirability.overallRating.score).toBe(80)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
@@ -31,7 +30,6 @@ describe('Prod Slurry - Score Engine Get Score test', () => {
   test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult High', () => {
     const scoreEngine = new ScoreEngine(fakeMessageHigh.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
-    console.log(scoreResult, 'scoreResult')
     expect(scoreResult).toBeDefined()
     expect(scoreResult.desirability.overallRating.score).toBe(90)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')

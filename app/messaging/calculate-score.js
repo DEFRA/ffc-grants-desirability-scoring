@@ -26,7 +26,6 @@ module.exports = async function (msg, calculateScoreReceiver) {
     }
     const scoreData = await scoreDataRepository.getScoreData(scoreDataType)
     if (scoreData && scoreData.data) {
-      console.log('body', body)
       const scoreEngine = new ScoreEngine(body, JSON.parse(scoreData.data))
       const scoreResult = scoreEngine.getScore()
       console.log('Score result:')

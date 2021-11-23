@@ -15,7 +15,7 @@ module.exports = {
                 title: 'What type of products are being processed?',
                 input: [
                   {
-                    key: 'products-processed-A1',
+                    key: 'products-processed-A5',
                     value: 'Arable crops'
                   }
                 ]
@@ -35,8 +35,8 @@ module.exports = {
                 title: 'How will you add value to the products?',
                 input: [
                   {
-                    key: 'how-adding-value-A1',
-                    value: 'Processing or preparing primary product'
+                    key: 'how-adding-value-A5',
+                    value: 'New retail facility to sell direct to consumers'
                   }
                 ]
               }
@@ -55,32 +55,8 @@ module.exports = {
                 title: 'What impact will the project have?',
                 input: [
                   {
-                    key: 'project-impact-A1',
-                    value: 'Diversifying into creating added-value products'
-                  }
-                ]
-              }
-            ],
-            rating: {
-              score: null,
-              band: null,
-              importance: null
-            }
-          },
-          {
-            key: 'current-customers',
-            answers: [
-              {
-                key: 'current-customers',
-                title: 'Who are your current customers?',
-                input: [
-                  {
-                    key: 'current-customers-A1',
-                    value: 'Processors'
-                  },
-                  {
-                    key: 'current-customers-A2',
-                    value: 'Wholesalers'
+                    key: 'project-impact-A4',
+                    value: 'Allow selling direct to consumer ( i.e. retail and dis)'
                   }
                 ]
               }
@@ -103,8 +79,8 @@ module.exports = {
                     value: 'Processors'
                   },
                   {
-                    key: 'future-customers-A2',
-                    value: 'Wholesalers'
+                    key: 'future-customers-A5',
+                    value: 'No Change'
                   }
                 ]
               }
@@ -136,6 +112,46 @@ module.exports = {
             }
           },
           {
+            key: 'products-coming-from',
+            answers: [
+              {
+                key: 'products-coming-from',
+                title: 'Where are the primary products coming from?',
+                input: [
+                  {
+                    key: 'products-coming-from-A5',
+                    value: 'from outside the UK'
+                  }
+                ]
+              }
+            ],
+            rating: {
+              score: null,
+              band: null,
+              importance: null
+            }
+          },
+          {
+            key: 'processed-sold',
+            answers: [
+              {
+                key: 'processed-sold',
+                title: 'Where are the processed products being sold?',
+                input: [
+                  {
+                    key: 'processed-sold-A5',
+                    value: 'from outside the UK'
+                  }
+                ]
+              }
+            ],
+            rating: {
+              score: null,
+              band: null,
+              importance: null
+            }
+          },
+          {
             key: 'environmental-impact',
             answers: [
               {
@@ -149,10 +165,6 @@ module.exports = {
                   {
                     key: 'environmental-impact-A2',
                     value: 'Water efficiency'
-                  },
-                  {
-                    key: 'environmental-impact-A3',
-                    value: 'Waste efficiency'
                   }
                 ]
               }
