@@ -7,12 +7,12 @@
         "overallRatingScoreData": [
             {
                 "name": "Strong",
-                "value": "75",
+                "value": "65",
                 "type": "numeric"
             },
             {
                 "name": "Weak",
-                "value": "55",
+                "value": "45",
                 "type": "numeric"
             },
             {
@@ -21,92 +21,23 @@
                 "type": "else"
             }
         ],
-        "questions": [
+        "questions": [                      
             {
-                "key": "products-processed",
-                "title": "What type of products are being processed?",
-                "maxScore": 4,
-                "weight": 0.8,
-                "showResult": true,
-                "scoreType": "boolWeightScore",
-                "answer": [
-                    {
-                        "key": "products-processed-A1",
-                        "weight": 5,
-                        "value": "Arable crops"
-                    },
-                    {
-                        "key": "products-processed-A2",
-                        "weight": 5,
-                        "value": "Horticultural crops"
-                    },
-                    {
-                        "key": "products-processed-A3",
-                        "weight": 5,
-                        "value": "Dairy or meat produce"
-                    },
-                    {
-                        "key": "products-processed-A4",
-                        "weight": 0,
-                        "value": "Forestry products"
-                    },
-                    {
-                        "key": "products-processed-A5",
-                        "weight": 0,
-                        "value": "Fodder crops"
-                    },
-                    {
-                        "key": "products-processed-A6",
-                        "weight": 0,
-                        "value": "Non-edible crops"
-                    },
-                    {
-                        "key": "products-processed-A7",
-                        "weight": 0,
-                        "value": "Fibre products"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                            "name": "Strong",
-                            "value": "0.8",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Weak",
-                            "value": "0.5",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Average",
-                            "value": null,
-                            "type": "else"
-                        }
-                    ]
-                }
-            },            
-            {                 
                 "key": "how-adding-value",
                 "title": "How will you add value to the products?",
-                "maxScore": 4,
-                "weight": 0.8,
-                "showResult": true,
-                "scoreType": "boolWeightScore",
-                "answer": [
+                "maxScore": 7,
+                "weight": 1,
+                "showResult": false,
+                "scoreType": "answerValNoBand",
+                "answer": [                                      
                     {
                         "key": "how-adding-value-A1",
-                        "weight": 1,
-                        "value": "Processing or preparing primary product"
+                        "weight": 7,
+                        "value": "Slaughtering, processing or preparing primary product"
                     },
                     {
                         "key": "how-adding-value-A2",
-                        "weight": 1,
+                        "weight": 6,
                         "value": "Grading or sorting primary product"
                     },
                     {
@@ -116,52 +47,13 @@
                     },
                     {
                         "key": "how-adding-value-A4",
-                        "weight": 2,
-                        "value": "Dynamic controlled-atmosphere storage"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                            "name": "Strong",
-                            "value": "0.8",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Weak",
-                            "value": "0.5",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Average",
-                            "value": null,
-                            "type": "else"
-                        }
-                    ]
-                }
-            },            
-            {
-                "key": "project-impact",
-                "title": "What impact will the project have?",
-                "maxScore": 4,
-                "weight": 0.8,
-                "showResult": true,
-                "scoreType": "boolWeightScore",
-                "answer": [
-                    {
-                        "key": "project-impact-A1",
-                        "weight": 2,
-                        "value": "Diversifying into creating added-value products"
+                        "weight": 4,
+                        "value": "Controlled atmosphere or dynamic controlled atmosphere storage"
                     },
                     {
-                        "key": "project-impact-A2",
-                        "weight": 1,
-                        "value": "Increase volume or range of added-value products"
+                        "key": "how-adding-value-A5",
+                        "weight": 3,
+                        "value": "New retail facility to sell direct to consumers"
                     }
                 ],
                 "rating": {
@@ -173,12 +65,12 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
+                            "value": "12.5",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "0.5",
+                            "value": "5",
                             "type": "numeric"
                         },
                         {
@@ -190,32 +82,48 @@
                 }
             },  
             {
-                "key": "current-customers",
-                "title": "Who are your current customers?",
-                "maxScore": 4,
-                "weight": 0.8,
+                "key": "products-processed",
+                "title": "What type of products are being processed?",
+                "maxScore": 20,
+                "weight": 20,
                 "showResult": true,
-                "scoreType": "dualsumWeightavgband",
+                "scoreType": "WeightedMatrixScore",
+                "matrixAxis": ["how-adding-value", "products-processed"],
                 "answer": [
                     {
-                        "key": "current-customers-A1",
-                        "weight": 5,
-                        "value": "Processors"
+                        "key": "products-processed-A1",
+                        "weight": 7,
+                        "value": "Arable crops"
                     },
                     {
-                        "key": "current-customers-A2",
-                        "weight": 5,
-                        "value": "Wholesalers"
+                        "key": "products-processed-A2",
+                        "weight": 6,
+                        "value": "Horticultural crops"
                     },
                     {
-                        "key": "current-customers-A3",
+                        "key": "products-processed-A3",
                         "weight": 5,
-                        "value": "Retailers"
+                        "value": "Dairy or meat produce"
                     },
                     {
-                        "key": "current-customers-A4",
-                        "weight": 0,
-                        "value": "Selling direct to consumers"
+                        "key": "products-processed-A4",
+                        "weight": 4,
+                        "value": "Forestry products"
+                    },
+                    {
+                        "key": "products-processed-A5",
+                        "weight": 3,
+                        "value": "Fodder crops"
+                    },
+                    {
+                        "key": "products-processed-A6",
+                        "weight": 2,
+                        "value": "Non-edible crops"
+                    },
+                    {
+                        "key": "products-processed-A7",
+                        "weight": 1,
+                        "value": "Fibre products"
                     }
                 ],
                 "rating": {
@@ -224,15 +132,105 @@
                     "importance": null
                 },
                 "scoreData": {
+                    "scoreMatrix": [
+                        {	
+                            "id": "7",
+                            "7": "0.80",
+                            "6": "1.00",
+                            "5": "0.80",
+                            "4": "0.10",
+                            "3": "0.40",
+                            "2": "0.50",
+                            "1": "0.50",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "6",
+                            "7": "0.60",
+                            "6": "0.70",
+                            "5": "0.60",
+                            "4": "0.10",
+                            "3": "0.30",
+                            "2": "0.20",
+                            "1": "0.50",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "5",
+                            "7": "0.30",
+                            "6": "0.40",
+                            "5": "0.30",
+                            "4": "0.10",
+                            "3": "0.20",
+                            "2": "0.20",
+                            "1": "0.20",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "4",
+                            "7": "0.00",
+                            "6": "0.50",
+                            "5": "0.00",
+                            "4": "0.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "3",
+                            "7": "0.10",
+                            "6": "0.10",
+                            "5": "0.10",
+                            "4": "0.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.10",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "2",
+                            "7": "50.00",
+                            "6": "45.00",
+                            "5": "40.00",
+                            "4": "30.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "1",
+                            "7": "50.00",
+                            "6": "40.00",
+                            "5": "30.00",
+                            "4": "25.00",
+                            "3": "0.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        },
+                        {
+                            "id": "0",
+                            "7": "50.00",
+                            "6": "40.00",
+                            "5": "10.00",
+                            "4": "10.00",
+                            "3": "10.00",
+                            "2": "0.00",
+                            "1": "0.00",
+                            "0": "0.00"
+                        }
+                    ],
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
+                            "value": "14",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "0.5",
+                            "value": "9",
                             "type": "numeric"
                         },
                         {
@@ -242,34 +240,34 @@
                         }
                     ]
                 }
-            },   
+            },           
             {
-                "key": "future-customers",
-                "title": "Who will your customers be after the project?",
-                "maxScore": 4,
-                "weight": 0.8,
+                "key": "project-impact",
+                "title": "What impact will the project have?",
+                "maxScore": 25,
+                "weight": 25,
                 "showResult": true,
-                "scoreType": "dualsumWeightavgband",
+                "scoreType": "dualSumNoPercentBand",
                 "answer": [
                     {
-                        "key": "future-customers-A1",
-                        "weight": 5,
-                        "value": "Processors"
+                        "key": "project-impact-A1",
+                        "weight": 1,
+                        "value": "Creating added-value products for the first time"
                     },
                     {
-                        "key": "future-customers-A2",
-                        "weight": 5,
-                        "value": "Wholesalers"
+                        "key": "project-impact-A2",
+                        "weight": 0.2,
+                        "value": "Increasing volume of added-value products"
                     },
                     {
-                        "key": "future-customers-A3",
-                        "weight": 5,
-                        "value": "Retailers"
+                        "key": "project-impact-A3",
+                        "weight": 0.3,
+                        "value": "Increasing range of added-value products"
                     },
                     {
-                        "key": "future-customers-A4",
-                        "weight": 0,
-                        "value": "Selling direct to consumers"
+                        "key": "project-impact-A4",
+                        "weight": 0.1,
+                        "value": "Allow selling direct to consumer ( i.e. retail and dis)"
                     }
                 ],
                 "rating": {
@@ -281,12 +279,71 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
+                            "value": "12.5",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "0.5",
+                            "value": "5",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Average",
+                            "value": null,
+                            "type": "else"
+                        }
+                    ]
+                }
+            }, 
+            {
+                "key": "future-customers",
+                "title": "Who will your customers be after the project?",
+                "maxScore": 15,
+                "weight": 15,
+                "showResult": true,
+                "scoreType": "dualSumNoPercentBand",
+                "answer": [
+                    {
+                        "key": "future-customers-A1",
+                        "weight": 0,
+                        "value": "Processors"
+                    },
+                    {
+                        "key": "future-customers-A2",
+                        "weight": 0.1,
+                        "value": "Wholesalers"
+                    },
+                    {
+                        "key": "future-customers-A3",
+                        "weight": 0.3,
+                        "value": "Retailers"
+                    },
+                    {
+                        "key": "future-customers-A4",
+                        "weight": 0.6,
+                        "value": "Selling direct to consumers"
+                    },
+                    {
+                        "key": "future-customers-A5",
+                        "weight": 0,
+                        "value": "No change"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                            "name": "Strong",
+                            "value": "8",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Weak",
+                            "value": "4",
                             "type": "numeric"
                         },
                         {
@@ -300,19 +357,19 @@
             {
                 "key": "collaboration",
                 "title": "Will you buy materials from other farmers?",
-                "maxScore": 4,
-                "weight": 0.8,
+                "maxScore": 10,
+                "weight": 10,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
                         "key": "collaboration-A1",
-                        "weight": 5,
+                        "weight": 1,
                         "value": "Yes"
                     },
                     {
                         "key": "collaboration-A2",
-                        "weight": 5,
+                        "weight": 0,
                         "value": "No"
                     }
                 ],
@@ -325,12 +382,7 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Weak",
-                            "value": "0.5",
+                            "value": "5",
                             "type": "numeric"
                         },
                         {
@@ -344,29 +396,29 @@
             {
                 "key": "products-coming-from",
                 "title": "Where are the primary products coming from?",
-                "maxScore": 4,
-                "weight": 0.8,
+                "maxScore": 5,
+                "weight": 5,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
                         "key": "products-coming-from-A1",
-                        "weight": 5,
-                        "value": "Processing point"
+                        "weight": 1,
+                        "value": "Within 1 mile"
                     },
                     {
                         "key": "products-coming-from-A2",
-                        "weight": 5,
+                        "weight": 0.8,
                         "value": "Within 10 miles"
                     },
                     {
                         "key": "products-coming-from-A3",
-                        "weight": 5,
+                        "weight": 0.6,
                         "value": "Within 50 miles"
                     },
                     {
                         "key": "products-coming-from-A4",
-                        "weight": 0,
+                        "weight": 0.2,
                         "value": "More than 50 miles"
                     },
                     {
@@ -384,12 +436,12 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
+                            "value": "4",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "0.5",
+                            "value": "1",
                             "type": "numeric"
                         },
                         {
@@ -403,29 +455,29 @@
             {
                 "key": "processed-sold",
                 "title": "Where are the processed products being sold?",
-                "maxScore": 4,
-                "weight": 0.8,
+                "maxScore": 5,
+                "weight": 5,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
                         "key": "processed-sold-A1",
-                        "weight": 5,
-                        "value": "Processing point"
+                        "weight": 1,
+                        "value": "Within 1 mile"
                     },
                     {
                         "key": "processed-sold-A2",
-                        "weight": 5,
+                        "weight": 0.8,
                         "value": "Within 10 miles"
                     },
                     {
                         "key": "processed-sold-A3",
-                        "weight": 5,
+                        "weight": 0.6,
                         "value": "Within 50 miles"
                     },
                     {
                         "key": "processed-sold-A4",
-                        "weight": 0,
+                        "weight": 0.2,
                         "value": "More than 50 miles"
                     },
                     {
@@ -443,12 +495,12 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
+                            "value": "4",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "0.5",
+                            "value": "1",
                             "type": "numeric"
                         },
                         {
@@ -462,34 +514,34 @@
             {
                 "key": "environmental-impact",
                 "title": "How will the project improve the environment?",
-                "maxScore": 4,
-                "weight": 0.8,
+                "maxScore": 20,
+                "weight": 20,
                 "showResult": true,
-                "scoreType": "dualsumWeightavgband",
+                "scoreType": "dualSumNoPercentBand",
                 "answer": [
                     {
                         "key": "environmental-impact-A1",
-                        "weight": 1,
+                        "weight": 0.6,
                         "value": "Energy efficiency"
                     },
                     {
                         "key": "environmental-impact-A2",
-                        "weight": 1,
+                        "weight": 0.1,
                         "value": "Water efficiency"
                     },
                     {
                         "key": "environmental-impact-A3",
-                        "weight": 1,
+                        "weight": 0.1,
                         "value": "Waste efficiency"
                     },
                     {
                         "key": "environmental-impact-A4",
-                        "weight": 0,
+                        "weight": 0.4,
                         "value": "Reduce single-use plastics"
                     },
                     {
                         "key": "environmental-impact-A5",
-                        "weight": 0,
+                        "weight": 0.2,
                         "value": "Reduce harmful emissions or pollutants"
                     },
                     {
@@ -507,12 +559,12 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "0.8",
+                            "value": "10",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "0.5",
+                            "value": "1",
                             "type": "numeric"
                         },
                         {

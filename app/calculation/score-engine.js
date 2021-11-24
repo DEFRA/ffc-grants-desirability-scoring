@@ -71,11 +71,11 @@ function calculate (qanswer, sectionScoringData, allQanswers) {
       dependentQuestionRatingScore.push(dqa.rating.score)
     })
   }
-  qanswer.rating = calculateQScore(question, qanswer.answers, dependentQuestionRatingScore)
+  qanswer.rating = calculateQScore(question, qanswer.answers, dependentQuestionRatingScore, allQanswers, sectionScoringData)
   return qanswer
 }
 
-function calculateQScore (question, answers, dependentQuestionRatingScore) {
+function calculateQScore (question, answers, dependentQuestionRatingScore, allQanswers, sectionScoringData) {
   let result = new ScoreResult('', '')
   switch (String(question.scoreType).toLowerCase()) {
     case 'dualsumweightband':
@@ -102,6 +102,12 @@ function calculateQScore (question, answers, dependentQuestionRatingScore) {
       break
     case 'dualsumweightavgband':
       result = dualSumWeightAvgBand(question, answers)
+      break
+    case 'weightedmatrixscore':
+      result = SingleValueWeightedMatrixScore(question, answers, allQanswers, sectionScoringData)
+      break
+    case 'dualsumnopercentband':
+      result = dualSumNoPercentBand(question, answers)
       break
   }
   return result
@@ -134,7 +140,6 @@ function dualSumWeightBand (question, answers) {
     .filter(itemX =>
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
-
   const scoreBand = score / question.maxScore
 
   let band = bandMedium
@@ -259,6 +264,57 @@ function dualSum (question, answers) {
   return new ScoreResult(score, band)
 }
 
+function dualSumNoPercentBand (question, answers) {
+  const score =
+  question.answer
+    .filter(itemX => first(answers).input
+      .some(itemY => itemY.key === itemX.key))
+    .reduce((total, answer) => answer.weight + total, 0) * question.weight
+
+  const scoreBand = score
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+
+  return new ScoreResult(score, band)
+}
+function SingleValueWeightedMatrixScore (question, answers, allQanswers, sectionScoringData) {
+  const currentQuestionWeight = question.answer
+    .filter(itemX => first(answers).input
+      .some(itemY => itemY.key === itemX.key))[0].weight
+
+  const tobeQuestion = first(
+    sectionScoringData.questions
+      .filter(q => q.key === question.matrixAxis.filter(axis => axis !== question.key)[0]))
+
+  const tobeAnswers = allQanswers.filter(x => tobeQuestion.key === x.key)[0]
+  const tobeQuestionScoreResult = calculateQScore(tobeQuestion, tobeAnswers.answers, null, allQanswers, sectionScoringData)
+  const rowIndex = question.key === question.matrixAxis[0] ? currentQuestionWeight : tobeQuestionScoreResult.score
+  const columnIndex = question.key === question.matrixAxis[1] ? currentQuestionWeight : tobeQuestionScoreResult.score
+  const score = question.scoreData.scoreMatrix.filter(x => x.id === String(rowIndex))[0][String(columnIndex)] * question.weight
+  let band = ''
+  if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
+    band = bandHigh
+    if (question.scoreData.scoreBand
+      .filter(r => r.name === bandMedium).length > 0) {
+      if (score <= first(
+        question.scoreData.scoreBand
+          .filter(r => r.name === bandMedium)).value) { band = bandMedium }
+    }
+    if (question.scoreData.scoreBand
+      .filter(r => r.name === bandLow).length > 0) {
+      if (score <= first(
+        question.scoreData.scoreBand
+          .filter(r => r.name === bandLow)).value) { band = bandLow }
+    }
+  }
+  return new ScoreResult(score, band)
+}
 class ScoreResult {
   constructor (score, band, importance = null) {
     this.score = score
