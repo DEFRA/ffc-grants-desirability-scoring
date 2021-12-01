@@ -16,7 +16,7 @@ module.exports = {
                 input: [
                   {
                     key: 'products-processed-A2',
-                    value: 'Horticultural crops'
+                    value: 'Horticultural products'
                   }
                 ]
               }
@@ -36,7 +36,7 @@ module.exports = {
                 input: [
                   {
                     key: 'how-adding-value-A1',
-                    value: 'Dynamic controlled-atmosphere storage'
+                    value: 'Slaughtering, processing or preparing primary product'
                   }
                 ]
               }
@@ -75,15 +75,15 @@ module.exports = {
                 title: 'Who will your customers be after the project?',
                 input: [
                   {
-                    key: 'future-customers-A2',
+                    key: 'future-customers-A3',
                     value: 'Wholesalers'
                   },
                   {
-                    key: 'future-customers-A3',
+                    key: 'future-customers-A4',
                     value: 'Retailers'
                   },
                   {
-                    key: 'future-customers-A4',
+                    key: 'future-customers-A5',
                     value: 'Selling direct to consumers'
                   }
                 ]
@@ -167,7 +167,7 @@ module.exports = {
                     value: 'Energy efficiency'
                   },
                   {
-                    key: 'environmental-impact-A4',
+                    key: 'environmental-impact-A5',
                     value: 'Reduce single-use plastics'
                   }
                 ]

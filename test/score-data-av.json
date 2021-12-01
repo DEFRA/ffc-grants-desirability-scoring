@@ -93,17 +93,17 @@
                     {
                         "key": "products-processed-A1",
                         "weight": 7,
-                        "value": "Arable crops"
+                        "value": "Arable products"
                     },
                     {
                         "key": "products-processed-A2",
                         "weight": 6,
-                        "value": "Horticultural crops"
+                        "value": "Horticultural products"
                     },
                     {
                         "key": "products-processed-A3",
                         "weight": 5,
-                        "value": "Dairy or meat produce"
+                        "value": "Dairy or meat products"
                     },
                     {
                         "key": "products-processed-A4",
@@ -113,12 +113,12 @@
                     {
                         "key": "products-processed-A5",
                         "weight": 3,
-                        "value": "Fodder crops"
+                        "value": "Fodder products"
                     },
                     {
                         "key": "products-processed-A6",
                         "weight": 2,
-                        "value": "Non-edible crops"
+                        "value": "Non-edible products"
                     },
                     {
                         "key": "products-processed-A7",
@@ -306,25 +306,30 @@
                     {
                         "key": "future-customers-A1",
                         "weight": 0,
-                        "value": "Processors"
+                        "value": "Producers or Growers"
                     },
                     {
                         "key": "future-customers-A2",
+                        "weight": 0,
+                        "value": "Processors"
+                    },
+                    {
+                        "key": "future-customers-A3",
                         "weight": 0.1,
                         "value": "Wholesalers"
                     },
                     {
-                        "key": "future-customers-A3",
+                        "key": "future-customers-A4",
                         "weight": 0.3,
                         "value": "Retailers"
                     },
                     {
-                        "key": "future-customers-A4",
+                        "key": "future-customers-A5",
                         "weight": 0.6,
                         "value": "Selling direct to consumers"
                     },
                     {
-                        "key": "future-customers-A5",
+                        "key": "future-customers-A6",
                         "weight": 0,
                         "value": "No change"
                     }
@@ -518,34 +523,39 @@
                 "weight": 20,
                 "showResult": true,
                 "scoreType": "dualSumNoPercentBand",
-                "answer": [
+                "answer": [	
                     {
                         "key": "environmental-impact-A1",
                         "weight": 0.6,
-                        "value": "Energy efficiency"
+                        "value": "Renewable energy"
                     },
                     {
                         "key": "environmental-impact-A2",
                         "weight": 0.1,
-                        "value": "Water efficiency"
+                        "value": "Energy efficiency"
                     },
                     {
                         "key": "environmental-impact-A3",
                         "weight": 0.1,
-                        "value": "Waste efficiency"
+                        "value": "Water efficiency"
                     },
                     {
                         "key": "environmental-impact-A4",
-                        "weight": 0.4,
-                        "value": "Reduce single-use plastics"
+                        "weight": 0.1,
+                        "value": "Waste efficiency"
                     },
                     {
                         "key": "environmental-impact-A5",
+                        "weight": 0.4,
+                        "value": "Remove single-use plastics"
+                    },
+                    {
+                        "key": "environmental-impact-A6",
                         "weight": 0.2,
                         "value": "Reduce harmful emissions or pollutants"
                     },
                     {
-                        "key": "environmental-impact-A6",
+                        "key": "environmental-impact-A7",
                         "weight": 0,
                         "value": "My project will not improve the environment"
                     }

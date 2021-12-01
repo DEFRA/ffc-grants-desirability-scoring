@@ -16,7 +16,7 @@ module.exports = {
                 input: [
                   {
                     key: 'products-processed-A5',
-                    value: 'Arable crops'
+                    value: 'Arable products'
                   }
                 ]
               }
@@ -75,11 +75,11 @@ module.exports = {
                 title: 'Who are your current customers?',
                 input: [
                   {
-                    key: 'future-customers-A1',
+                    key: 'future-customers-A2',
                     value: 'Processors'
                   },
                   {
-                    key: 'future-customers-A5',
+                    key: 'future-customers-A6',
                     value: 'No Change'
                   }
                 ]
@@ -159,11 +159,11 @@ module.exports = {
                 title: 'How will the project improve the environment?',
                 input: [
                   {
-                    key: 'environmental-impact-A1',
+                    key: 'environmental-impact-A2',
                     value: 'Energy efficiency'
                   },
                   {
-                    key: 'environmental-impact-A2',
+                    key: 'environmental-impact-A3',
                     value: 'Water efficiency'
                   }
                 ]
