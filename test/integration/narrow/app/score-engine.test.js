@@ -131,7 +131,7 @@ describe('Score Engine Get Score test', () => {
     const scoreResult = scoreEngine.getScore()
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'Q20')).rating
     expect(rating.score).toBe(4)
-    expect(rating.band).toBe('Strong')
+    expect(rating.band).toBe('Average')
   })
   test('verify score for score-type boolweightscore Low', () => {
     const msg = fakeMessage.get()

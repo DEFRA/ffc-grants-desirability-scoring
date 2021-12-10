@@ -55,8 +55,8 @@ module.exports = {
                 title: 'What impact will the project have?',
                 input: [
                   {
-                    key: 'project-impact-A1',
-                    value: 'Diversifying into creating added-value products'
+                    key: 'project-impact-A2',
+                    value: 'Increasing volume of added-value products'
                   }
                 ]
               }
