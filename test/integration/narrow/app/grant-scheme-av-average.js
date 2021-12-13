@@ -55,8 +55,8 @@ module.exports = {
                 title: 'What impact will the project have?',
                 input: [
                   {
-                    key: 'project-impact-A1',
-                    value: 'Diversifying into creating added-value products'
+                    key: 'project-impact-A2',
+                    value: 'Increasing volume of added-value products'
                   }
                 ]
               }
@@ -119,8 +119,8 @@ module.exports = {
                 title: 'Where are the primary products coming from?',
                 input: [
                   {
-                    key: 'products-coming-from-A5',
-                    value: 'from outside the UK'
+                    key: 'products-coming-from-A3',
+                    value: 'Within 50 miles'
                   }
                 ]
               }
@@ -139,8 +139,8 @@ module.exports = {
                 title: 'Where are the processed products being sold?',
                 input: [
                   {
-                    key: 'processed-sold-A5',
-                    value: 'from outside the UK'
+                    key: 'processed-sold-A3',
+                    value: 'Within 50 miles'
                   }
                 ]
               }

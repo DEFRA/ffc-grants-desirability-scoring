@@ -183,28 +183,23 @@ function dualQuestionHectorScore (question, answers, dependentQuestionRatingScor
 
 // Q20
 function boolWeightScore (question, answers) {
-  const score = first(
-    question.answer
-      .filter(x =>
-        first(answers).input
-          .some(y => y.key === x.key))).weight * question.weight
-  let band = ''
-  if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
-    band = bandHigh
-    if (question.scoreData.scoreBand
-      .filter(r => r.name === bandMedium).length > 0) {
-      if (score <= first(
-        question.scoreData.scoreBand
-          .filter(r => r.name === bandMedium)).value) { band = bandMedium }
-    }
-    if (question.scoreData.scoreBand
-      .filter(r => r.name === bandLow).length > 0) {
-      if (score <= first(
-        question.scoreData.scoreBand
-          .filter(r => r.name === bandLow)).value) { band = bandLow }
-    }
-  }
+  const score = first(question.answer
+    .filter(answer =>
+      first(answers).input
+        .some(selectedAnswer => selectedAnswer.key === answer.key))).weight * question.weight
+
+  let band = bandMedium
+  const hasBandHigh = (question.scoreData.scoreBand.filter(band => band.name === bandHigh).length > 0)
+  const hasBandLow = (question.scoreData.scoreBand.filter(r => r.name === bandLow).length > 0)
+
+  if (hasBandHigh && score >= bandLimit(question, bandHigh)) { band = bandHigh }
+  if (hasBandLow && score <= bandLimit(question, bandLow)) { band = bandLow }
+
   return new ScoreResult(score, band)
+}
+
+const bandLimit = (question, scoreBand) => {
+  return first(question.scoreData.scoreBand.filter(band => band.name === scoreBand))?.value
 }
 
 // Q18/17

@@ -251,7 +251,7 @@
                 "answer": [
                     {
                         "key": "project-impact-A1",
-                        "weight": 1,
+                        "weight": 0.9,
                         "value": "Creating added-value products for the first time"
                     },
                     {
