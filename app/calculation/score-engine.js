@@ -188,18 +188,23 @@ function boolWeightScore (question, answers) {
       first(answers).input
         .some(selectedAnswer => selectedAnswer.key === answer.key))).weight * question.weight
 
-  let band = bandMedium
-  const hasBandHigh = (question.scoreData.scoreBand.filter(band => band.name === bandHigh).length > 0)
-  const hasBandLow = (question.scoreData.scoreBand.filter(r => r.name === bandLow).length > 0)
+  const questionBand = getBand(question, score)
 
-  if (hasBandHigh && score >= bandLimit(question, bandHigh)) { band = bandHigh }
-  if (hasBandLow && score <= bandLimit(question, bandLow)) { band = bandLow }
-
-  return new ScoreResult(score, band)
+  return new ScoreResult(score, questionBand)
 }
 
 const bandLimit = (question, scoreBand) => {
   return first(question.scoreData.scoreBand.filter(band => band.name === scoreBand))?.value
+}
+
+const getBand = (question, score) => {
+  let questionBand = bandMedium
+  const hasBandHigh = (question.scoreData.scoreBand.filter(band => band.name === bandHigh).length > 0)
+  const hasBandLow = (question.scoreData.scoreBand.filter(band => band.name === bandLow).length > 0)
+
+  if (hasBandHigh && score >= bandLimit(question, bandHigh)) { questionBand = bandHigh }
+  if (hasBandLow && score <= bandLimit(question, bandLow)) { questionBand = bandLow }
+  return questionBand
 }
 
 // Q18/17
@@ -278,6 +283,7 @@ function dualSumNoPercentBand (question, answers) {
 
   return new ScoreResult(score, band)
 }
+
 function SingleValueWeightedMatrixScore (question, answers, allQanswers, sectionScoringData) {
   const currentQuestionWeight = question.answer
     .filter(itemX => first(answers).input
@@ -292,23 +298,9 @@ function SingleValueWeightedMatrixScore (question, answers, allQanswers, section
   const rowIndex = question.key === question.matrixAxis[0] ? currentQuestionWeight : tobeQuestionScoreResult.score
   const columnIndex = question.key === question.matrixAxis[1] ? currentQuestionWeight : tobeQuestionScoreResult.score
   const score = question.scoreData.scoreMatrix.filter(x => x.id === String(rowIndex))[0][String(columnIndex)] * question.weight
-  let band = ''
-  if (question.scoreData.scoreBand && question.scoreData.scoreBand.length > 0) {
-    band = bandHigh
-    if (question.scoreData.scoreBand
-      .filter(r => r.name === bandMedium).length > 0) {
-      if (score <= first(
-        question.scoreData.scoreBand
-          .filter(r => r.name === bandMedium)).value) { band = bandMedium }
-    }
-    if (question.scoreData.scoreBand
-      .filter(r => r.name === bandLow).length > 0) {
-      if (score <= first(
-        question.scoreData.scoreBand
-          .filter(r => r.name === bandLow)).value) { band = bandLow }
-    }
-  }
-  return new ScoreResult(score, band)
+  const questionBand = getBand(question, score)
+
+  return new ScoreResult(score, questionBand)
 }
 class ScoreResult {
   constructor (score, band, importance = null) {
