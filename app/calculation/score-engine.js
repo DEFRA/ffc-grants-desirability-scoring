@@ -198,10 +198,11 @@ const bandLimit = (question, scoreBand) => {
 }
 
 const getBand = (question, score) => {
-  let questionBand = bandMedium
   const hasBandHigh = (question.scoreData.scoreBand.filter(band => band.name === bandHigh).length > 0)
   const hasBandLow = (question.scoreData.scoreBand.filter(band => band.name === bandLow).length > 0)
-
+  const typeElseBand = first(question.scoreData.scoreBand.filter(band => band.type === 'else'))?.name
+  let questionBand = question.scoreData.scoreBand.length === 1 ? bandHigh : typeElseBand
+  console.log(questionBand)
   if (hasBandHigh && score >= bandLimit(question, bandHigh)) { questionBand = bandHigh }
   if (hasBandLow && score <= bandLimit(question, bandLow)) { questionBand = bandLow }
   return questionBand
