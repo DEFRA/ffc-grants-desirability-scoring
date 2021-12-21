@@ -27,7 +27,7 @@ class ScoreEngine {
       .reduce(
         (total, question) =>
           question.rating.score + total, 0)
-    actualScore = Math.round(actualScore)
+    actualScore = Math.round(actualScore * 100) / 100 // only shows upto 2 decimal when needed
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     let bandScore = actualScore
     const overallRatingHave = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
@@ -202,7 +202,7 @@ const getBand = (question, score) => {
   const hasBandLow = (question.scoreData.scoreBand.filter(band => band.name === bandLow).length > 0)
   const typeElseBand = first(question.scoreData.scoreBand.filter(band => band.type === 'else'))?.name
   let questionBand = question.scoreData.scoreBand.length === 1 ? bandHigh : typeElseBand
-  console.log(questionBand)
+
   if (hasBandHigh && score >= bandLimit(question, bandHigh)) { questionBand = bandHigh }
   if (hasBandLow && score <= bandLimit(question, bandLow)) { questionBand = bandLow }
   return questionBand
