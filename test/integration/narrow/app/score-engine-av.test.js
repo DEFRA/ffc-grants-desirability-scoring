@@ -34,7 +34,7 @@ describe('Adding Value - Score Engine Get Score test', () => {
     const scoreResult = scoreEngine.getScore()
     console.log(scoreResult, 'scoreResult')
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(98)
+    expect(scoreResult.desirability.overallRating.score).toBe(97.5)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
   test('Adding Value - createScoreEngine Call Get Score returns ScoreResult Weak', () => {
@@ -42,7 +42,7 @@ describe('Adding Value - Score Engine Get Score test', () => {
     const scoreResult = scoreEngine.getScore()
     console.log(scoreResult, 'scoreResult')
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(17)
+    expect(scoreResult.desirability.overallRating.score).toBe(16.5)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
 })

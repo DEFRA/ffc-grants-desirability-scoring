@@ -56,7 +56,7 @@ module.exports = {
                 input: [
                   {
                     key: 'project-impact-A4',
-                    value: 'Allow selling direct to consumer ( i.e. retail and dis)'
+                    value: 'Allow selling direct to consumer'
                   }
                 ]
               }

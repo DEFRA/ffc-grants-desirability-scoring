@@ -174,7 +174,7 @@ describe('Score Engine Get Score test', () => {
     })
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(39)
+    expect(scoreResult.desirability.overallRating.score).toBe(39.3)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
 
@@ -203,7 +203,7 @@ describe('Score Engine Get Score test', () => {
     const msg = getMediumMessage()
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(62)
+    expect(scoreResult.desirability.overallRating.score).toBe(62.3)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
   const getHighMessage = () => {
@@ -248,7 +248,7 @@ describe('Score Engine Get Score test', () => {
     const msg = getHighMessage()
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(76)
+    expect(scoreResult.desirability.overallRating.score).toBe(75.8)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 })
