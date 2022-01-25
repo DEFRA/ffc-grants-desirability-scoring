@@ -39,7 +39,7 @@ describe('Prod Robotics - Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessageLow.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(48)
+    expect(scoreResult.desirability.overallRating.score).toBe(40)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
 })
