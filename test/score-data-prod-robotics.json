@@ -53,7 +53,7 @@
             },
             {
                 "key": "robotics-technology",
-                "title": "Robotics Technology",
+                "title": "Technology",
                 "maxScore": 22,
                 "weight": 22,
                 "showResult": true,
@@ -61,7 +61,7 @@
                 "answer": [
                     {
                         "key": "robotics-technology-A1",
-                        "weight": 1,
+                        "weight": 0,
                         "value": "Yes, we’re using it now"
                     },
                     {
@@ -71,7 +71,7 @@
                     },
                     {
                         "key": "robotics-technology-A3",
-                        "weight": 0,
+                        "weight": 1,
                         "value": "No, we haven’t used it yet"
                     }
                 ],
@@ -95,7 +95,7 @@
             },
             {
                 "key": "robotics-data-analytics",
-                "title": "Robotics Data Analytics",
+                "title": "Data analytics",
                 "maxScore": 7,
                 "weight": 7,
                 "showResult": true,
@@ -139,24 +139,24 @@
             },
             {
                 "key": "robotics-energy-source",
-                "title": "Robotics Energy Source",
+                "title": "Energy source",
                 "maxScore": 16,
                 "weight": 4,
                 "showResult": true,
                 "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
-                        "key": "robotics-energy-source-A1",
+                        "key": "robotics-energy-source-A2",
                         "weight": 4,
                         "value": "Electricity – derived from renewable generation on farm"
                     },
                     {
-                        "key": "robotics-energy-source-A2",
+                        "key": "robotics-energy-source-A3",
                         "weight": 1,
                         "value": "Biofuels"
                     },
                     {
-                        "key": "robotics-energy-source-A3",
+                        "key": "robotics-energy-source-A1",
                         "weight": 1,
                         "value": "Mains Electricity"
                     },
@@ -192,7 +192,7 @@
             },
             {
                 "key": "robotics-agricultural-sector",
-                "title": "Robotics Agricultural Sector",
+                "title": "Agricultural sector",
                 "maxScore": 45,
                 "weight": 15,
                 "showResult": true,
@@ -209,14 +209,14 @@
                         "value": "Arable"
                     },
                     {
-                        "key": "robotics-agricultural-sector-A3",
+                        "key": "robotics-agricultural-sector-A4",
                         "weight": 2,
-                        "value": "Livestock (non-diary)"
+                        "value": "Dairy livestock"
                     },
                     {
-                        "key": "robotics-agricultural-sector-A4",
-                        "weight": 0,
-                        "value": "Livestock (diary)"
+                        "key": "robotics-agricultural-sector-A3",
+                        "weight": 2,
+                        "value": "Non-dairy livestock"
                     }
                 ],
                 "rating": {

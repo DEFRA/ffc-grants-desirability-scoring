@@ -27,11 +27,11 @@ module.exports = {
             answers: [
               {
                 key: 'robotics-technology-A1',
-                value: 'Yes',
+                value: 'Yes, we’re using it now',
                 input: [
                   {
                     key: 'robotics-technology-A1',
-                    value: 'Yes'
+                    value: 'Yes, we’re using it now'
                   }
                 ]
               }
@@ -56,12 +56,12 @@ module.exports = {
             key: 'robotics-energy-source',
             answers: [
               {
-                key: 'robotics-energy-source-A1',
-                value: 'Electricity – derived from renewable generation on farm',
+                key: 'robotics-energy-source-A4',
+                value: 'Fossil fuels',
                 input: [
                   {
-                    key: 'robotics-energy-source-A1',
-                    value: 'Electricity – derived from renewable generation on farm'
+                    key: 'robotics-energy-source-A4',
+                    value: 'Fossil fuels'
                   }
                 ]
               }
@@ -72,11 +72,11 @@ module.exports = {
             answers: [
               {
                 key: 'robotics-agricultural-sector-A4',
-                value: 'Livestock (diary)',
+                value: 'Non-dairy livestock',
                 input: [
                   {
                     key: 'robotics-agricultural-sector-A4',
-                    value: 'Livestock (diary)'
+                    value: 'Non-dairy livestock'
                   }
                 ]
               }

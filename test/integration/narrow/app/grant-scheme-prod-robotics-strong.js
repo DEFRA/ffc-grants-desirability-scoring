@@ -56,12 +56,12 @@ module.exports = {
             key: 'robotics-energy-source',
             answers: [
               {
-                key: 'robotics-energy-source-A1',
-                value: 'Electricity – derived from renewable generation on farm',
+                key: 'robotics-energy-source-A2',
+                value: 'Renewable electricity generated on the farm',
                 input: [
                   {
-                    key: 'robotics-energy-source-A1',
-                    value: 'Electricity – derived from renewable generation on farm'
+                    key: 'robotics-energy-source-A2',
+                    value: 'Renewable electricity generated on the farm'
                   }
                 ]
               },
