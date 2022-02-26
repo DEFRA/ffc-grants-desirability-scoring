@@ -18,7 +18,7 @@
     "ffc-messaging": "^2.3.4",
     "ffc-protective-monitoring": "^1.0.1",
     "lodash": "^4.17.21",
-    "pg": "^8.7.1",
+    "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.14.1"
   },
