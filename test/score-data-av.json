@@ -7,12 +7,12 @@
         "overallRatingScoreData": [
             {
                 "name": "Strong",
-                "value": "65",
+                "value": "62.5",
                 "type": "numeric"
             },
             {
                 "name": "Weak",
-                "value": "45",
+                "value": "1",
                 "type": "numeric"
             },
             {
@@ -83,7 +83,7 @@
             },  
             {
                 "key": "products-processed",
-                "title": "What type of products are being processed?",
+                "title": "What type of produce is being processed?",
                 "maxScore": 20,
                 "weight": 20,
                 "showResult": true,
@@ -93,17 +93,17 @@
                     {
                         "key": "products-processed-A1",
                         "weight": 7,
-                        "value": "Arable products"
+                        "value": "Arable produce"
                     },
                     {
                         "key": "products-processed-A2",
                         "weight": 6,
-                        "value": "Horticultural products"
+                        "value": "Horticultural produce"
                     },
                     {
                         "key": "products-processed-A3",
                         "weight": 5,
-                        "value": "Dairy or meat products"
+                        "value": "Dairy or meat produce"
                     },
                     {
                         "key": "products-processed-A4",
@@ -244,8 +244,8 @@
             {
                 "key": "project-impact",
                 "title": "What impact will the project have?",
-                "maxScore": 25,
-                "weight": 25,
+                "maxScore": 20,
+                "weight": 20,
                 "showResult": true,
                 "scoreType": "dualSumNoPercentBand",
                 "answer": [
@@ -279,7 +279,7 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "12.5",
+                            "value": "18",
                             "type": "numeric"
                         },
                         {
@@ -397,136 +397,18 @@
                         }
                     ]
                 }
-            },  
-            {
-                "key": "products-coming-from",
-                "title": "Where are the primary products coming from?",
-                "maxScore": 5,
-                "weight": 5,
-                "showResult": true,
-                "scoreType": "boolWeightScore",
-                "answer": [
-                    {
-                        "key": "products-coming-from-A1",
-                        "weight": 1,
-                        "value": "Within 1 mile"
-                    },
-                    {
-                        "key": "products-coming-from-A2",
-                        "weight": 0.8,
-                        "value": "Within 10 miles"
-                    },
-                    {
-                        "key": "products-coming-from-A3",
-                        "weight": 0.6,
-                        "value": "Within 50 miles"
-                    },
-                    {
-                        "key": "products-coming-from-A4",
-                        "weight": 0.2,
-                        "value": "More than 50 miles"
-                    },
-                    {
-                        "key": "products-coming-from-A5",
-                        "weight": 0,
-                        "value": "Outside the UK"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                            "name": "Strong",
-                            "value": "4",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Weak",
-                            "value": "1",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Average",
-                            "value": null,
-                            "type": "else"
-                        }
-                    ]
-                }
-            },    
-            {
-                "key": "processed-sold",
-                "title": "Where are the processed products being sold?",
-                "maxScore": 5,
-                "weight": 5,
-                "showResult": true,
-                "scoreType": "boolWeightScore",
-                "answer": [
-                    {
-                        "key": "processed-sold-A1",
-                        "weight": 1,
-                        "value": "Within 1 mile"
-                    },
-                    {
-                        "key": "processed-sold-A2",
-                        "weight": 0.8,
-                        "value": "Within 10 miles"
-                    },
-                    {
-                        "key": "processed-sold-A3",
-                        "weight": 0.6,
-                        "value": "Within 50 miles"
-                    },
-                    {
-                        "key": "processed-sold-A4",
-                        "weight": 0.2,
-                        "value": "More than 50 miles"
-                    },
-                    {
-                        "key": "processed-sold-A5",
-                        "weight": 0,
-                        "value": "Outside the UK"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                            "name": "Strong",
-                            "value": "4",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Weak",
-                            "value": "1",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Average",
-                            "value": null,
-                            "type": "else"
-                        }
-                    ]
-                }
             },   
             {
                 "key": "environmental-impact",
                 "title": "How will the project improve the environment?",
-                "maxScore": 20,
-                "weight": 20,
+                "maxScore": 30,
+                "weight": 30,
                 "showResult": true,
                 "scoreType": "dualSumNoPercentBand",
                 "answer": [	
                     {
                         "key": "environmental-impact-A1",
-                        "weight": 0.6,
+                        "weight": 0.3,
                         "value": "Renewable energy"
                     },
                     {
@@ -546,12 +428,12 @@
                     },
                     {
                         "key": "environmental-impact-A5",
-                        "weight": 0.4,
+                        "weight": 0.27,
                         "value": "Remove single-use plastics"
                     },
                     {
                         "key": "environmental-impact-A6",
-                        "weight": 0.2,
+                        "weight": 0.13,
                         "value": "Reduce harmful emissions or pollutants"
                     },
                     {
@@ -569,12 +451,12 @@
                     "scoreBand": [
                         {
                             "name": "Strong",
-                            "value": "10",
+                            "value": "12",
                             "type": "numeric"
                         },
                         {
                             "name": "Weak",
-                            "value": "1",
+                            "value": "7",
                             "type": "numeric"
                         },
                         {

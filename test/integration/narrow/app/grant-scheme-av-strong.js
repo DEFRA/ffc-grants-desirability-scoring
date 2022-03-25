@@ -12,11 +12,11 @@ module.exports = {
             answers: [
               {
                 key: 'products-processed',
-                title: 'What type of products are being processed?',
+                title: 'What type of produce are being processed?',
                 input: [
                   {
                     key: 'products-processed-A2',
-                    value: 'Horticultural products'
+                    value: 'Horticultural produce'
                   }
                 ]
               }
