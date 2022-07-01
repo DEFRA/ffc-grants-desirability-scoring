@@ -3,6 +3,7 @@ name: ffc-grants-desirability-scoring
 namespace: ffc-grants
 workstream: ffc-grants
 image: ffc-grants-desirability-scoring
+environmentCode: dummy
 
 labels: {}
 
@@ -44,6 +45,8 @@ container:
   calculateScoreQueueAddress: calculate-score
   desirabilityScoreTopicAddress: desirability-score
   protectiveMonitoringUrl:
+  applicationRequestQueueAddress: ffc-grants-slurry-cost-details-req
+  applicationResponseQueueAddress: ffc-grants-slurry-cost-details-res
 
 postgresService:
   postgresDb: ffc_grants_desirability-scoring

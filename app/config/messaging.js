@@ -1,3 +1,5 @@
+const msgTypePrefix = 'uk.gov.ffc.grants'
+
 const sharedConfig = {
   appInsights: require('applicationinsights'),
   host: process.env.SERVICE_BUS_HOST,
@@ -7,6 +9,18 @@ const sharedConfig = {
 }
 
 module.exports = {
+  applicationRequestQueue: {
+    address: process.env.APPLICATIONREQUEST_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
+  applicationRequestMsgType: `${msgTypePrefix}.app.request`,
+  applicationResponseQueue: {
+    address: process.env.APPLICATIONRESPONSE_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
+  applicationResponseMsgType: `${msgTypePrefix}.app.response`,
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',
