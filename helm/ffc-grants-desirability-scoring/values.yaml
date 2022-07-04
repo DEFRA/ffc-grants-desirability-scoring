@@ -51,7 +51,7 @@ container:
 postgresService:
   postgresDb: ffc_grants_desirability-scoring
   postgresExternalName:
-  postgresHost: ffc-grants-desirability-scoring-postgres
+  postgresqlHost: ffc-grants-desirability-scoring-postgres
   postgresPort: 5432
   postgresSchema: public
   postgresUser: postgres
