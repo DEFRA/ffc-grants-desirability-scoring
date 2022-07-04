@@ -4,11 +4,14 @@ data:
   NODE_ENV: {{ quote .Values.environment }}
   PORT: {{ quote .Values.container.port }}
   POSTGRES_DB: {{ quote .Values.postgresService.postgresDb }}
-  POSTGRES_HOST: {{ quote .Values.postgresService.postgresHost }}
+  POSTGRES_HOST: {{ quote .Values.postgresService.postgresqlHost }}
   POSTGRES_PORT: {{ quote .Values.postgresService.postgresPort }}
   POSTGRES_SCHEMA_NAME: {{ quote .Values.postgresService.postgresSchema }}
   DESIRABILITY_SCORE_TOPIC_ADDRESS: {{ quote .Values.container.desirabilityScoreTopicAddress }}
   CALCULATE_SCORE_QUEUE_ADDRESS: {{ quote .Values.container.calculateScoreQueueAddress }}
   SERVICE_BUS_HOST: {{ quote .Values.container.messageQueueHost }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
+  APPLICATIONREQUEST_QUEUE_ADDRESS: {{ .Values.container.applicationRequestQueueAddress | quote }}
+  APPLICATIONRESPONSE_QUEUE_ADDRESS: {{ .Values.container.applicationResponseQueueAddress | quote }}
+  ENVIRONMENT_CODE: {{ .Values.environmentCode | quote }}
 {{- end -}}
