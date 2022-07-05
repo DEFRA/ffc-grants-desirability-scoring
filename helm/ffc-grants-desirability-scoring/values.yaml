@@ -45,8 +45,8 @@ container:
   calculateScoreQueueAddress: calculate-score
   desirabilityScoreTopicAddress: desirability-score
   protectiveMonitoringUrl:
-  applicationRequestQueueAddress: ffc-grants-slurry-cost-details-req
-  applicationResponseQueueAddress: ffc-grants-slurry-cost-details-res
+  costRequestQueueAddress: ffc-grants-slurry-cost-details-req
+  costResponseQueueAddress: ffc-grants-slurry-cost-details-res
 
 postgresService:
   postgresDb: ffc_grants_desirability-scoring

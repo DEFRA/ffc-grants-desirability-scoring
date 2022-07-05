@@ -1,6 +1,8 @@
 const { MessageReceiver } = require('ffc-messaging')
 
 async function receiveMessage (messageId, config) {
+    console.log('[THIS IS MESSAGEiD]', messageId)
+
   let result
   const receiver = new MessageReceiver(config)
   await receiver.acceptSession(messageId)

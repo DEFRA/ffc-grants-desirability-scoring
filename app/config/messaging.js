@@ -9,18 +9,18 @@ const sharedConfig = {
 }
 
 module.exports = {
-  applicationRequestQueue: {
-    address: process.env.APPLICATIONREQUEST_QUEUE_ADDRESS,
+  costRequestQueue: {
+    address: process.env.COST_REQUEST_QUEUE_ADDRESS + '-' + process.env.ENVIRONMENT_CODE,
     type: 'queue',
     ...sharedConfig
   },
-  applicationRequestMsgType: `${msgTypePrefix}.app.request`,
-  applicationResponseQueue: {
-    address: process.env.APPLICATIONRESPONSE_QUEUE_ADDRESS,
+  costRequestMsgType: `${msgTypePrefix}.app.request`,
+  costResponseQueue: {
+    address: process.env.COST_RESPONSE_QUEUE_ADDRESS + '-' + process.env.ENVIRONMENT_CODE,
     type: 'queue',
     ...sharedConfig
   },
-  applicationResponseMsgType: `${msgTypePrefix}.app.response`,
+  costResponseMsgType: `${msgTypePrefix}.app.response`,
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',
