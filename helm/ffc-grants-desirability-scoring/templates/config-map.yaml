@@ -11,4 +11,7 @@ data:
   CALCULATE_SCORE_QUEUE_ADDRESS: {{ quote .Values.container.calculateScoreQueueAddress }}
   SERVICE_BUS_HOST: {{ quote .Values.container.messageQueueHost }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
+  COST_REQUEST_QUEUE_ADDRESS: {{ .Values.container.costRequestQueueAddress | quote }}
+  COST_RESPONSE_QUEUE_ADDRESS: {{ .Values.container.costResponseQueueAddress | quote }}
+  ENVIRONMENT_CODE: {{ .Values.environmentCode | quote }}
 {{- end -}}
