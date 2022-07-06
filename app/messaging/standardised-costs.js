@@ -1,8 +1,7 @@
 // const { sendMessage } = require('./index')
 const appInsights = require('../services/app-insights')
-const {sendResponseToSession} = require('./application/index')
-// const ScoreEngine = require('../../app/calculation/score-engine')
-// const scoreDataRepository = require('../services/score-repository')
+const {sendResponseToSession} = require('./application/index')// const ScoreEngine = require('../../app/calculation/score-engine')
+const scoreDataRepository = require('../services/score-repository')
 const msgCfg = require('../config/messaging')
 const msgTypePrefix = 'uk.gov.ffc.grants'
 
@@ -17,16 +16,15 @@ const processCost = async (msg) => {
     const msgType = applicationProperties.type.replace(msgTypePrefix, '')
     let grantType = null
     let senderMsgType = null
-    if (msgType === '.fetch.app.request') {
+    if (msgType === '.fetch.cost.request') {
       senderMsgType = msgCfg.fetchCostResponseMsgType
       grantType = 'Slurry Infrastructure Grant'
     }
 
-    let grantData = ''
-    // const grantData = await scoreDataRepository.getScoreData(grantType)
-    // console.log('[GRANT DATA RECEIVED]:', grantData)
+     const grantData = await scoreDataRepository.getScoreData(grantType)
+     console.log('[GRANT DATA RECEIVED]:', grantData)
 
-    if (grantData) {
+    if (grantData && grantData.data) {
       console.log('Score result:')
       
 

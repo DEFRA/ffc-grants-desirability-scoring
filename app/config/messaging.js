@@ -14,15 +14,11 @@ module.exports = {
     type: 'queue',
     ...sharedConfig
   },
-  costRequestMsgType: `${msgTypePrefix}.app.request`,
-  fetchCostRequestMsgType: `${msgTypePrefix}.fetch.app.request`,
   costResponseQueue: {
     address: process.env.COST_RESPONSE_QUEUE_ADDRESS + '-' + process.env.ENVIRONMENT_CODE,
     type: 'queue',
     ...sharedConfig
   },
-  costResponseMsgType: `${msgTypePrefix}.app.response`,
-  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.app.response`,
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',
@@ -37,5 +33,8 @@ module.exports = {
   desirabilityProductivityScoreMsgType: 'uk.gov.ffc.grants.prod.score.calculated',
   desirabilityAddingValueScoreMsgType: 'uk.gov.ffc.grants.av.score.calculated',
   desirabilitySlurryMsgType: 'uk.gov.ffc.grants.si.cost',
-  msgSrc: 'ffc-grants-desirability-scoring'
+  msgSrc: 'ffc-grants-desirability-scoring',
+  fetchCostRequestMsgType: `${msgTypePrefix}.fetch.cost.request`,
+  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`
+
 }

@@ -15,8 +15,7 @@ const start = async () => {
 
 // Function to stop Listening if server is down/error occurs
 const stop = async () => {
-  await applicationReceiver.closeConnection()
-
+  await MessageReceiver.closeConnection()
 }
 
 module.exports = { start, stop }
