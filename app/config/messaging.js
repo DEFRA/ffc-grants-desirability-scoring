@@ -15,12 +15,14 @@ module.exports = {
     ...sharedConfig
   },
   costRequestMsgType: `${msgTypePrefix}.app.request`,
+  fetchCostRequestMsgType: `${msgTypePrefix}.fetch.app.request`,
   costResponseQueue: {
     address: process.env.COST_RESPONSE_QUEUE_ADDRESS + '-' + process.env.ENVIRONMENT_CODE,
     type: 'queue',
     ...sharedConfig
   },
   costResponseMsgType: `${msgTypePrefix}.app.response`,
+  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.app.response`,
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',

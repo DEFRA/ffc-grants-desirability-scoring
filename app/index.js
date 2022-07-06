@@ -10,7 +10,8 @@ const init = async () => {
   console.log('Server running on %s', server.info.uri)
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', async (err) => {
+  console.log('[ERROR HERE]')
   console.log(err)
   await messageService.stop()
   process.exit(1)

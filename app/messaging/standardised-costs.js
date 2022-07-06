@@ -1,7 +1,8 @@
-const { sendMessage } = require('./index')
+// const { sendMessage } = require('./index')
 const appInsights = require('../services/app-insights')
-const ScoreEngine = require('../../app/calculation/score-engine')
-const scoreDataRepository = require('../services/score-repository')
+const {sendResponseToSession} = require('./application/index')
+// const ScoreEngine = require('../../app/calculation/score-engine')
+// const scoreDataRepository = require('../services/score-repository')
 const msgCfg = require('../config/messaging')
 const msgTypePrefix = 'uk.gov.ffc.grants'
 
@@ -17,20 +18,25 @@ const processCost = async (msg) => {
     let grantType = null
     let senderMsgType = null
     if (msgType === '.fetch.app.request') {
-      senderMsgType = msgCfg.costResponseMsgType
+      senderMsgType = msgCfg.fetchCostResponseMsgType
       grantType = 'Slurry Infrastructure Grant'
     }
-    const grantData = await scoreDataRepository.getScoreData(grantType)
-    console.log('[GRANT DATA RECEIVED]:', grantData)
 
-    if (grantData && grantData.data) {
+    let grantData = ''
+    // const grantData = await scoreDataRepository.getScoreData(grantType)
+    // console.log('[GRANT DATA RECEIVED]:', grantData)
+
+    if (grantData) {
       console.log('Score result:')
-      console.log(JSON.stringify(grantData, null, 2))
-
-      await sendMessage(grantData, msgCfg.costResponseMsgType, msgCfg.costResponseQueue, { sessionId }) 
-
-      await grantReciever.completeMessage(msg)
       
+
+      // await grantReciever.completeMessage(msg)
+
+      // await sendMessage(grantData, msgCfg.fetchCostResponseMsgType, msgCfg.costResponseQueue, { sessionId })
+      
+      await sendResponseToSession({ }, sessionId)
+
+
     } else {
       throw new Error('Unable to get valid score data from database')
     }
@@ -38,7 +44,7 @@ const processCost = async (msg) => {
     console.error('Unable to process message')
     console.error(err)
     appInsights.logException(err, msg.correlationId)
-    await grantReciever.abandonMessage(msg)
+    // await grantReciever.abandonMessage(msg)
   }
 }
 

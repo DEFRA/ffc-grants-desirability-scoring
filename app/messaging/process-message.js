@@ -1,4 +1,4 @@
-const { costRequestMsgType } = require('../config')
+const { fetchCostRequestMsgType } = require('../config/messaging')
 
 const processCost = require('./standardised-costs')
 
@@ -7,8 +7,9 @@ const processCost = require('./standardised-costs')
 const processCostMessage = async (message, receiver) => {
   try {
     const { applicationProperties: properties } = message
+    console.log('[YAY IT WOKRED]')
     switch (properties.type) {
-      case costRequestMsgType:
+      case fetchCostRequestMsgType:
         await processCost(message)
         break
     }
