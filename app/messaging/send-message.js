@@ -4,7 +4,14 @@ const createMessage = require('./create-message')
 const sendMessage = async (body, type, config, options) => {
   const message = createMessage(body, type, options)
   const sender = new MessageSender(config)
-  await sender.sendMessage(message)
+  try {
+    await sender.sendMessage(message)
+  } catch (err) {
+    console.log('[ERROR THROWN]', err)
+    throw err
+  }
+
+  console.log('[SUCESSFULLY SENT STANDARDISED COST]')
   await sender.closeConnection()
 }
 

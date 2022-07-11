@@ -9,18 +9,16 @@ const sharedConfig = {
 }
 
 module.exports = {
-  applicationRequestQueue: {
-    address: process.env.APPLICATIONREQUEST_QUEUE_ADDRESS,
+  costRequestQueue: {
+    address: process.env.COST_REQUEST_QUEUE_ADDRESS,
     type: 'queue',
     ...sharedConfig
   },
-  applicationRequestMsgType: `${msgTypePrefix}.app.request`,
-  applicationResponseQueue: {
-    address: process.env.APPLICATIONRESPONSE_QUEUE_ADDRESS,
+  costResponseQueue: {
+    address: process.env.COST_RESPONSE_QUEUE_ADDRESS,
     type: 'queue',
     ...sharedConfig
   },
-  applicationResponseMsgType: `${msgTypePrefix}.app.response`,
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',
@@ -34,5 +32,9 @@ module.exports = {
   desirabilityScoreMsgType: 'uk.gov.ffc.grants.score.calculated',
   desirabilityProductivityScoreMsgType: 'uk.gov.ffc.grants.prod.score.calculated',
   desirabilityAddingValueScoreMsgType: 'uk.gov.ffc.grants.av.score.calculated',
-  msgSrc: 'ffc-grants-desirability-scoring'
+  desirabilitySlurryMsgType: 'uk.gov.ffc.grants.si.cost',
+  msgSrc: 'ffc-grants-desirability-scoring',
+  fetchCostRequestMsgType: `${msgTypePrefix}.fetch.cost.request`,
+  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`
+
 }
