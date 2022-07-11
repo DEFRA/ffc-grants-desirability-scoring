@@ -44,6 +44,28 @@ describe('Process Message test', () => {
         expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
     })
 
+    test(`hellohello message does not call processCost`, async () => {
+        const message = {
+            body: {
+                cattle: 'yes',
+                pigs: 'yes',
+                organisation: {
+                    name: 'test-org',
+                    email: 'test-email'
+                }
+            },
+            applicationProperties: {
+                type: 'hellohello'
+            },
+            sessionId
+        }
+
+
+        await processCostMessage(message, receiver)
+        expect(processCost).toHaveBeenCalledTimes(0)
+        expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
+    })
+
     test(`${fetchCostRequestMsgType} throws error`, async () => {
         const message = {
             body: {

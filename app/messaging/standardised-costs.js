@@ -10,14 +10,18 @@ const processCost = async (msg, costReciever) => {
     const { sessionId, applicationProperties } = msg
     const msgType = applicationProperties.type.replace(msgTypePrefix, '')
     let grantType = null
+    console.log('here')
     if (msgType == '.fetch.cost.request' ) {
       grantType = 'Slurry Infrastructure Grant'
         
     }
 
+    console.log('there now', grantType)
+
     const grantData = await scoreDataRepository.getScoreData(grantType)
     console.log('[GRANT DATA RECEIVED]')
     if (grantData && grantData.data) {
+      console.log('how')
       await sendResponseToSession(JSON.parse(grantData.data), sessionId)
     } else {
       throw new Error('Unable to get valid grant data from database')
