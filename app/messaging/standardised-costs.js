@@ -10,13 +10,10 @@ const processCost = async (msg, costReciever) => {
     const { sessionId, applicationProperties } = msg
     const msgType = applicationProperties.type.replace(msgTypePrefix, '')
     let grantType = null
-    console.log('here')
     if (msgType == '.fetch.cost.request' ) {
       grantType = 'Slurry Infrastructure Grant'
         
     }
-
-    console.log('there now', grantType)
 
     const grantData = await scoreDataRepository.getScoreData(grantType)
     console.log('[GRANT DATA RECEIVED]')
