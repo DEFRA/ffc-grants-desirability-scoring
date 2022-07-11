@@ -10,10 +10,9 @@ const processCost = async (msg, costReciever) => {
     const { sessionId, applicationProperties } = msg
     const msgType = applicationProperties.type.replace(msgTypePrefix, '')
     let grantType = null
-    switch (msgType) {
-      case '.fetch.cost.request':
-        grantType = 'Slurry Infrastructure Grant'
-        break
+    if (msgType == '.fetch.cost.request' ) {
+      grantType = 'Slurry Infrastructure Grant'
+        
     }
 
     const grantData = await scoreDataRepository.getScoreData(grantType)
