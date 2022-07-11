@@ -7,10 +7,8 @@ const processCost = require('./standardised-costs')
 const processCostMessage = async (message, receiver) => {
   try {
     const { applicationProperties: properties } = message
-    switch (properties.type) {
-      case fetchCostRequestMsgType:
+    if (properties.type == fetchCostRequestMsgType) {        
         await processCost(message)
-        break
     }
 
     await receiver.completeMessage(message)

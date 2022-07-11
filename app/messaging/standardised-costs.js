@@ -1,4 +1,3 @@
-// const { sendMessage } = require('./index')
 const appInsights = require('../services/app-insights')
 const { sendResponseToSession } = require('./application/index')
 const scoreDataRepository = require('../services/score-repository')
