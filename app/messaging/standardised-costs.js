@@ -18,15 +18,17 @@ const processCost = async (msg, costReciever) => {
     const grantData = await scoreDataRepository.getScoreData(grantType)
     console.log('[GRANT DATA RECEIVED]')
     if (grantData && grantData.data) {
-      console.log('how')
-      await sendResponseToSession(JSON.parse(grantData.data), sessionId)
+      await sendResponseToSession({applicationState: 'found', data: JSON.parse(grantData.data)}, sessionId)
     } else {
-      throw new Error('Unable to get valid grant data from database')
+      console.log('[ERROR WITH GRANT DATA - NO DATA]')
+      await sendResponseToSession({applicationState: 'Invalid data', data: grantData}, sessionId)
     }
   } catch (err) {
-    console.error('Unable to process message')
+    console.error('[UNABLE TO PROCESS MESSAGE. ERROR BELOW]')
     console.error(err)
-    appInsights.logException(err, msg.correlationId)
+    appInsights.logException(err, msg.sessionId)
+    await sendResponseToSession({ applicationState: 'Backend server error', data: err }, msg.sessionId)
+
     await costReciever.abandonMessage(msg)
   }
 }

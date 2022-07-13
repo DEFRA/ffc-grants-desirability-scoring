@@ -56,13 +56,18 @@ describe('Standardised Cost test', () => {
 
         jest.spyOn(scoreRepository, 'getScoreData').mockResolvedValue({test:{}})
 
+        sendResponseToSession.mockResolvedValue(true)
 
         await processCost(msg, costReceiver)
 
         expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
         expect(scoreRepository.getScoreData).toHaveBeenCalledWith(null)
 
-        expect(sendResponseToSession).toHaveBeenCalledTimes(0)
+        expect(sendResponseToSession).toHaveBeenCalledTimes(1)
+        expect(sendResponseToSession).toHaveBeenCalledWith({
+            applicationState: 'Invalid data', data: { test: {} }
+        }, '12345')
+
 
     })
 
@@ -84,6 +89,8 @@ describe('Standardised Cost test', () => {
 
         jest.spyOn(MessageReceiver.prototype, 'abandonMessage').mockImplementationOnce(() => Promise.resolve(true))
 
+        sendResponseToSession.mockResolvedValue(true)
+
         await processCost(msg, costReceiver)
 
         expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
@@ -91,6 +98,8 @@ describe('Standardised Cost test', () => {
 
         expect(appInsights.logException).toHaveBeenCalledTimes(1)
         expect(MessageReceiver.prototype.abandonMessage).toHaveBeenCalledTimes(1)
+
+        expect(sendResponseToSession).toHaveBeenCalledTimes(1)
 
     })
    
