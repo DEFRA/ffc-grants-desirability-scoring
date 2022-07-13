@@ -39,7 +39,7 @@ describe('Standardised Cost test', () => {
         expect(scoreRepository.getScoreData).toHaveBeenCalledWith('Slurry Infrastructure Grant')
 
         expect(sendResponseToSession).toHaveBeenCalledTimes(1)
-        expect(sendResponseToSession).toHaveBeenCalledWith({applicationState: 'found', data: {
+        expect(sendResponseToSession).toHaveBeenCalledWith({applicationState: 'success', data: {
             test: 'helloAll'
         }}, '12345')
 
@@ -64,7 +64,7 @@ describe('Standardised Cost test', () => {
 
         expect(sendResponseToSession).toHaveBeenCalledTimes(1)
         expect(sendResponseToSession).toHaveBeenCalledWith({
-            applicationState: 'Invalid data', data: { test: {} }
+            applicationState: 'not_found', data: { test: {} }
         }, '12345')
 
 
