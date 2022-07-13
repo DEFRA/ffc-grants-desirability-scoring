@@ -19,7 +19,7 @@ const costReceiver = new MessageReceiver()
 
 describe('Standardised Cost test', () => {
     beforeEach(() => {
-        jest.clearAllMocks()
+        jest.resetAllMocks()
     })
     test('message properly processed', async () => {
 
@@ -33,20 +33,19 @@ describe('Standardised Cost test', () => {
 
         sendResponseToSession.mockResolvedValue(true)
 
-
         await processCost(msg, costReceiver)
 
         expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
         expect(scoreRepository.getScoreData).toHaveBeenCalledWith('Slurry Infrastructure Grant')
 
         expect(sendResponseToSession).toHaveBeenCalledTimes(1)
-        expect(sendResponseToSession).toHaveBeenCalledWith({
+        expect(sendResponseToSession).toHaveBeenCalledWith({applicationState: 'found', data: {
             test: 'helloAll'
-        }, '12345')
+        }}, '12345')
 
     })
 
-    test('message properly processed but not right type', async () => {
+    test('message processed but not right type', async () => {
 
         const msg = {
             sessionId: '12345', applicationProperties: {
