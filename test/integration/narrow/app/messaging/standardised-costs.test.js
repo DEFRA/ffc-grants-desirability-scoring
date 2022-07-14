@@ -19,7 +19,7 @@ const costReceiver = new MessageReceiver()
 
 describe('Standardised Cost test', () => {
     beforeEach(() => {
-        jest.clearAllMocks()
+        jest.resetAllMocks()
     })
     test('message properly processed', async () => {
 
@@ -33,20 +33,19 @@ describe('Standardised Cost test', () => {
 
         sendResponseToSession.mockResolvedValue(true)
 
-
         await processCost(msg, costReceiver)
 
         expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
         expect(scoreRepository.getScoreData).toHaveBeenCalledWith('Slurry Infrastructure Grant')
 
         expect(sendResponseToSession).toHaveBeenCalledTimes(1)
-        expect(sendResponseToSession).toHaveBeenCalledWith({
+        expect(sendResponseToSession).toHaveBeenCalledWith({costData: 'success', data: {
             test: 'helloAll'
-        }, '12345')
+        }}, '12345')
 
     })
 
-    test('message properly processed but not right type', async () => {
+    test('message processed but not right type', async () => {
 
         const msg = {
             sessionId: '12345', applicationProperties: {
@@ -56,13 +55,18 @@ describe('Standardised Cost test', () => {
 
         jest.spyOn(scoreRepository, 'getScoreData').mockResolvedValue({test:{}})
 
+        sendResponseToSession.mockResolvedValue(true)
 
         await processCost(msg, costReceiver)
 
         expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
         expect(scoreRepository.getScoreData).toHaveBeenCalledWith(null)
 
-        expect(sendResponseToSession).toHaveBeenCalledTimes(0)
+        expect(sendResponseToSession).toHaveBeenCalledTimes(1)
+        expect(sendResponseToSession).toHaveBeenCalledWith({
+            costData: 'not_found', data: { test: {} }
+        }, '12345')
+
 
     })
 
@@ -84,6 +88,8 @@ describe('Standardised Cost test', () => {
 
         jest.spyOn(MessageReceiver.prototype, 'abandonMessage').mockImplementationOnce(() => Promise.resolve(true))
 
+        sendResponseToSession.mockResolvedValue(true)
+
         await processCost(msg, costReceiver)
 
         expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
@@ -91,6 +97,8 @@ describe('Standardised Cost test', () => {
 
         expect(appInsights.logException).toHaveBeenCalledTimes(1)
         expect(MessageReceiver.prototype.abandonMessage).toHaveBeenCalledTimes(1)
+
+        expect(sendResponseToSession).toHaveBeenCalledTimes(1)
 
     })
    
