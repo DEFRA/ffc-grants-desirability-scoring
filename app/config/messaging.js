@@ -9,6 +9,16 @@ const sharedConfig = {
 }
 
 module.exports = {
+  costRequestQueue: {
+    address: process.env.COST_REQUEST_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
+  costResponseQueue: {
+    address: process.env.COST_RESPONSE_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
   scoreRequestQueue: {
     address: process.env.SCORE_REQUEST_QUEUE_ADDRESS,
     type: 'queue',
