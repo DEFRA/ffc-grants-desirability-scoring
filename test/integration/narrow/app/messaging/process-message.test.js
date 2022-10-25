@@ -1,4 +1,4 @@
-const { fetchCostRequestMsgType } = require('../../../../../app/config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType } = require('../../../../../app/config/messaging')
 
 const processCostMessage = require('../../../../../app/messaging/process-message')
 
@@ -34,6 +34,28 @@ describe('Process Message test', () => {
             },
             applicationProperties: {
                 type: fetchCostRequestMsgType
+            },
+            sessionId
+        }
+
+
+        await processCostMessage(message, receiver)
+        expect(processCost).toHaveBeenCalledTimes(1)
+        expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
+    })
+
+    test(`${fetchScoreRequestMsgType} message calls processCost`, async () => {
+        const message = {
+            body: {
+                cattle: 'yes',
+                pigs: 'yes',
+                organisation: {
+                    name: 'test-org',
+                    email: 'test-email'
+                }
+            },
+            applicationProperties: {
+                type: fetchScoreRequestMsgType
             },
             sessionId
         }
