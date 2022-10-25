@@ -9,13 +9,13 @@ const sharedConfig = {
 }
 
 module.exports = {
-  costRequestQueue: {
-    address: process.env.COST_REQUEST_QUEUE_ADDRESS,
+  scoreRequestQueue: {
+    address: process.env.SCORE_REQUEST_QUEUE_ADDRESS,
     type: 'queue',
     ...sharedConfig
   },
-  costResponseQueue: {
-    address: process.env.COST_RESPONSE_QUEUE_ADDRESS,
+  scoreResponseQueue: {
+    address: process.env.SCORE_RESPONSE_QUEUE_ADDRESS,
     type: 'queue',
     ...sharedConfig
   },
@@ -35,6 +35,8 @@ module.exports = {
   desirabilitySlurryMsgType: 'uk.gov.ffc.grants.si.cost',
   msgSrc: 'ffc-grants-desirability-scoring',
   fetchCostRequestMsgType: `${msgTypePrefix}.fetch.cost.request`,
-  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`
+  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`,
+  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
+  fetchScoreResponseMsgType: `${msgTypePrefix}.fetch.score.response`
 
 }

@@ -24,6 +24,10 @@ services:
       CALCULATE_SCORE_QUEUE_ADDRESS: ${CALCULATE_SCORE_QUEUE_ADDRESS:-notset}
       COST_REQUEST_QUEUE_ADDRESS: ${COST_REQUEST_QUEUE_ADDRESS:-ffc-grants-slurry-cost-details-req}${MESSAGE_QUEUE_SUFFIX}
       COST_RESPONSE_QUEUE_ADDRESS: ${COST_RESPONSE_QUEUE_ADDRESS:-ffc-grants-slurry-cost-details-res}${MESSAGE_QUEUE_SUFFIX}
+      SCORE_RESPONSE_QUEUE_ADDRESS: ${SCORE_RESPONSE_QUEUE_ADDRESS:-ffc-grants-desirability-scoring-res}${MESSAGE_QUEUE_SUFFIX}
+      SCORE_REQUEST_QUEUE_ADDRESS: ${SCORE_REQUEST_QUEUE_ADDRESS:-ffc-grants-desirability-scoring-req}${MESSAGE_QUEUE_SUFFIX}
+
+
 
   ffc-grants-desirability-scoring-postgres:
     image: postgres:11.4-alpine

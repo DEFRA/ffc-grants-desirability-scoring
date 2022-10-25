@@ -10,7 +10,7 @@ const start = async () => {
   costReceiver = new MessageReceiver(config.costRequestQueue, costAction)
   await costReceiver.subscribe()
 
-  console.info('Ready to receive messages')
+  console.info('[READY TO RECEIVE MESSAGES]')
 }
 
 // Function to stop Listening if server is down/error occurs

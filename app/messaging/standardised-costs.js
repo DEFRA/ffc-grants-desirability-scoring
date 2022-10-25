@@ -10,18 +10,20 @@ const processCost = async (msg, costReciever) => {
     const { sessionId, applicationProperties } = msg
     const msgType = applicationProperties.type.replace(msgTypePrefix, '')
     let grantType = null
-    if (msgType == '.fetch.cost.request' ) {
+    if (msgType === '.fetch.cost.request') {
       grantType = 'Slurry Infrastructure Grant'
-        
+    }
+    if (msgType === '.fetch.score.request') {
+      grantType = 'Slurry Infrastructure Grant' // change this when applying scoring engine
     }
 
     const grantData = await scoreDataRepository.getScoreData(grantType)
-    console.log('[GRANT DATA RECEIVED]')
+    console.log(grantData.data, '[GRANT DATA RECEIVED]')
     if (grantData && grantData.data) {
-      await sendResponseToSession({costData: 'success', data: JSON.parse(grantData.data)}, sessionId)
+      await sendResponseToSession({ costData: 'success', data: JSON.parse(grantData.data) }, sessionId)
     } else {
       console.log('[ERROR WITH GRANT DATA - NO DATA]')
-      await sendResponseToSession({costData: 'not_found', data: grantData}, sessionId)
+      await sendResponseToSession({ costData: 'not_found', data: grantData }, sessionId)
     }
   } catch (err) {
     console.error('[UNABLE TO PROCESS MESSAGE. ERROR BELOW]')
