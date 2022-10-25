@@ -10,6 +10,7 @@ const processCostMessage = async (message, receiver) => {
     if (properties.type === fetchCostRequestMsgType) {
       await processCost(message)
     }
+
     if (properties.type === fetchScoreRequestMsgType) {
       await processCost(message)
     }
