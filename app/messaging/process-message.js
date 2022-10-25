@@ -1,4 +1,4 @@
-const { fetchCostRequestMsgType } = require('../config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType } = require('../config/messaging')
 
 const processCost = require('./standardised-costs')
 
@@ -7,8 +7,12 @@ const processCost = require('./standardised-costs')
 const processCostMessage = async (message, receiver) => {
   try {
     const { applicationProperties: properties } = message
-    if (properties.type == fetchCostRequestMsgType) {        
-        await processCost(message)
+    if (properties.type === fetchCostRequestMsgType) {
+      await processCost(message)
+    }
+
+    if (properties.type === fetchScoreRequestMsgType) {
+      await processCost(message)
     }
 
     await receiver.completeMessage(message)

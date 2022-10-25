@@ -19,6 +19,16 @@ module.exports = {
     type: 'queue',
     ...sharedConfig
   },
+  scoreRequestQueue: {
+    address: process.env.SCORE_REQUEST_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
+  scoreResponseQueue: {
+    address: process.env.SCORE_RESPONSE_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',
@@ -35,6 +45,8 @@ module.exports = {
   desirabilitySlurryMsgType: 'uk.gov.ffc.grants.si.cost',
   msgSrc: 'ffc-grants-desirability-scoring',
   fetchCostRequestMsgType: `${msgTypePrefix}.fetch.cost.request`,
-  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`
+  fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`,
+  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
+  fetchScoreResponseMsgType: `${msgTypePrefix}.fetch.score.response`
 
 }
