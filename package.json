@@ -16,7 +16,7 @@
     "@hapi/hapi": "^20.2.2",
     "applicationinsights": "^1.8.10",
     "ffc-messaging": "^2.4.0",
-    "ffc-protective-monitoring": "^1.0.1",
+    "ffc-protective-monitoring": "^1.0.3",
     "lodash": "^4.17.21",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
