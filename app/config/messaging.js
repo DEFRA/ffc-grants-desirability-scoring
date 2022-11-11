@@ -57,6 +57,8 @@ module.exports = {
   fetchCostRequestMsgType: `${msgTypePrefix}.fetch.cost.request`,
   fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`,
   fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
-  fetchScoreResponseMsgType: `${msgTypePrefix}.fetch.score.response`
+  fetchScoreResponseMsgType: `${msgTypePrefix}.fetch.score.response`,
+  fetchWaterScoreRequestMsgType: `${msgTypePrefix}.fetch.water.score.request`,
+  fetchWaterScoreResponseMsgType: `${msgTypePrefix}.fetch.water.score.response`
 
 }
