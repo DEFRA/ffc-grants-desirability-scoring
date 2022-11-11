@@ -15,5 +15,7 @@ data:
   COST_RESPONSE_QUEUE_ADDRESS: {{ .Values.container.costResponseQueueAddress | quote }}
   SCORE_REQUEST_QUEUE_ADDRESS: {{ .Values.container.scoreRequestQueueAddress | quote }}
   SCORE_RESPONSE_QUEUE_ADDRESS: {{ .Values.container.scoreResponseQueueAddress | quote }}
+  WATER_SCORE_REQUEST_QUEUE_ADDRESS: {{ .Values.container.scoreRequestWaterQueueAddress | quote }}
+  WATER_SCORE_RESPONSE_QUEUE_ADDRESS: {{ .Values.container.scoreResponseWaterQueueAddress | quote }}
 
 {{- end -}}

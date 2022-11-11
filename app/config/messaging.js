@@ -24,6 +24,16 @@ module.exports = {
     type: 'queue',
     ...sharedConfig
   },
+  waterScoreRequestQueue: {
+    address: process.env.WATER_SCORE_REQUEST_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
+  waterScoreResponseQueue: {
+    address: process.env.WATER_SCORE_RESPONSE_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
   scoreResponseQueue: {
     address: process.env.SCORE_RESPONSE_QUEUE_ADDRESS,
     type: 'queue',
