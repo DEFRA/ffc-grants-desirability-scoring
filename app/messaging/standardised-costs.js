@@ -15,6 +15,9 @@ const processCost = async (msg, costReciever) => {
       grantType = 'Slurry Infrastructure Grant'
     }
     if (msgType === '.fetch.score.request') {
+      grantType = 'Slurry Infrastructure Grant' 
+    }
+    if (msgType === '.fetch.water.score.request') {
       grantType = 'Slurry Infrastructure Grant' // change this when applying scoring engine
     }
 

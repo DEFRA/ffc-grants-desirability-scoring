@@ -1,4 +1,4 @@
-const { fetchCostRequestMsgType, fetchScoreRequestMsgType } = require('../config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType } = require('../config/messaging')
 
 const processCost = require('./standardised-costs')
 
@@ -13,6 +13,10 @@ const processCostMessage = async (message, receiver) => {
 
     if (properties.type === fetchScoreRequestMsgType) {
       await processCost(message)
+    }
+
+    if (properties.type === fetchWaterScoreRequestMsgType) {
+      await processCost(message) // Temporary, update to scoring call
     }
 
     await receiver.completeMessage(message)
