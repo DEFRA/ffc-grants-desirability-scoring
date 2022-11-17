@@ -29,6 +29,16 @@ module.exports = {
     type: 'queue',
     ...sharedConfig
   },
+  scoreWaterRequestQueue: {
+    address: process.env.WATER_SCORE_REQUEST_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
+  scoreWaterResponseQueue: {
+    address: process.env.WATER_SCORE_RESPONSE_QUEUE_ADDRESS,
+    type: 'queue',
+    ...sharedConfig
+  },
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',
@@ -47,6 +57,8 @@ module.exports = {
   fetchCostRequestMsgType: `${msgTypePrefix}.fetch.cost.request`,
   fetchCostResponseMsgType: `${msgTypePrefix}.fetch.cost.response`,
   fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.score.request`,
-  fetchScoreResponseMsgType: `${msgTypePrefix}.fetch.score.response`
+  fetchScoreResponseMsgType: `${msgTypePrefix}.fetch.score.response`,
+  fetchWaterScoreRequestMsgType: `${msgTypePrefix}.fetch.water.score.request`,
+  fetchWaterScoreResponseMsgType: `${msgTypePrefix}.fetch.water.score.response`
 
 }
