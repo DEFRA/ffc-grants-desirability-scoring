@@ -1,15 +1,13 @@
-const { fetchCostRequestMsgType, fetchScoreRequestMsgType } = require('../../../../../app/config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType } = require('../../../../../app/config/messaging')
 
 const processCostMessage = require('../../../../../app/messaging/process-message')
 
 jest.mock('../../../../../app/messaging/standardised-costs')
 const processCost = require('../../../../../app/messaging/standardised-costs')
 
+jest.mock('../../../../../app/messaging/session-scoring')
+const processScoring = require('../../../../../app/messaging/session-scoring')
 
-// jest.mock('../../../../app/messaging/fetch-application')
-// jest.mock('../../../../app/messaging/fetch-claim')
-// jest.mock('../../../../app/messaging/process-vet-visit')
-// jest.mock('../../../../app/messaging/submit-claim')
 
 describe('Process Message test', () => {
     const sessionId = '8e5b5789-dad5-4f16-b4dc-bf6db90ce090'
@@ -44,7 +42,7 @@ describe('Process Message test', () => {
         expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
     })
 
-    test(`${fetchScoreRequestMsgType} message calls processCost`, async () => {
+    test(`${fetchScoreRequestMsgType} message calls processScoring`, async () => {
         const message = {
             body: {
                 cattle: 'yes',
@@ -62,11 +60,11 @@ describe('Process Message test', () => {
 
 
         await processCostMessage(message, receiver)
-        expect(processCost).toHaveBeenCalledTimes(1)
+        expect(processScoring).toHaveBeenCalledTimes(1)
         expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
     })
 
-    test(`hellohello message does not call processCost`, async () => {
+    test(`${fetchWaterScoreRequestMsgType} message calls processScoring`, async () => {
         const message = {
             body: {
                 cattle: 'yes',
@@ -77,7 +75,29 @@ describe('Process Message test', () => {
                 }
             },
             applicationProperties: {
-                type: 'hellohello'
+                type: fetchWaterScoreRequestMsgType
+            },
+            sessionId
+        }
+
+
+        await processCostMessage(message, receiver)
+        expect(processScoring).toHaveBeenCalledTimes(1)
+        expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
+    })
+
+    test(`random text message does not call processCost`, async () => {
+        const message = {
+            body: {
+                cattle: 'yes',
+                pigs: 'yes',
+                organisation: {
+                    name: 'test-org',
+                    email: 'test-email'
+                }
+            },
+            applicationProperties: {
+                type: 'random text'
             },
             sessionId
         }
