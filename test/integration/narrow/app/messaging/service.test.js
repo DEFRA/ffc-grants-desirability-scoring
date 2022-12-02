@@ -17,13 +17,13 @@ describe(('Fetch application tests'), () => {
     })
     test('successfully fetched application', async () => {
         await service.start()
-        expect(mocksubscribe).toHaveBeenCalledTimes(3)
+        expect(mocksubscribe).toHaveBeenCalledTimes(2)
     })
 
     test('successfully stopped application', async () => {
 
         
         await service.stop()
-        expect(mockCloseConnection).toHaveBeenCalledTimes(3)
+        expect(mockCloseConnection).toHaveBeenCalledTimes(2)
     })
 })
