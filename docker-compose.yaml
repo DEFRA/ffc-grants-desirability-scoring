@@ -28,7 +28,6 @@ services:
       SCORE_REQUEST_QUEUE_ADDRESS: ${SCORE_REQUEST_QUEUE_ADDRESS:-ffc-grants-desirability-scoring-req}${MESSAGE_QUEUE_SUFFIX}
 
 
-
   ffc-grants-desirability-scoring-postgres:
     image: postgres:11.4-alpine
     environment:
