@@ -48,8 +48,6 @@ container:
   costResponseQueueAddress: ffc-grants-slurry-cost-details-res
   scoreRequestQueueAddress: ffc-grants-desirability-scoring-req
   scoreResponseQueueAddress: ffc-grants-desirability-scoring-res
-  scoreRequestWaterQueueAddress: ffc-grants-water-desirability-scoring-req
-  scoreResponseWaterQueueAddress: ffc-grants-water-desirability-scoring-res
 
 postgresService:
   postgresDb: ffc_grants_desirability-scoring

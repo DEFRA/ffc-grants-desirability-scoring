@@ -29,16 +29,6 @@ module.exports = {
     type: 'queue',
     ...sharedConfig
   },
-  scoreWaterRequestQueue: {
-    address: process.env.WATER_SCORE_REQUEST_QUEUE_ADDRESS,
-    type: 'queue',
-    ...sharedConfig
-  },
-  scoreWaterResponseQueue: {
-    address: process.env.WATER_SCORE_RESPONSE_QUEUE_ADDRESS,
-    type: 'queue',
-    ...sharedConfig
-  },
   calculateScoreQueue: {
     address: process.env.CALCULATE_SCORE_QUEUE_ADDRESS,
     type: 'queue',

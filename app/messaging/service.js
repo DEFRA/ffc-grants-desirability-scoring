@@ -4,7 +4,6 @@ const processCostMessage = require('./process-message')
 
 let costReceiver
 let scoreReceiver
-let waterScoreReceiver
 
 // Listener, started by app/index.js
 const start = async () => {
@@ -16,10 +15,6 @@ const start = async () => {
   scoreReceiver = new MessageReceiver(config.scoreRequestQueue, scoreAction)
   await scoreReceiver.subscribe()
 
-  const waterScoreAction = message => processCostMessage(message, waterScoreReceiver)
-  waterScoreReceiver = new MessageReceiver(config.scoreWaterRequestQueue, waterScoreAction)
-  await waterScoreReceiver.subscribe()
-
   console.info('[READY TO RECEIVE MESSAGES]')
 }
 
@@ -27,7 +22,6 @@ const start = async () => {
 const stop = async () => {
   await costReceiver.closeConnection()
   await scoreReceiver.closeConnection()
-  await waterScoreReceiver.closeConnection()
 
 }
 
