@@ -9,7 +9,7 @@ async function getScoreData (schemeType) {
             order: [['version', 'DESC']]
           })
   if (existingscoreData) {
-    console.info(`[Got data for ${schemeType} scheme]: ${existingscoreData.score_data_id}`)
+    console.info(`[Got scoring data for ${schemeType} scheme from DB]`)
   }
   return existingscoreData
 }

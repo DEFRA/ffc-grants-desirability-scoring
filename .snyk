@@ -2,22 +2,6 @@
 version: v1.22.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-JS-VALIDATOR-1090599:
-    - '*':
-        reason: 'no fix, low availability'
-        expires: 2021-10-01T00:00:00.000Z
-  SNYK-JS-VALIDATOR-1090600:
-    - '*':
-        reason: 'no fix, low availability'
-        expires: 2021-10-01T00:00:00.000Z
-  SNYK-JS-VALIDATOR-1090601:
-    - '*':
-        reason: 'no fix, low availability'
-        expires: 2021-10-01T00:00:00.000Z
-  SNYK-JS-VALIDATOR-1090602:
-    - '*':
-        reason: 'no fix, low availability'
-        expires: 2021-10-01T00:00:00.000Z
   SNYK-JS-AXIOS-1579269:
     - ffc-messaging > @azure/identity > axios:
         reason: no update available
@@ -25,4 +9,29 @@ ignore:
     - ffc-messaging > @azure/identity > @azure/msal-node > axios:
         reason: no update available
         expires: '2021-10-02T15:23:47.767Z'
+        SNYK-JS-FASTXMLPARSER-3325616:
+    - '*':
+        reason: no update available
+        expires: 2023-03-22T11:41:56.464Z
+        created: 2023-02-20T11:41:56.471Z
+  SNYK-JS-SEQUELIZE-3324090:
+    - '*':
+        reason: None Given
+        expires: 2023-03-22T12:57:44.127Z
+        created: 2023-02-20T12:57:44.131Z
+  SNYK-JS-SEQUELIZE-3324088:
+    - '*':
+        reason: None Given
+        expires: 2023-03-22T12:58:05.425Z
+        created: 2023-02-20T12:58:05.434Z
+  SNYK-JS-SEQUELIZE-3324089:
+    - '*':
+        reason: None Given
+        expires: 2023-03-22T12:58:10.048Z
+        created: 2023-02-20T12:58:10.055Z
+  SNYK-JS-FASTXMLPARSER-3325616:
+    - '*':
+        reason: None Given
+        expires: 2023-03-22T11:41:56.464Z
+        created: 2023-02-20T11:41:56.471Z
 patch: {}

@@ -18,13 +18,13 @@ const processCostMessage = async (message, receiver) => {
     }
 
     if (properties.type === fetchWaterScoreRequestMsgType) {
-      console.log(message.body, '[BODY of SCORE MESSAGE FOR WATER]')
+      console.log(message.body, '[SCORING SCRIPT FOR WATER]')
       await processScoring(message)
     }
 
     await receiver.completeMessage(message)
   } catch (err) {
-    console.error('Unable to process Cost request:', err)
+    console.error('Unable to process request:', err)
   }
 }
 

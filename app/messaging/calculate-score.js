@@ -28,7 +28,7 @@ module.exports = async function (msg, calculateScoreReceiver) {
     if (scoreData && scoreData.data) {
       const scoreEngine = new ScoreEngine(body, JSON.parse(scoreData.data))
       const scoreResult = scoreEngine.getScore()
-      console.log('Score result:')
+      console.log('[SCORE RESULT]')
       console.log(JSON.stringify(scoreResult, null, 2))
       await sendScoreCalculated(scoreResult, correlationId, senderMsgType)
 
