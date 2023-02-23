@@ -8,38 +8,14 @@ module.exports = {
       desirability: {
         questions: [
           {
-            key: 'Q14',
-            answers: [
-              {
-                key: null,
-                title: 'The project will:',
-                input: [
-                  {
-                    key: 'Q14-A1',
-                    value: 'Change water source'
-                  },
-                  {
-                    key: 'Q14-A2',
-                    value: 'Improve irrigation efficiency'
-                  }
-                ]
-              }
-            ],
-            rating: {
-              score: null,
-              band: null,
-              importance: null
-            }
-          },
-          {
-            key: 'Q15',
+            key: 'irrigated-crops',
             answers: [
               {
                 key: null,
                 title: 'What main crops will be irrigated?',
                 input: [
                   {
-                    key: 'Q15-A3',
+                    key: 'irrigated-crops-A3',
                     value: 'Fruit'
                   }
                 ]
@@ -52,10 +28,10 @@ module.exports = {
             }
           },
           {
-            key: 'Q16',
+            key: 'irrigated-land',
             answers: [
               {
-                key: 'Q16a',
+                key: 'irrigated-land-a',
                 title: 'How much land is currently irrigated in total per year?',
                 input: [
                   {
@@ -65,7 +41,7 @@ module.exports = {
                 ]
               },
               {
-                key: 'Q16b',
+                key: 'irrigated-land-b',
                 title: 'How much land will be irrigated after the project?',
                 input: [
                   {
@@ -82,24 +58,24 @@ module.exports = {
             }
           },
           {
-            key: 'Q17',
+            key: 'water-source',
             answers: [
               {
-                key: 'Q17a',
+                key: 'water-source-a',
                 title: 'Under your current irrigation, where does the water come from [primary?]?',
                 input: [
                   {
-                    key: 'Q17a-A6',
+                    key: 'water-source-a-A6',
                     value: 'Not currently irrigating'
                   }
                 ]
               },
               {
-                key: 'Q17b',
+                key: 'water-source-b',
                 title: 'Where will your irrigation water come from?',
                 input: [
                   {
-                    key: 'Q17b-A1',
+                    key: 'water-source-b-A1',
                     value: 'Peak flow surface water'
                   }
                 ]
@@ -112,32 +88,32 @@ module.exports = {
             }
           },
           {
-            key: 'Q18',
+            key: 'irrigation-system',
             answers: [
               {
-                key: 'Q18a',
+                key: 'irrigation-system-a',
                 title: 'What systems are [primarily] currently used to irrigate?',
                 input: [
                   {
-                    key: 'Q18a-A4',
+                    key: 'irrigation-system-a-A4',
                     value: 'Sprinklers'
                   },
                   {
-                    key: 'Q18a-A5',
+                    key: 'irrigation-system-a-A5',
                     value: 'Capillary Bed'
                   }
                 ]
               },
               {
-                key: 'Q18b',
+                key: 'irrigation-system-b',
                 title: 'What systems will be used to irrigate?',
                 input: [
                   {
-                    key: 'Q18b-A1',
+                    key: 'irrigation-system-b-A1',
                     value: 'Trickle'
                   },
                   {
-                    key: 'Q18b-A2',
+                    key: 'irrigation-system-b-A2',
                     value: 'Mist'
                   }
                 ]
@@ -150,18 +126,18 @@ module.exports = {
             }
           },
           {
-            key: 'Q19',
+            key: 'productivity',
             answers: [
               {
                 key: null,
                 title: 'How will the project improve productivity ',
                 input: [
                   {
-                    key: 'Q19-A1',
+                    key: 'productivity-A1',
                     value: 'Introduce or expand High Value Crops'
                   },
                   {
-                    key: 'Q19-A2',
+                    key: 'productivity-A2',
                     value: 'Introduce or expand protected Crops'
                   }
                 ]
@@ -174,14 +150,14 @@ module.exports = {
             }
           },
           {
-            key: 'Q20',
+            key: 'collaboration',
             answers: [
               {
                 key: null,
                 title: 'Will water be supplied to other farm [businesses]?',
                 input: [
                   {
-                    key: 'Q20-A1',
+                    key: 'collaboration-A1',
                     value: 'Yes'
                   }
                 ]
