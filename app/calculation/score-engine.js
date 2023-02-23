@@ -166,7 +166,7 @@ function answerValNoBand (question, answers) {
 function dualQuestionHectorScore (question, answers, dependentQuestionRatingScore) {
   const q15Score = first(dependentQuestionRatingScore)
   const q16bAnsVal = first(
-    first(answers.filter(x => x.key === `${question.key}b`)).input).value
+    first(answers.filter(answer => answer.key === `${question.key}-b`)).input).value
 
   const hector = q16bAnsVal
   const bandBoundary = first(question.scoreData.scoreMatrix.filter(e => e.crop === q15Score))
@@ -214,11 +214,11 @@ function dualAvgMatrix (question, answers) {
     question.answer
       .filter(x => first(
         answers
-          .filter(z => z.key === `${question.key}a`)).input
+          .filter(z => z.key === `${question.key}-a`)).input
         .some(y => y.key === x.key))
   const toBeAnswers =
   question.answer.filter(x => first(
-    answers.filter(z => z.key === `${question.key}b`)).input
+    answers.filter(z => z.key === `${question.key}-b`)).input
     .some(y => y.key === x.key))
 
   const asIsAverage = Math.round(

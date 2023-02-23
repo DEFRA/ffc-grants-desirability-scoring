@@ -24,7 +24,7 @@ const processCostMessage = async (message, receiver) => {
 
     await receiver.completeMessage(message)
   } catch (err) {
-    console.error('Unable to process Cost request:', err)
+    console.error('Unable to process request:', err)
   }
 }
 
