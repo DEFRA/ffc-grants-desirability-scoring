@@ -23,84 +23,25 @@
         ],
         "questions": [
             {
-                "key": "Q14",
-                "title": "The project will:",
-                "maxScore": 4,
-                "weight": 0.8,
-                "showResult": true,
-                "scoreType": "DualSumWeightBand",
-                "answer": [
-                    {
-                        "key": "Q14-A1",
-                        "weight": 3,
-                        "value": "Change water source"
-                    },
-                    {
-                        "key": "Q14-A2",
-                        "weight": 2,
-                        "value": "Improve irrigation efficiency"
-                    },
-                    {
-                        "key": "Q14-A3",
-                        "weight": 1,
-                        "value": "Introduce Irrigation"
-                    },
-                    {
-                        "key": "Q14-A4",
-                        "weight": 1,
-                        "value": "Increase Irrigation"
-                    },
-                    {
-                        "key": "Q14-A5",
-                        "weight": 0,
-                        "value": "None of the above"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                            "name": "Strong",
-                            "value": "0.8",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Weak",
-                            "value": "0.5",
-                            "type": "numeric"
-                        },
-                        {
-                            "name": "Average",
-                            "value": null,
-                            "type": "else"
-                        }
-                    ]
-                }
-            },
-            {
-                "key": "Q15",
+                "key": "irrigated-crops",
                 "title": "What main crops will be irrigated?",
                 "scoreType": "AnswerValNoBand",
                 "maxScore": 0,
                 "showResult": false,
-                "group": "Q16",
+                "group": "irrigated-land",
                 "answer": [
                     {
-                        "key": "Q15-A1",
+                        "key": "irrigated-crops-A1",
                         "desc": "Protected cropping (eg glass house or poly tunnel)",
                         "weight": 3
                     },
                     {
-                        "key": "Q15-A2",
+                        "key": "irrigated-crops-A2",
                         "desc": "Fruit (eg top fruit, bush fruit)",
                         "weight": 2
                     },
                     {
-                        "key": "Q15-A3",
+                        "key": "irrigated-crops-A3",
                         "desc": "Field-scale crops (eg potatoes, onions, carrots)",
                         "weight": 1
                     }
@@ -112,19 +53,19 @@
                 }
             },
             {
-                "key": "Q16",
+                "key": "irrigated-land",
                 "title": "How much land will be irrigated after the project?",
-                "group": "Q16",
+                "group": "irrigated-land",
                 "scoreType": "DualQuestionHectorScore",
                 "dependentQuestions": [
-                    "Q15"
+                    "irrigated-crops"
                 ],
                 "maxScore": 9,
                 "weight": 3,
                 "showResult": true,
                 "answer": [
                     {
-                        "key": "Q16a-A",
+                        "key": "irrigated-land-b",
                         "value": 100
                     }
                 ],
@@ -174,71 +115,71 @@
                 }
             },
             {
-                "key": "Q17",
+                "key": "water-source",
                 "title": "Where will the water used for irrigation come from?",
-                "group": "Q17",
+                "group": "water-source",
                 "scoreType": "DualAvgMatrix",
                 "maxScore": 50,
                 "weight": 1,
                 "showResult": true,
                 "answer": [
                     {
-                        "key": "Q17a-A1",
+                        "key": "water-source-a-A1",
                         "desc": "Peak flow surface water",
                         "weight": 7
                     },
                     {
-                        "key": "Q17a-A2",
+                        "key": "water-source-a-A2",
                         "desc": "Rain water harvesting",
                         "weight": 6
                     },
                     {
-                        "key": "Q17a-A3",
+                        "key": "water-source-a-A3",
                         "desc": "Bore hole / aquifer",
                         "weight": 3
                     },
                     {
-                        "key": "Q17a-A4",
+                        "key": "water-source-a-A4",
                         "desc": "Summer water surface abstraction",
                         "weight": 2
                     },
                     {
-                        "key": "Q17a-A5",
+                        "key": "water-source-a-A5",
                         "desc": "Mains",
                         "weight": 0
                     },
                     {
-                        "key": "Q17a-A6",
+                        "key": "water-source-a-A6",
                         "desc": "Not currently irrigating",
                         "weight": 0
                     },
                     {
-                        "key": "Q17b-A1",
+                        "key": "water-source-b-A1",
                         "desc": "Peak flow surface water",
                         "weight": 7
                     },
                     {
-                        "key": "Q17b-A2",
+                        "key": "water-source-b-A2",
                         "desc": "Rain water harvesting",
                         "weight": 6
                     },
                     {
-                        "key": "Q17b-A3",
+                        "key": "water-source-b-A3",
                         "desc": "Bore hole / aquifer",
                         "weight": 3
                     },
                     {
-                        "key": "Q17b-A4",
+                        "key": "water-source-b-A4",
                         "desc": "Summer water surface abstraction",
                         "weight": 2
                     },
                     {
-                        "key": "Q17b-A5",
+                        "key": "water-source-b-A5",
                         "desc": "Mains",
                         "weight": 0
                     },
                     {
-                        "key": "Q17b-A6",
+                        "key": "water-source-b-A6",
                         "desc": "Not currently irrigating",
                         "weight": 0
                     }
@@ -359,91 +300,91 @@
                 }
             },
             {
-                "key": "Q18",
+                "key": "irrigation-system",
                 "title": "What systems will be used to irrigate?",
-                "group": "Q18",
+                "group": "irrigation-system",
                 "scoreType": "DualAvgMatrix",
                 "maxScore": 30,
                 "weight": 1,
                 "showResult": true,
                 "answer": [
                     {
-                        "key": "Q18a-A1",
+                        "key": "irrigation-system-a-A1",
                         "desc": "Trickle",
                         "weight": 6
                     },
                     {
-                        "key": "Q18a-A2",
+                        "key": "irrigation-system-a-A2",
                         "desc": "Mist",
                         "weight": 5
                     },
                     {
-                        "key": "Q18a-A3",
+                        "key": "irrigation-system-a-A3",
                         "desc": "Ebb and flow",
                         "weight": 4
                     },
                     {
-                        "key": "Q18a-A4",
+                        "key": "irrigation-system-a-A4",
                         "desc": "Sprinklers",
                         "weight": 3
                     },
                     {
-                        "key": "Q18a-A5",
+                        "key": "irrigation-system-a-A5",
                         "desc": "Capillary Bed",
                         "weight": 2
                     },
                     {
-                        "key": "Q18a-A6",
+                        "key": "irrigation-system-a-A6",
                         "desc": "Boom",
                         "weight": 1
                     },
                     {
-                        "key": "Q18a-A7",
+                        "key": "irrigation-system-a-A7",
                         "desc": "Rain Gun",
                         "weight": 0
                     },
                     {
-                        "key": "Q18a-A8",
+                        "key": "irrigation-system-a-A8",
                         "desc": "Not currently irrigating",
                         "weight": 0
                     },
                     {
-                        "key": "Q18b-A1",
+                        "key": "irrigation-system-b-A1",
                         "desc": "Trickle",
                         "weight": 6
                     },
                     {
-                        "key": "Q18b-A2",
+                        "key": "irrigation-system-b-A2",
                         "desc": "Mist",
                         "weight": 5
                     },
                     {
-                        "key": "Q18b-A3",
+                        "key": "irrigation-system-b-A3",
                         "desc": "Ebb and flow",
                         "weight": 4
                     },
                     {
-                        "key": "Q18b-A4",
+                        "key": "irrigation-system-b-A4",
                         "desc": "Sprinklers",
                         "weight": 3
                     },
                     {
-                        "key": "Q18b-A5",
+                        "key": "irrigation-system-b-A5",
                         "desc": "Capillary Bed",
                         "weight": 2
                     },
                     {
-                        "key": "Q18b-A6",
+                        "key": "irrigation-system-b-A6",
                         "desc": "Boom",
                         "weight": 1
                     },
                     {
-                        "key": "Q18b-A7",
+                        "key": "irrigation-system-b-A7",
                         "desc": "Rain Gun",
                         "weight": 0
                     },
                     {
-                        "key": "Q18b-A8",
+                        "key": "irrigation-system-b-A8",
                         "desc": "Not currently irrigating",
                         "weight": 0
                     }
@@ -546,7 +487,7 @@
                 }
             },
             {
-                "key": "Q19",
+                "key": "productivity",
                 "title": "How will the project improve productivity",
                 "scoreType": "DualSum",
                 "maxScore": 3,
@@ -554,27 +495,27 @@
                 "showResult": true,
                 "answer": [
                     {
-                        "key": "Q19-A1",
+                        "key": "productivity-A1",
                         "desc": "Introduce or expand high Value Crops",
                         "weight": 3
                     },
                     {
-                        "key": "Q19-A2",
+                        "key": "productivity-A2",
                         "desc": "Introduce or expand protected Crops",
                         "weight": 3
                     },
                     {
-                        "key": "Q19-A3",
+                        "key": "productivity-A3",
                         "desc": "Improved Yield per Ha",
                         "weight": 1
                     },
                     {
-                        "key": "Q19-A4",
+                        "key": "productivity-A4",
                         "desc": "Improved Quality",
                         "weight": 1
                     },
                     {
-                        "key": "Q19-A5",
+                        "key": "productivity-A5",
                         "desc": "Maintain productivity",
                         "weight": 0
                     }
@@ -605,7 +546,7 @@
                 }
             },
             {
-                "key": "Q20",
+                "key": "collaboration",
                 "title": "Will water be supplied to other farm [businesses]?",
                 "scoreType": "BoolWeightScore",
                 "maxScore": 4,
@@ -613,12 +554,12 @@
                 "showResult": true,
                 "answer": [
                     {
-                        "key": "Q20-A1",
+                        "key": "collaboration-A1",
                         "desc": "Yes",
                         "weight": 1
                     },
                     {
-                        "key": "Q20-A2",
+                        "key": "collaboration-A2",
                         "desc": "No",
                         "weight": 0
                     }
