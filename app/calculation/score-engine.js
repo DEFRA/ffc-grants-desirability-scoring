@@ -153,7 +153,7 @@ function dualSumWeightBand (question, answers) {
   return new ScoreResult(score, band)
 }
 
-// Q15
+// water source scoring
 function answerValNoBand (question, answers) {
   const score = first(question.answer
     .filter(x =>
