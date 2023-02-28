@@ -4,13 +4,16 @@ const bandHigh = 'Strong'
 const bandLow = 'Weak'
 const bandMedium = 'Average'
 
+const UNSUSTAINABLE_WATER_SOURCE_ID = ['WS4', 'WS5']
+
 class ScoreEngine {
   constructor (desirabilityAssessment, scoreData) {
     this.scoringData = scoreData
     this.desirabilityAssessment = desirabilityAssessment
   }
 
-  getScore () {
+  getScore() {
+    console.log(this.desirabilityAssessment.desirability.questions,'dddddddd')
     // calculate each question result
     this.desirabilityAssessment.desirability.questions
       .map((qanswer, index, allQanswers) => calculate(qanswer, this.scoringData.desirability, allQanswers))
@@ -94,6 +97,14 @@ function calculateQScore (question, answers, dependentQuestionRatingScore, allQa
       result = dualAvgMatrix(question, answers)
       break
 
+    case 'multiavgmatrix':
+      result = multiAvgMatrix(question, answers)
+      break
+
+    case 'getdependantvalue':
+      result = getDependantValue(question, answers)
+      break
+
     case 'dualsum':
       result = dualSum(question, answers)
       break
@@ -153,6 +164,15 @@ function dualSumWeightBand (question, answers) {
   return new ScoreResult(score, band)
 }
 
+function getDependantValue (question, answers) {
+  const score = first(question.answer
+    .filter(x =>
+      first(answers).input.some(y => y.key === x.key)
+  )).weight
+  console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
+  return new ScoreResult(score, null)
+}
+
 // water source scoring
 function answerValNoBand (question, answers) {
   const score = first(question.answer
@@ -208,18 +228,72 @@ const getBand = (question, score) => {
   return questionBand
 }
 
+const getMatrixValue = (scoreMatrix, matrixId, matrixValue) => {
+  return parseInt(first(
+    scoreMatrix
+      .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)], 10)
+}
+
+function multiAvgMatrix (question, answers) {
+  const asIsAnswers =
+    question.answer
+      .filter(answer => first(
+        answers
+          .filter(selectedAnswer => selectedAnswer.key === `${question.key}-a`)).input
+        .some(asIsAnswer => asIsAnswer.key === answer.key))
+
+  const toBeAnswers =
+  question.answer.filter(qAnswer => first(
+    answers.filter(selectedAnswer => selectedAnswer.key === `${question.key}-b`)).input
+    .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
+
+  const matrixScoreArray = []
+  if (asIsAnswers.length > 0) {
+    const us = asIsAnswers.filter(ansIsanswer => UNSUSTAINABLE_WATER_SOURCE_ID.includes(ansIsanswer.wsId))
+    us.forEach(unSustainableAnswer => {
+      if (!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId)) {
+        matrixScoreArray.push(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId))
+        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer),'insode stop value')
+      }
+      console.log(toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId))
+    })
+    console.log(us,'UUUUUUUUUU')
+  }
+
+  toBeAnswers.forEach(toBeAnswer => {
+    const maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'maintain' : 'start'
+    const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
+    matrixScoreArray.push(matrixVal)
+    console.log(matrixVal,'MMMMMMMM')
+    console.log(maintainOrStart,'CCCCCCCCCCCCCCC')
+  })
+  const totalAverage = Math.round(matrixScoreArray.reduce((a, b) => a + b) / matrixScoreArray.length)
+  const score = totalAverage * question.weight
+  const scoreBand = score / question.maxScore
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+  console.log(matrixScoreArray,'AAAAAAA', totalAverage,'BBBBBB', scoreBand)
+  return new ScoreResult(score, band)
+}
+
 // Q18/17
 function dualAvgMatrix (question, answers) {
   const asIsAnswers =
     question.answer
-      .filter(x => first(
+      .filter(answer => first(
         answers
-          .filter(z => z.key === `${question.key}-a`)).input
-        .some(y => y.key === x.key))
+          .filter(selectedAnswer => selectedAnswer.key === `${question.key}-a`)).input
+        .some(asIsAnswer => asIsAnswer.key === answer.key))
   const toBeAnswers =
-  question.answer.filter(x => first(
-    answers.filter(z => z.key === `${question.key}-b`)).input
-    .some(y => y.key === x.key))
+  question.answer.filter(qAnswer => first(
+    answers.filter(selectedAnswer => selectedAnswer.key === `${question.key}-b`)).input
+    .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
 
   const asIsAverage = Math.round(
     asIsAnswers.reduce((total, next) => total + next.weight, 0) / asIsAnswers.length)
