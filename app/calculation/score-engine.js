@@ -12,8 +12,7 @@ class ScoreEngine {
     this.desirabilityAssessment = desirabilityAssessment
   }
 
-  getScore() {
-    console.log(this.desirabilityAssessment.desirability.questions,'dddddddd')
+  getScore () {
     // calculate each question result
     this.desirabilityAssessment.desirability.questions
       .map((qanswer, index, allQanswers) => calculate(qanswer, this.scoringData.desirability, allQanswers))
@@ -62,23 +61,28 @@ function getOverAllRatingBand (bandScore, sectionScoringData) {
   return bandMedium
 }
 
-function calculate (qanswer, sectionScoringData, allQanswers) {
+function calculate(qanswer, sectionScoringData, allQanswers) {
+  const dependentQuestionRatingScore = []
+  let dependantQuestionAnswers
   // get question
   const question = first(
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
-  const dependentQuestionRatingScore = []
+  if (question.dependentValueQuestions) {
+    dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
+  }
+
   if (question.dependentQuestions) {
     const answers = allQanswers.filter(x => question.dependentQuestions.some(d => d === x.key))
     answers.forEach(dqa => {
       dependentQuestionRatingScore.push(dqa.rating.score)
     })
   }
-  qanswer.rating = calculateQScore(question, qanswer.answers, dependentQuestionRatingScore, allQanswers, sectionScoringData)
+  qanswer.rating = calculateQScore(question, qanswer.answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData)
   return qanswer
 }
 
-function calculateQScore (question, answers, dependentQuestionRatingScore, allQanswers, sectionScoringData) {
+function calculateQScore (question, answers, dependentQuestionRatingScore,dependantQuestionAnswers, allQanswers, sectionScoringData) {
   let result = new ScoreResult('', '')
   switch (String(question.scoreType).toLowerCase()) {
     case 'dualsumweightband':
@@ -98,11 +102,7 @@ function calculateQScore (question, answers, dependentQuestionRatingScore, allQa
       break
 
     case 'multiavgmatrix':
-      result = multiAvgMatrix(question, answers)
-      break
-
-    case 'getdependantvalue':
-      result = getDependantValue(question, answers)
+      result = multiAvgMatrix(question, answers, dependantQuestionAnswers)
       break
 
     case 'dualsum':
@@ -162,15 +162,6 @@ function dualSumWeightBand (question, answers) {
       .filter(x => x.name === bandHigh)).value) { band = bandHigh }
 
   return new ScoreResult(score, band)
-}
-
-function getDependantValue (question, answers) {
-  const score = first(question.answer
-    .filter(x =>
-      first(answers).input.some(y => y.key === x.key)
-  )).weight
-  console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
-  return new ScoreResult(score, null)
 }
 
 // water source scoring
@@ -234,7 +225,8 @@ const getMatrixValue = (scoreMatrix, matrixId, matrixValue) => {
       .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)], 10)
 }
 
-function multiAvgMatrix (question, answers) {
+function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
+  console.log(dependantQuestionAnswers,'ddddeeeeepppppppp')
   const asIsAnswers =
     question.answer
       .filter(answer => first(
@@ -248,20 +240,28 @@ function multiAvgMatrix (question, answers) {
     .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
 
   const matrixScoreArray = []
+  //checking if stoping unsustainable option
   if (asIsAnswers.length > 0) {
-    const us = asIsAnswers.filter(ansIsanswer => UNSUSTAINABLE_WATER_SOURCE_ID.includes(ansIsanswer.wsId))
-    us.forEach(unSustainableAnswer => {
+    const unSustainableAnswers = asIsAnswers.filter(ansIsanswer => UNSUSTAINABLE_WATER_SOURCE_ID.includes(ansIsanswer.wsId))
+    unSustainableAnswers.forEach(unSustainableAnswer => {
       if (!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId)) {
         matrixScoreArray.push(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId))
-        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer),'insode stop value')
+        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId),'insode stop value')
       }
-      console.log(toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId))
+      console.log(!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId))
     })
-    console.log(us,'UUUUUUUUUU')
+    console.log(unSustainableAnswers,'UUUUUUUUUU')
   }
 
   toBeAnswers.forEach(toBeAnswer => {
-    const maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'maintain' : 'start'
+    let maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'nochange' : 'start'
+    // if unsustainable option is a decrease 
+    if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
+      maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[0].value.toLowerCase().replace(' ', '')
+      console.log(maintainOrStart,'NNNNNNNNNNNNNNN')
+    }
+
+
     const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
     matrixScoreArray.push(matrixVal)
     console.log(matrixVal,'MMMMMMMM')
