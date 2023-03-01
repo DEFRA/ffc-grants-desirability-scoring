@@ -187,7 +187,7 @@ describe('Score Engine Get Score test', () => {
         // firstInputVal.key = firstInputVal.key === 'Q14-A1' ? 'Q14-A4' : firstInputVal.key
         firstInputVal.value = (mi.key === 'irrigated-land-a') ? 1 : firstInputVal.value
         firstInputVal.value = (mi.key === 'irrigated-land-b') ? 20 : firstInputVal.value
-        firstInputVal.key = (mi.key === 'water-source-a') ? 'water-source-a-A5' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'water-source-a') ? 'water-source-a-A3' : firstInputVal.key
         firstInputVal.key = (mi.key === 'water-source-b') ? 'water-source-b-A1' : firstInputVal.key
         firstInputVal.key = (mi.key === 'irrigation-system-a') ? 'irrigation-system-a-A5' : firstInputVal.key
         firstInputVal.key = (mi.key === 'irrigation-system-b') ? 'irrigation-system-b-A7' : firstInputVal.key
@@ -206,6 +206,7 @@ describe('Score Engine Get Score test', () => {
     expect(scoreResult.desirability.overallRating.score).toBe(61.5)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
+
   const getHighMessage = () => {
     const msg = fakeMessage.get()
     msg.desirability.questions.map(m => {
@@ -216,17 +217,16 @@ describe('Score Engine Get Score test', () => {
         firstInputVal.key = (firstInputVal.key === 'irrigated-crops-A3') ? 'irrigated-crops-A2' : firstInputVal.key
         firstInputVal.value = (mi.key === 'irrigated-land-a') ? 20 : firstInputVal.value
         firstInputVal.value = (mi.key === 'irrigated-land-b') ? 21 : firstInputVal.value
-        firstInputVal.key = (mi.key === 'water-source-a') ? 'water-source-a-A4' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'water-source-a') ? 'water-source-a-A2' : firstInputVal.key
         firstInputVal.key = (mi.key === 'water-source-b') ? 'water-source-b-A1' : firstInputVal.key
         firstInputVal.key = (mi.key === 'irrigation-system-a') ? 'irrigation-system-a-A5' : firstInputVal.key
-        firstInputVal.key = (mi.key === 'irrigation-system-b') ? 'irrigation-system-b-A1' : firstInputVal.key
-        firstInputVal.key = (mi.key === 'productivity') ? 'productivity-A3' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'irrigation-system-b') ? 'irrigation-system-b-A7' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'productivity') ? 'productivity-A1' : firstInputVal.key
+        firstInputVal.key = (mi.key === 'collaboration') ? 'collaboration-A1' : firstInputVal.key
+
         ansInputs.push(firstInputVal)
         if (mi.key === 'water-source-a') {
-          ansInputs.push({ key: 'water-source-a-A5' })
-        }
-        if (mi.key === 'water-source-b') {
-          ansInputs.push({ key: 'water-source-b-A3' })
+          ansInputs.push({ key: 'water-source-a-A3' })
         }
         if (mi.key === 'irrigation-system-a') {
           ansInputs.push({ key: 'irrigation-system-a-A6' })
@@ -248,7 +248,7 @@ describe('Score Engine Get Score test', () => {
     const msg = getHighMessage()
     const scoreEngine = new ScoreEngine(msg, scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(75)
+    expect(scoreResult.desirability.overallRating.score).toBe(85)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 })
