@@ -225,14 +225,15 @@ const getMatrixValue = (scoreMatrix, matrixId, matrixValue) => {
       .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)], 10)
 }
 
-function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
-  console.log(dependantQuestionAnswers,'ddddeeeeepppppppp')
+function multiAvgMatrix (question, answers, dependantQuestionAnswers = []) {
+  console.log(dependantQuestionAnswers[0].answers[0].input,'dep Q A')
   const asIsAnswers =
     question.answer
       .filter(answer => first(
         answers
           .filter(selectedAnswer => selectedAnswer.key === `${question.key}-a`)).input
         .some(asIsAnswer => asIsAnswer.key === answer.key))
+console.log(asIsAnswers,' assss is array ')
 
   const toBeAnswers =
   question.answer.filter(qAnswer => first(
@@ -240,13 +241,13 @@ function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
     .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
 
   const matrixScoreArray = []
-  //checking if stoping unsustainable option
+  // checking if stoping unsustainable option
   if (asIsAnswers.length > 0) {
     const unSustainableAnswers = asIsAnswers.filter(ansIsanswer => UNSUSTAINABLE_WATER_SOURCE_ID.includes(ansIsanswer.wsId))
     unSustainableAnswers.forEach(unSustainableAnswer => {
       if (!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId)) {
         matrixScoreArray.push(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId))
-        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId),'insode stop value')
+        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId),'inside stop value')
       }
       console.log(!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId))
     })
@@ -258,14 +259,14 @@ function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
     // if unsustainable option is a decrease 
     if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
       maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[0].value.toLowerCase().replace(' ', '')
-      console.log(maintainOrStart,'NNNNNNNNNNNNNNN')
+      console.log(maintainOrStart,'nochange or dec')
     }
 
 
     const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
     matrixScoreArray.push(matrixVal)
-    console.log(matrixVal,'MMMMMMMM')
-    console.log(maintainOrStart,'CCCCCCCCCCCCCCC')
+    console.log(matrixVal,'Mat val')
+    console.log(maintainOrStart,'main or start val')
   })
   const totalAverage = Math.round(matrixScoreArray.reduce((a, b) => a + b) / matrixScoreArray.length)
   const score = totalAverage * question.weight
