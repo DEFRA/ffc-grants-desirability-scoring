@@ -4,6 +4,8 @@ const bandHigh = 'Strong'
 const bandLow = 'Weak'
 const bandMedium = 'Average'
 
+const UNSUSTAINABLE_WATER_SOURCE_ID = ['WS4', 'WS5']
+
 class ScoreEngine {
   constructor (desirabilityAssessment, scoreData) {
     this.scoringData = scoreData
@@ -59,23 +61,28 @@ function getOverAllRatingBand (bandScore, sectionScoringData) {
   return bandMedium
 }
 
-function calculate (qanswer, sectionScoringData, allQanswers) {
+function calculate(qanswer, sectionScoringData, allQanswers) {
+  const dependentQuestionRatingScore = []
+  let dependantQuestionAnswers
   // get question
   const question = first(
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
-  const dependentQuestionRatingScore = []
+  if (question.dependentValueQuestions) {
+    dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
+  }
+
   if (question.dependentQuestions) {
     const answers = allQanswers.filter(x => question.dependentQuestions.some(d => d === x.key))
     answers.forEach(dqa => {
       dependentQuestionRatingScore.push(dqa.rating.score)
     })
   }
-  qanswer.rating = calculateQScore(question, qanswer.answers, dependentQuestionRatingScore, allQanswers, sectionScoringData)
+  qanswer.rating = calculateQScore(question, qanswer.answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData)
   return qanswer
 }
 
-function calculateQScore (question, answers, dependentQuestionRatingScore, allQanswers, sectionScoringData) {
+function calculateQScore (question, answers, dependentQuestionRatingScore,dependantQuestionAnswers, allQanswers, sectionScoringData) {
   let result = new ScoreResult('', '')
   switch (String(question.scoreType).toLowerCase()) {
     case 'dualsumweightband':
@@ -92,6 +99,10 @@ function calculateQScore (question, answers, dependentQuestionRatingScore, allQa
 
     case 'dualavgmatrix':
       result = dualAvgMatrix(question, answers)
+      break
+
+    case 'multiavgmatrix':
+      result = multiAvgMatrix(question, answers, dependantQuestionAnswers)
       break
 
     case 'dualsum':
@@ -208,18 +219,82 @@ const getBand = (question, score) => {
   return questionBand
 }
 
+const getMatrixValue = (scoreMatrix, matrixId, matrixValue) => {
+  return parseInt(first(
+    scoreMatrix
+      .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)], 10)
+}
+
+function multiAvgMatrix (question, answers, dependantQuestionAnswers = []) {
+  console.log(dependantQuestionAnswers[0].answers[0].input,'dep Q A')
+  const asIsAnswers =
+    question.answer
+      .filter(answer => first(
+        answers
+          .filter(selectedAnswer => selectedAnswer.key === `${question.key}-a`)).input
+        .some(asIsAnswer => asIsAnswer.key === answer.key))
+console.log(asIsAnswers,' assss is array ')
+
+  const toBeAnswers =
+  question.answer.filter(qAnswer => first(
+    answers.filter(selectedAnswer => selectedAnswer.key === `${question.key}-b`)).input
+    .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
+
+  const matrixScoreArray = []
+  // checking if stoping unsustainable option
+  if (asIsAnswers.length > 0) {
+    const unSustainableAnswers = asIsAnswers.filter(ansIsanswer => UNSUSTAINABLE_WATER_SOURCE_ID.includes(ansIsanswer.wsId))
+    unSustainableAnswers.forEach(unSustainableAnswer => {
+      if (!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId)) {
+        matrixScoreArray.push(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId))
+        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId),'inside stop value')
+      }
+      console.log(!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId))
+    })
+    console.log(unSustainableAnswers,'UUUUUUUUUU')
+  }
+
+  toBeAnswers.forEach(toBeAnswer => {
+    let maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'nochange' : 'start'
+    // if unsustainable option is a decrease 
+    if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
+      maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[0].value.toLowerCase().replace(' ', '')
+      console.log(maintainOrStart,'nochange or dec')
+    }
+
+
+    const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
+    matrixScoreArray.push(matrixVal)
+    console.log(matrixVal,'Mat val')
+    console.log(maintainOrStart,'main or start val')
+  })
+  const totalAverage = Math.round(matrixScoreArray.reduce((a, b) => a + b) / matrixScoreArray.length)
+  const score = totalAverage * question.weight
+  const scoreBand = score / question.maxScore
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+  console.log(matrixScoreArray,'AAAAAAA', totalAverage,'BBBBBB', scoreBand)
+  return new ScoreResult(score, band)
+}
+
 // Q18/17
 function dualAvgMatrix (question, answers) {
   const asIsAnswers =
     question.answer
-      .filter(x => first(
+      .filter(answer => first(
         answers
-          .filter(z => z.key === `${question.key}-a`)).input
-        .some(y => y.key === x.key))
+          .filter(selectedAnswer => selectedAnswer.key === `${question.key}-a`)).input
+        .some(asIsAnswer => asIsAnswer.key === answer.key))
   const toBeAnswers =
-  question.answer.filter(x => first(
-    answers.filter(z => z.key === `${question.key}-b`)).input
-    .some(y => y.key === x.key))
+  question.answer.filter(qAnswer => first(
+    answers.filter(selectedAnswer => selectedAnswer.key === `${question.key}-b`)).input
+    .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
 
   const asIsAverage = Math.round(
     asIsAnswers.reduce((total, next) => total + next.weight, 0) / asIsAnswers.length)

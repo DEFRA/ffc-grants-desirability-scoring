@@ -116,72 +116,63 @@
             },
             {
                 "key": "water-source",
-                "title": "Where will the water used for irrigation come from?",
+                "title": "Where will your irrigation water come from?",
                 "group": "water-source",
-                "scoreType": "DualAvgMatrix",
+                "scoreType": "MultiAvgMatrix",
+	   			"dependentValueQuestions": ["change-summer-abstraction"],
                 "maxScore": 50,
                 "weight": 1,
-                "showResult": true,
+                "showResult":true,
                 "answer": [
                     {
                         "key": "water-source-a-A1",
-                        "desc": "Peak flow surface water",
-                        "weight": 7
+                        "desc": "Peak-flow surface water",
+                        "wsId": "WS1"
                     },
                     {
                         "key": "water-source-a-A2",
                         "desc": "Rain water harvesting",
-                        "weight": 6
+                        "wsId": "WS2"
                     },
                     {
                         "key": "water-source-a-A3",
-                        "desc": "Bore hole / aquifer",
-                        "weight": 3
+                        "desc": "Bore hole/aquifer",
+                        "wsId": "WS3"
                     },
                     {
                         "key": "water-source-a-A4",
                         "desc": "Summer water surface abstraction",
-                        "weight": 2
+                        "wsId": "WS4"
                     },
                     {
                         "key": "water-source-a-A5",
                         "desc": "Mains",
-                        "weight": 0
-                    },
-                    {
-                        "key": "water-source-a-A6",
-                        "desc": "Not currently irrigating",
-                        "weight": 0
+                        "wsId": "WS5"
                     },
                     {
                         "key": "water-source-b-A1",
-                        "desc": "Peak flow surface water",
-                        "weight": 7
+                        "desc": "Peak-flow surface water",
+                        "wsId": "WS1"
                     },
                     {
                         "key": "water-source-b-A2",
                         "desc": "Rain water harvesting",
-                        "weight": 6
+                        "wsId": "WS2"
                     },
                     {
                         "key": "water-source-b-A3",
-                        "desc": "Bore hole / aquifer",
-                        "weight": 3
+                        "desc": "Bore hole/aquifer",
+                        "wsId": "WS3"
                     },
                     {
                         "key": "water-source-b-A4",
                         "desc": "Summer water surface abstraction",
-                        "weight": 2
+                        "wsId": "WS4"
                     },
                     {
                         "key": "water-source-b-A5",
                         "desc": "Mains",
-                        "weight": 0
-                    },
-                    {
-                        "key": "water-source-b-A6",
-                        "desc": "Not currently irrigating",
-                        "weight": 0
+                        "wsId": "WS5"
                     }
                 ],
                 "rating": {
@@ -192,92 +183,36 @@
                 "scoreData": {
                     "scoreMatrix": [
                         {
-                            "id": "7",
-                            "7": "45.00",
-                            "6": "40.00",
-                            "5": "0.00",
-                            "4": "0.00",
-                            "3": "0.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
+                            "id": "start",
+                            "WS1": "50.00",
+                            "WS2": "40.00",
+                            "WS3": "10.00",
+                            "WS4": "0.00",
+                            "WS5": "0.00"
                         },
                         {
-                            "id": "6",
-                            "7": "45.00",
-                            "6": "45.00",
-                            "5": "0.00",
-                            "4": "0.00",
-                            "3": "0.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
+                            "id": "stop",
+                            "WS1": "0.00",
+                            "WS2": "0.00",
+                            "WS3": "0.00",
+                            "WS4": "20.00",
+                            "WS5": "20.00"
                         },
                         {
-                            "id": "5",
-                            "7": "40.00",
-                            "6": "35.00",
-                            "5": "25.00",
-                            "4": "0.00",
-                            "3": "0.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
+                           "id": "decrease",
+                            "WS1": "0.00",
+                            "WS2": "0.00",
+                            "WS3": "0.00",
+                            "WS4": "10.00",
+                            "WS5": "10.00"
                         },
                         {
-                            "id": "4",
-                            "7": "40.00",
-                            "6": "35.00",
-                            "5": "30.00",
-                            "4": "25.00",
-                            "3": "0.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
-                        },
-                        {
-                            "id": "3",
-                            "7": "45.00",
-                            "6": "40.00",
-                            "5": "30.00",
-                            "4": "25.00",
-                            "3": "10.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
-                        },
-                        {
-                            "id": "2",
-                            "7": "50.00",
-                            "6": "45.00",
-                            "5": "40.00",
-                            "4": "30.00",
-                            "3": "0.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
-                        },
-                        {
-                            "id": "1",
-                            "7": "50.00",
-                            "6": "40.00",
-                            "5": "30.00",
-                            "4": "25.00",
-                            "3": "0.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
-                        },
-                        {
-                            "id": "0",
-                            "7": "50.00",
-                            "6": "40.00",
-                            "5": "10.00",
-                            "4": "10.00",
-                            "3": "10.00",
-                            "2": "0.00",
-                            "1": "0.00",
-                            "0": "0.00"
+                           "id": "nochange",
+                            "WS1": "45.00",
+                            "WS2": "45.00",
+                            "WS3": "10.00",
+                            "WS4": "0.00",
+                            "WS5": "0.00"
                         }
                     ],
                     "scoreBand": [
@@ -297,6 +232,41 @@
                             "type": "else"
                         }
                     ]
+                }
+            },
+            {
+                "key": "change-summer-abstraction",
+                "title": "How will your use of summer abstraction and mains change?",
+                "scoreType": "GetDependantValue",
+                "maxScore": 0,
+                "showResult":false,
+                "group": "water-source",
+                "answer": [
+                    {
+                        "key": "change-summer-abstraction-a-A1",
+                        "desc": "Decrease",
+                        "weight": 0
+                    },
+                    {
+                        "key": "change-summer-abstraction-a-A2",
+                        "desc": "No change",
+                        "weight": 0
+                    },  
+                    {
+                        "key": "change-summer-abstraction-b-A1",
+                        "desc": "Decrease",
+                        "weight": 0
+                    },
+                    {
+                        "key": "change-summer-abstraction-b-A2",
+                        "desc": "No change",
+                        "weight": 0
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
                 }
             },
             {
