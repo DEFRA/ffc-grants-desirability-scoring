@@ -85,10 +85,6 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
 function calculateQScore (question, answers, dependentQuestionRatingScore,dependantQuestionAnswers, allQanswers, sectionScoringData) {
   let result = new ScoreResult('', '')
   switch (String(question.scoreType).toLowerCase()) {
-    case 'dualsumweightband':
-      result = dualSumWeightBand(question, answers)
-      break
-
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
       break
@@ -145,24 +141,24 @@ function dualSumWeightAvgBand (question, answers) {
 
   return new ScoreResult(score, band)
 }
-// Q14
-function dualSumWeightBand (question, answers) {
-  const score = question.answer
-    .filter(itemX =>
-      first(answers).input.some(itemY => itemY.key === itemX.key))
-    .reduce((total, answer) => answer.weight + total, 0) * question.weight
-  const scoreBand = score / question.maxScore
+// Q14 replaced by multiavgmatrix in water
+// function dualSumWeightBand (question, answers) {
+//   const score = question.answer
+//     .filter(itemX =>
+//       first(answers).input.some(itemY => itemY.key === itemX.key))
+//     .reduce((total, answer) => answer.weight + total, 0) * question.weight
+//   const scoreBand = score / question.maxScore
 
-  let band = bandMedium
-  if (scoreBand <= first(
-    question.scoreData.scoreBand
-      .filter(x => x.name === bandLow)).value) { band = bandLow }
-  if (scoreBand >= first(
-    question.scoreData.scoreBand
-      .filter(x => x.name === bandHigh)).value) { band = bandHigh }
+//   let band = bandMedium
+//   if (scoreBand <= first(
+//     question.scoreData.scoreBand
+//       .filter(x => x.name === bandLow)).value) { band = bandLow }
+//   if (scoreBand >= first(
+//     question.scoreData.scoreBand
+//       .filter(x => x.name === bandHigh)).value) { band = bandHigh }
 
-  return new ScoreResult(score, band)
-}
+//   return new ScoreResult(score, band)
+// }
 
 // water source scoring
 function answerValNoBand (question, answers) {
