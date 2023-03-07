@@ -230,20 +230,28 @@ const getBand = (question, score) => {
 }
 
 const getMatrixValue = (scoreMatrix, matrixId, matrixValue) => {
-  return parseInt(first(
+  return +first(
     scoreMatrix
-      .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)], 10)
+      .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)]
+}
+
+const getTotalAvg = (matrixScoreArray, unSustainableStop, maxScore) => {
+  let totalAverage = Math.round(matrixScoreArray.reduce((a, b) => a + b) / matrixScoreArray.length)
+  if (unSustainableStop.length > 0) {
+    const avgPercentIncrease = (unSustainableStop.reduce((a, b) => a + b) / unSustainableStop.length)
+    totalAverage = (totalAverage * avgPercentIncrease) + totalAverage
+    totalAverage = totalAverage > maxScore ? maxScore : totalAverage
+  }
+  return totalAverage
 }
 
 function multiAvgMatrix (question, answers, dependantQuestionAnswers = []) {
-  console.log(dependantQuestionAnswers[0].answers[0].input,'dep Q A')
   const asIsAnswers =
     question.answer
       .filter(answer => first(
         answers
           .filter(selectedAnswer => selectedAnswer.key === `${question.key}-a`)).input
         .some(asIsAnswer => asIsAnswer.key === answer.key))
-console.log(asIsAnswers,' assss is array ')
 
   const toBeAnswers =
   question.answer.filter(qAnswer => first(
@@ -251,36 +259,33 @@ console.log(asIsAnswers,' assss is array ')
     .some(toBeAnswer => toBeAnswer.key === qAnswer.key))
 
   const matrixScoreArray = []
+  const unSustainableStop = []
   // checking if stoping unsustainable option
   if (asIsAnswers.length > 0) {
     const unSustainableAnswers = asIsAnswers.filter(ansIsanswer => UNSUSTAINABLE_WATER_SOURCE_ID.includes(ansIsanswer.wsId))
     unSustainableAnswers.forEach(unSustainableAnswer => {
       if (!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId)) {
-        matrixScoreArray.push(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId))
-        console.log(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId),'inside stop value')
+        unSustainableStop.push(getMatrixValue(question.scoreData.scoreMatrix, 'stop', unSustainableAnswer.wsId))
       }
-      console.log(!toBeAnswers.find(toBeanswer => toBeanswer.wsId === unSustainableAnswer.wsId))
     })
-    console.log(unSustainableAnswers,'UUUUUUUUUU')
   }
 
   toBeAnswers.forEach(toBeAnswer => {
     let maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'nochange' : 'start'
-    // if unsustainable option is a decrease 
+    // if unsustainable option is a decrease
     if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
       maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[0].value.toLowerCase().replace(' ', '')
-      console.log(maintainOrStart,'nochange or dec')
+      console.log(maintainOrStart, 'nochange or dec')
     }
 
 
     const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
     matrixScoreArray.push(matrixVal)
     console.log(matrixVal,'Mat val')
-    console.log(maintainOrStart,'main or start val')
   })
-  const totalAverage = Math.round(matrixScoreArray.reduce((a, b) => a + b) / matrixScoreArray.length)
+  const totalAverage = getTotalAvg(matrixScoreArray, unSustainableStop, question.maxScore)
   const score = totalAverage * question.weight
-  const scoreBand = score / question.maxScore
+  const scoreBand = (score / question.maxScore).toFixed(2)
 
   let band = bandMedium
   if (scoreBand <= first(
@@ -289,7 +294,7 @@ console.log(asIsAnswers,' assss is array ')
   if (scoreBand >= first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
-  console.log(matrixScoreArray,'AAAAAAA', totalAverage,'BBBBBB', scoreBand)
+  console.log(matrixScoreArray,'AVVVGGG = ', totalAverage,'BBBBBB', scoreBand)
   return new ScoreResult(score, band)
 }
 
