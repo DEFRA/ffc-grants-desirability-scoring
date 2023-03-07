@@ -13,7 +13,6 @@ class ScoreEngine {
   }
 
   getScore() {
-    console.log(this.desirabilityAssessment.desirability.questions,'dddddddd')
     // calculate each question result
     this.desirabilityAssessment.desirability.questions
       .map((qanswer, index, allQanswers) => calculate(qanswer, this.scoringData.desirability, allQanswers))
@@ -163,15 +162,6 @@ function dualSumWeightBand (question, answers) {
       .filter(x => x.name === bandHigh)).value) { band = bandHigh }
 
   return new ScoreResult(score, band)
-}
-
-function getDependantValue (question, answers) {
-  const score = first(question.answer
-    .filter(x =>
-      first(answers).input.some(y => y.key === x.key)
-  )).weight
-  console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
-  return new ScoreResult(score, null)
 }
 
 // water source scoring
