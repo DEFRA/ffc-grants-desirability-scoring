@@ -83,7 +83,7 @@ describe('Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     let rating = first(scoreResult.desirability.questions.filter(q => q.key === 'water-source')).rating
-    expect(rating.score).toBe(50)
+    expect(rating.score).toBe(45)
     expect(rating.band).toBe('Strong')
     rating = first(scoreResult.desirability.questions.filter(q => q.key === 'irrigation-system')).rating
     expect(rating.score).toBe(30)
@@ -158,7 +158,7 @@ describe('Score Engine Get Score test', () => {
   test('verify score for overall Ratings', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult.desirability.overallRating.score).toBe(93)
+    expect(scoreResult.desirability.overallRating.score).toBe(88)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
   test('verify score for overall Ratings is Low', () => {

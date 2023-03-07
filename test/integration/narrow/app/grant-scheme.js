@@ -65,6 +65,10 @@ module.exports = {
                 title: 'Under your current irrigation, where does the water come from [primary?]?',
                 input: [
                   {
+                    key: 'water-source-a-A1',
+                    value: 'Peak-flow surface water'
+                  },
+                  {
                     key: 'water-source-a-A3',
                     value: 'Bore hole/aquifer'
                   }
