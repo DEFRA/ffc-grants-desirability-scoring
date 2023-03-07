@@ -46,7 +46,7 @@ module.exports = {
                 input: [
                   {
                     key: null,
-                    value: 21
+                    value: 31
                   }
                 ]
               }
@@ -65,8 +65,8 @@ module.exports = {
                 title: 'Under your current irrigation, where does the water come from [primary?]?',
                 input: [
                   {
-                    key: 'water-source-a-A6',
-                    value: 'Not currently irrigating'
+                    key: 'water-source-a-A3',
+                    value: 'Bore hole/aquifer'
                   }
                 ]
               },
@@ -86,6 +86,31 @@ module.exports = {
               band: null,
               importance: null
             }
+          },
+          {
+            key: 'change-summer-abstraction',
+            answers: [
+              {
+                key: 'change-summer-abstraction-a',
+                title: 'Summer water surface abstraction',
+                input: [
+                  {
+                    value: ' '
+                  }
+                ]
+              },
+              {
+                key: 'change-summer-abstraction-b',
+                title: 'Mains',
+                input: [
+                  {
+                    key: 'change-summer-abstraction-b-A2',
+                    value: 'No change'
+                  }
+                ]
+              }
+            ],
+            rating: { score: null, band: null, importance: null }
           },
           {
             key: 'irrigation-system',
