@@ -15,8 +15,11 @@ const processScoring = async (msg, scoreReciever) => {
 
     if (msgType === '.fetch.score.request') {
       grantType = 'Upgrade Cattle Housing' // change this when applying scoring engine
+      console.log('[CATTLE HOUSING]')
     } else if (msgType === '.fetch.water.score.request') {
       grantType = 'Water Grant' // change this when applying scoring engine
+    } else if (msgType === '.fetch.prod.score.request') {
+      grantType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Slurry' : 'Prod Grant Robotics'
     }
 
     const scoreData = await scoreDataRepository.getScoreData(grantType)
