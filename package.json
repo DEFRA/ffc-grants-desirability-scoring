@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-desirability-scoring",
-  "version": "1.18.0",
+  "version": "1.19.0",
   "description": "FFC Grants desirability scoring microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-desirability-scoring",
   "main": "app/index.js",
