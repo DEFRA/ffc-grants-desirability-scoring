@@ -20,10 +20,11 @@ const processScoring = async (msg, scoreReciever) => {
       grantType = 'Water Grant' // change this when applying scoring engine
     } else if (msgType === '.fetch.prod.score.request') {
       grantType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Slurry' : 'Prod Grant Robotics'
+      console.log('[MADE IT TO HERE', grantType)
     }
 
     const scoreData = await scoreDataRepository.getScoreData(grantType)
-    console.log('[SCORE DATA RECEIVED]')
+    console.log('[SCORE DATA RECEIVED]', scoreData)
     if (scoreData && scoreData.data) {
       const scoreEngine = new ScoreEngine(body, JSON.parse(scoreData.data))
       const scoreResult = scoreEngine.getScore()

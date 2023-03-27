@@ -1,4 +1,4 @@
-const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType, fetchProdRequestMsgType } = require('../config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType, fetchProdScoreRequestMsgType } = require('../config/messaging')
 
 const processCost = require('./standardised-costs')
 const processScoring = require('./session-scoring')
