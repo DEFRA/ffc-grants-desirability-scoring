@@ -160,15 +160,6 @@ function dualSumWeightAvgBand (question, answers) {
 //   return new ScoreResult(score, band)
 // }
 
-function getDependantValue (question, answers) {
-  const score = first(question.answer
-    .filter(x =>
-      first(answers).input.some(y => y.key === x.key)
-  )).weight
-  console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
-  return new ScoreResult(score, null)
-}
-
 // water source scoring
 function answerValNoBand (question, answers) {
   const score = first(question.answer
