@@ -25,48 +25,53 @@ describe('Score Engine Get Score test', () => {
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
   })
-  // test('verify score for score-type dualsumweightband', () => {
-  //   const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
-  //   const scoreResult = scoreEngine.getScore()
-  //   const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'Q14')).rating
-  //   expect(rating.score).toEqual(4)
-  //   expect(rating.band).toBe('Strong')
-  // })
-  // test('verify score for score-type dualsumweightband Low', () => {
-  //   const msg = fakeMessage.get()
-  //   msg.desirability.questions.map(m => {
-  //     m.answers.map(mi => {
-  //       const firstInputVal = mi.input[0]
-  //       firstInputVal.key = firstInputVal.key === 'Q14-A1' ? 'Q14-A5' : firstInputVal.key
-  //       mi.input[0] = firstInputVal
-  //       return mi
-  //     })
-  //     return m
-  //   })
-  //   const scoreEngine = new ScoreEngine(msg, scoreData)
-  //   const scoreResult = scoreEngine.getScore()
-  //   const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'Q14')).rating
-  //   expect(rating.score).toEqual(1.6)
-  //   expect(rating.band).toBe('Weak')
-  // })
-  // test('verify score for score-type dualsumweightband Medium', () => {
-  //   const msg = fakeMessage.get()
-  //   msg.desirability.questions.map(m => {
-  //     m.answers.map(mi => {
-  //       const firstInputVal = mi.input[0]
-  //       firstInputVal.key = firstInputVal.key === 'Q14-A1' ? 'Q14-A4' : firstInputVal.key
-  //       mi.input[0] = firstInputVal
-  //       return mi
-  //     })
-  //     return m
-  //   })
-  //   const scoreEngine = new ScoreEngine(msg, scoreData)
-  //   const scoreResult = scoreEngine.getScore()
-  //   const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'Q14')).rating
-  //   const score = Math.round(rating.score)
-  //   expect(score).toEqual(2)
-  //   expect(rating.band).toBe('Average')
-  // })
+  test('verify score for score-type dualsumweightband HIGH', () => {
+    const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'productivity')).rating
+    expect(rating.score).toEqual(3)
+    expect(rating.band).toBe('Strong')
+  })
+
+  test('verify score for score-type dualsumweightband LOW', () => {
+    const msg = fakeMessage.get()
+    msg.desirability.questions.map(m => {
+      m.answers.map(mi => {
+        const ansInputs = []
+        const firstInputVal = mi.input[0]
+        firstInputVal.key = firstInputVal.key === 'productivity-A1' ? 'productivity-A5' : firstInputVal.key
+        ansInputs.push(firstInputVal)
+        mi.input = ansInputs
+        return mi
+      })
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, scoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'productivity')).rating
+    expect(rating.score).toEqual(0)
+    expect(rating.band).toBe('Weak')
+  })
+
+  test('verify score for score-type dualsumweightband MEDIUM', () => {
+    const msg = fakeMessage.get()
+    msg.desirability.questions.map(m => {
+      m.answers.map(mi => {
+        const firstInputVal = mi.input[0]
+        firstInputVal.key = firstInputVal.key === 'productivity-A1' ? 'productivity-A4' : firstInputVal.key
+        mi.input[0] = firstInputVal
+        return mi
+      })
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, scoreData)
+    const scoreResult = scoreEngine.getScore()
+
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'productivity')).rating
+    const score = Math.round(rating.score)
+    expect(score).toEqual(2)
+    expect(rating.band).toBe('Average')
+  })
   test('verify score for score-type dualquestionhectorscore', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
