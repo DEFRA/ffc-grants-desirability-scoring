@@ -11,7 +11,7 @@ const sendMessage = async (body, type, config, options) => {
     throw err
   }
 
-  console.log(body, '[SUCESSFULLY SENT STANDARDISED COST]')
+  console.log(JSON.stringify(body), '[SUCCESSFULLY SENT STANDARDISED COST]')
   await sender.closeConnection()
 }
 
