@@ -182,25 +182,12 @@ function answerValNoBand(question, answers) {
 }
 
 function inputQuestion(question, answers) {
-  // Get dependent answers
-  const livingSpace3 = answers.filter(x => x.key === 'living-space-3m2').input
-  const livingSpace4 = answers.filter(x => x.key === 'living-space-4m2').input
-  const livingSpace5 = answers.filter(x => x.key === 'living-space-5m2').input
-  // Get user input
-  const clavesNumber = first(answers).input
-  let result = 0;
-  // Run some very sophisticated calculations
-  if (livingSpace3) {
-    result = (((clavesNumber - 3) * 100) / 3) * 10;
-  }
-  if (livingSpace4) {
-    result = (((clavesNumber - 4) * 100) / 4) * 10;
-  }
-  if (livingSpace5) {
-    result = (((clavesNumber - 5) * 100) / 5) * 10;
-  }
+  const livingSpaceAnswer = answers.filter(x => x.key === 'living-space').input
+  const clavesNumber = livingSpaceAnswer.value
+  const clavesPageKey = livingSpaceAnswer.key
+  const score = (((clavesNumber - clavesPageKey) * 100) / 2) * 10;
 
-  return new ScoreResult(result, null)
+  return new ScoreResult(score, null)
 }
 
 // Q16
