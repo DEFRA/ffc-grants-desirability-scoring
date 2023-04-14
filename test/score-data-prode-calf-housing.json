@@ -258,7 +258,9 @@
 				}
 			},
 			{
-				"key": "Number input"
+				"key": "living-space",
+				"title": "What will be the minimum living space per calf?",
+				"scoreType": "userInput"
 			},
 			{
 				"key": "automatic-calf-feeder",
