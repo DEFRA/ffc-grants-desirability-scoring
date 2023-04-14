@@ -181,8 +181,9 @@ function answerValNoBand(question, answers) {
   return new ScoreResult(score, null)
 }
 
+// AHW living space scoring
 function inputQuestion(question, answers) {
-  const livingSpaceAnswer = answers.filter(x => x.key === 'living-space').input
+  const livingSpaceAnswer = answers.filter(x => x.key === 'floor-space-100kg-150kg').input
   const clavesNumber = livingSpaceAnswer.value
   const clavesPageKey = livingSpaceAnswer.key
   const score = (((clavesNumber - clavesPageKey) * 100) / 2) * 10;
