@@ -186,8 +186,15 @@ function inputQuestion(question, answers) {
   const clavesNumber = livingSpaceAnswer.value
   const clavesPageKey = livingSpaceAnswer.key
   const score = (((clavesNumber - clavesPageKey) * 100) / 2) * 10;
+  const scoreBand = score / question.maxScore;
 
-  return new ScoreResult(score, null)
+  let band = bandMedium;
+  if (scoreBand >= 0.7) {
+    band = bandHigh;
+  } else if (scoreBand <= 0.3) {
+    band = bandLow;
+  }
+  return new ScoreResult(score, band);
 }
 
 // Q16

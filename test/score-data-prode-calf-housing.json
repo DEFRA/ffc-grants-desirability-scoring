@@ -260,7 +260,28 @@
 			{
 				"key": "living-space",
 				"title": "What will be the minimum living space per calf?",
-				"scoreType": "userInput"
+				"scoreType": "userInput",
+				"maxScore": 100,
+				"weight": 11.07,
+				"rating": {
+					"score": null,
+					"band": null,
+					"importance": null
+				},
+				"scoreData": {
+					"scoreBand": [
+						{
+							"name": "Weak",
+							"value": "0",
+							"type": "numeric"
+						},
+						{
+							"name": "Strong",
+							"value": null,
+							"type": "else"
+						}
+					]
+				}
 			},
 			{
 				"key": "automatic-calf-feeder",
