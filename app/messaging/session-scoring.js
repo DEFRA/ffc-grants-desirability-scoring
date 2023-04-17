@@ -14,7 +14,7 @@ const processScoring = async (msg, scoreReciever) => {
     let grantType = null
 
     if (msgType === '.fetch.score.request') {
-      grantType = 'Upgrade Cattle Housing' // change this when applying scoring engine
+      grantType = 'Calf Housing Grant' // change this when applying scoring engine
       console.log('[CATTLE HOUSING]')
     } else if (msgType === '.fetch.water.score.request') {
       grantType = 'Water Grant' // change this when applying scoring engine

@@ -68,6 +68,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
   const question = first(
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
+
   if (question.dependentValueQuestions) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
@@ -115,10 +116,10 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'weightedmatrixscore':
       result = SingleValueWeightedMatrixScore(question, answers, allQanswers, sectionScoringData)
       break
-    case 'userInput':
+    case 'userinput':
       result = inputQuestion(question, answers, allQanswers, sectionScoringData)
       break
-    case 'MultiSelectNoMatrix':
+    case 'multiselectnomatrix':
       result = handleMultiSelect(question, answers)
       break;
     case 'dualsumnopercentband':
@@ -188,9 +189,10 @@ function answerValNoBand(question, answers) {
 
 // AHW living space scoring
 function inputQuestion(question, answers) {
-  const livingSpaceAnswer = answers.filter(x => x.key === 'floor-space-100kg-150kg').input
-  const clavesNumber = livingSpaceAnswer.value
-  const clavesPageKey = livingSpaceAnswer.key
+  const livingSpaceAnswer = answers.filter(x => x.key === 'floor-space')[0].input
+  // console.log('needed', JSON.stringify(answers), livingSpaceAnswer[0])
+  const clavesNumber = livingSpaceAnswer[0].value
+  const clavesPageKey = livingSpaceAnswer[0].key
   const score = (((clavesNumber - clavesPageKey) * 100) / 2) * 10;
   const scoreBand = score / question.maxScore;
 

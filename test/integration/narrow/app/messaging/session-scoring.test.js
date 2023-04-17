@@ -83,7 +83,7 @@ describe("Session scoring test", () => {
 
     expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1);
     expect(scoreRepository.getScoreData).toHaveBeenCalledWith(
-      "Upgrade Cattle Housing"
+      "Calf Housing Grant"
     );
 
     expect(sendResponseToSession).toHaveBeenCalledTimes(1);
