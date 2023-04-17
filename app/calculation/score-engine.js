@@ -83,7 +83,9 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
 }
 
 function calculateQScore(question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
+  //
   let result = new ScoreResult('', '')
+  console.log('here: ', String(question.scoreType).toLowerCase());
   switch (String(question.scoreType).toLowerCase()) {
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
@@ -116,6 +118,9 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'userInput':
       result = inputQuestion(question, answers, allQanswers, sectionScoringData)
       break
+    case 'MultiSelectNoMatrix':
+      result = handleMultiSelect(question, answers)
+      break;
     case 'dualsumnopercentband':
       result = dualSumNoPercentBand(question, answers)
       break
@@ -196,6 +201,10 @@ function inputQuestion(question, answers) {
     band = bandLow;
   }
   return new ScoreResult(score, band);
+}
+// AHW multianswer scoring
+function handleMultiSelect(question, answers) {
+  return {}
 }
 
 // Q16

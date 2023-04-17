@@ -1,5 +1,7 @@
 const { first } = require('lodash')
 const scoreData = require('../../../score-data.json')
+const ahwScoreData = require('../../../score-data-prod-calf-housing.json')
+
 describe('Score Engine test', () => {
   afterAll(async (done) => {
     require('applicationinsights').dispose()
@@ -14,6 +16,7 @@ describe('Score Engine test', () => {
 
 describe('Score Engine Get Score test', () => {
   const fakeMessage = require('./grant-scheme.js')
+  const fakeAHWmsg = require('./ahw-scheme.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
   test('createScoreEngine returns ScoreEngine', () => {
@@ -89,6 +92,13 @@ describe('Score Engine Get Score test', () => {
     expect(rating.score).toBe(30)
     expect(rating.band).toBe('Strong')
   })
+  test.only('verify score for score-type dualavgmatrix', () => {
+    const msg = fakeAHWmsg.get()
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    expect(scoreResult).toEqual({})
+  });
+
   test('verify score for score-type dualsum', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
