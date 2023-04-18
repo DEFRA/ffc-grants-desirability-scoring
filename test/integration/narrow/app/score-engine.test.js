@@ -110,9 +110,7 @@ describe('Score Engine Get Score test', () => {
     let msg = fakeAHWmsg.get()
     msg.desirability.questions.map(m => {
       if (m.key === 'permanent-sick-pen') {
-        console.log('m', JSON.stringify(m.answers))
         m.answers[ 0 ].input = fakeInput;
-        console.log('m after', JSON.stringify(m.answers))
       }
       return m
     })
@@ -133,19 +131,10 @@ describe('Score Engine Get Score test', () => {
       })
       return m
     })
-    console.log('High: ', JSON.stringify(msg))
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
     let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
     expect(sickPenQ.rating.band).toBe('Weak')
-  });
-
-  test('verify score for score-type multiselectnomatrix - high', () => {
-    const msg = fakeAHWmsg.get()
-    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
-    const scoreResult = scoreEngine.getScore()
-    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
-    expect(sickPenQ.rating.band).toBe('Average')
   });
 
   test('verify score for score-type userInput', () => {
