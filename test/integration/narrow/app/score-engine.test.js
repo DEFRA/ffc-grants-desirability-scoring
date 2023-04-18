@@ -1,5 +1,7 @@
 const { first } = require('lodash')
 const scoreData = require('../../../score-data.json')
+const ahwScoreData = require('../../../score-data-prod-calf-housing.json')
+
 describe('Score Engine test', () => {
   afterAll(async (done) => {
     require('applicationinsights').dispose()
@@ -14,6 +16,7 @@ describe('Score Engine test', () => {
 
 describe('Score Engine Get Score test', () => {
   const fakeMessage = require('./grant-scheme.js')
+  const fakeAHWmsg = require('./ahw-scheme.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
   test('createScoreEngine returns ScoreEngine', () => {
@@ -89,6 +92,93 @@ describe('Score Engine Get Score test', () => {
     expect(rating.score).toBe(30)
     expect(rating.band).toBe('Strong')
   })
+
+  test('verify score for score-type multiselectnomatrix - Average', () => {
+    const msg = fakeAHWmsg.get()
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Average')
+  });
+
+  test('verify score for score-type multiselectnomatrix - Strong', () => {
+    const fakeInput = [
+      { "key": "permanent-sick-pen-A1", "value": "A permanent sick pen" },
+      { "key": "permanent-sick-pen-A2", "value": "A separate air space" },
+      { "key": "permanent-sick-pen-A3", "value": "A permanent heat source" },
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'permanent-sick-pen') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Strong')
+  });
+
+  test('verify score for score-type multiselectnomatrix - Weak', () => {
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      m.answers.map(mi => {
+        const firstInputVal = mi.input[ 0 ]
+        firstInputVal.key = firstInputVal.key === 'permanent-sick-pen-A1' ? 'permanent-sick-pen-A4' : firstInputVal.key
+        mi.input[ 0 ] = firstInputVal
+        return mi
+      })
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Weak')
+  });
+
+  test('verify score for score-type userInput - Strong', () => {
+    const msg = fakeAHWmsg.get()
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
+    expect(floorQ.rating.band).toBe('Strong')
+  });
+
+  test('verify score for score-type userInput - Weak', () => {
+    const fakeInput = [
+      { "key": "2", "value": "0" },
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'floor-space') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
+    expect(floorQ.rating.band).toBe('Weak')
+  });
+
+  test('verify score for score-type userInput - Average', () => {
+    const fakeInput = [
+      { "key": "100", "value": "104" },
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'floor-space') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
+    expect(floorQ.rating.band).toBe('Average')
+  });
+
   test('verify score for score-type dualsum', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
