@@ -193,7 +193,7 @@ function answerValNoBand(question, answers) {
 
 // AHW living space scoring
 function inputQuestion(question, answers) {
-  const livingSpaceAnswer = answers.filter(x => x.key === 'floor-space')[0].input
+  const livingSpaceAnswer = answers.filter(x => x.key === question.key)[0].input
 
   const clavesNumber = Number(livingSpaceAnswer[0].value)
   const clavesPageKey = Number(livingSpaceAnswer[0].key)
@@ -211,10 +211,31 @@ function inputQuestion(question, answers) {
 // AHW multianswer scoring
 function handleMultiSelect(question, answers) {
   console.log('question: ', 'multi select', question);
-  console.log('answers: ', 'multi select', answers);
-  const answer = answers.filter(x => x.key === question.key)[ 0 ].input
-  const score = answer.reduce((total, answer) => answer.weight + total, 0) * question.weight
-  return new ScoreResult(score, null)
+  console.log('answers: ', 'multi select', JSON.stringify(answers));
+
+  const answerList = question.answer.filter(answer => first(
+    answers
+      .filter(selectedAnswer => selectedAnswer.key === question.key)).input
+    .some(givenAnswer => givenAnswer.key === answer.key))
+  console.log('answer', answerList)
+
+  
+  const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+  console.log('score', score)
+
+  const scoreBand = score / question.maxScore;
+
+  let band = bandMedium;
+
+  if (scoreBand >= 0.7) {
+    band = bandHigh;
+  } else if (scoreBand <= 0.3) {
+    band = bandLow;
+  }
+
+  console.log(band)
+
+  return new ScoreResult(score, band)
 }
 
 // Q16
