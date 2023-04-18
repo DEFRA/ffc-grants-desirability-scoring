@@ -166,26 +166,6 @@ module.exports = {
 							band: null,
 							importance: null
 						}
-					},
-					{
-						key: "automatic-calf-feeder",
-						answers: [
-							{
-								key: "automatic-calf-feeder",
-								title: "How many calves will you have per automatic feeder?",
-								input: [
-									{
-										key: "automatic-calf-feeder-A2",
-										value: "5 to 8"
-									}
-								]
-							}
-						],
-						rating: {
-							score: null,
-							band: null,
-							importance: null
-						}
 					}
 				],
 				overallRating: {

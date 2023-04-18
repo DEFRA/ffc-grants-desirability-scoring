@@ -72,7 +72,9 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
   
   if(!question) {
     console.log('missing key: ', qanswer.key);
+    throw new Error('missing key: ' + qanswer.key)
   }
+
   if (question.dependentValueQuestions) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
@@ -210,19 +212,12 @@ function inputQuestion(question, answers) {
 }
 // AHW multianswer scoring
 function handleMultiSelect(question, answers) {
-  console.log('question: ', 'multi select', question);
-  console.log('answers: ', 'multi select', JSON.stringify(answers));
-
   const answerList = question.answer.filter(answer => first(
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
-  console.log('answer', answerList)
-
   
   const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
-  console.log('score', score)
-
   const scoreBand = score / question.maxScore;
 
   let band = bandMedium;
@@ -232,9 +227,6 @@ function handleMultiSelect(question, answers) {
   } else if (scoreBand <= 0.3) {
     band = bandLow;
   }
-
-  console.log(band)
-
   return new ScoreResult(score, band)
 }
 

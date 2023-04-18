@@ -93,7 +93,54 @@ describe('Score Engine Get Score test', () => {
     expect(rating.band).toBe('Strong')
   })
 
-  test('verify score for score-type multiselectnomatrix', () => {
+  test('verify score for score-type multiselectnomatrix - Average', () => {
+    const msg = fakeAHWmsg.get()
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Average')
+  });
+
+  test('verify score for score-type multiselectnomatrix - Strong', () => {
+    const fakeInput = [
+      { "key": "permanent-sick-pen-A1", "value": "A permanent sick pen" },
+      { "key": "permanent-sick-pen-A2", "value": "A separate air space" },
+      { "key": "permanent-sick-pen-A3", "value": "A permanent heat source" },
+    ];
+    let msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'permanent-sick-pen') {
+        console.log('m', JSON.stringify(m.answers))
+        m.answers[ 0 ].input = fakeInput;
+        console.log('m after', JSON.stringify(m.answers))
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Strong')
+  });
+
+  test('verify score for score-type multiselectnomatrix - Weak', () => {
+    let msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      m.answers.map(mi => {
+        const firstInputVal = mi.input[ 0 ]
+        firstInputVal.key = firstInputVal.key === 'permanent-sick-pen-A1' ? 'permanent-sick-pen-A4' : firstInputVal.key
+        mi.input[ 0 ] = firstInputVal
+        return mi
+      })
+      return m
+    })
+    console.log('High: ', JSON.stringify(msg))
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Weak')
+  });
+
+  test('verify score for score-type multiselectnomatrix - high', () => {
     const msg = fakeAHWmsg.get()
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
