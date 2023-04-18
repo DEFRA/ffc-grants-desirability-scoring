@@ -93,11 +93,12 @@ describe('Score Engine Get Score test', () => {
     expect(rating.band).toBe('Strong')
   })
 
-  test.skip('verify score for score-type multiselectnomatrix', () => {
+  test('verify score for score-type multiselectnomatrix', () => {
     const msg = fakeAHWmsg.get()
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
-    expect(scoreResult).toEqual({})
+    let sickPenQ = first(scoreResult.desirability.questions.filter(q => q.key === 'permanent-sick-pen'))
+    expect(sickPenQ.rating.band).toBe('Average')
   });
 
   test('verify score for score-type userInput', () => {
