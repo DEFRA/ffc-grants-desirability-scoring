@@ -69,6 +69,10 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
 
+  
+  if(!question) {
+    console.log('missing key: ', qanswer.key);
+  }
   if (question.dependentValueQuestions) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
@@ -86,7 +90,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
 function calculateQScore(question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
   //
   let result = new ScoreResult('', '')
-  console.log('here: ', String(question.scoreType).toLowerCase());
+  // console.log('here: ', String(question.scoreType).toLowerCase());
   switch (String(question.scoreType).toLowerCase()) {
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
@@ -117,7 +121,7 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
       result = SingleValueWeightedMatrixScore(question, answers, allQanswers, sectionScoringData)
       break
     case 'userinput':
-      result = inputQuestion(question, answers, allQanswers, sectionScoringData)
+      result = inputQuestion(question, answers)
       break
     case 'multiselectnomatrix':
       result = handleMultiSelect(question, answers)
@@ -190,9 +194,9 @@ function answerValNoBand(question, answers) {
 // AHW living space scoring
 function inputQuestion(question, answers) {
   const livingSpaceAnswer = answers.filter(x => x.key === 'floor-space')[0].input
-  // console.log('needed', JSON.stringify(answers), livingSpaceAnswer[0])
-  const clavesNumber = livingSpaceAnswer[0].value
-  const clavesPageKey = livingSpaceAnswer[0].key
+
+  const clavesNumber = Number(livingSpaceAnswer[0].value)
+  const clavesPageKey = Number(livingSpaceAnswer[0].key)
   const score = (((clavesNumber - clavesPageKey) * 100) / 2) * 10;
   const scoreBand = score / question.maxScore;
 
@@ -206,7 +210,11 @@ function inputQuestion(question, answers) {
 }
 // AHW multianswer scoring
 function handleMultiSelect(question, answers) {
-  return {}
+  console.log('question: ', 'multi select', question);
+  console.log('answers: ', 'multi select', answers);
+  const answer = answers.filter(x => x.key === question.key)[ 0 ].input
+  const score = answer.reduce((total, answer) => answer.weight + total, 0) * question.weight
+  return new ScoreResult(score, null)
 }
 
 // Q16

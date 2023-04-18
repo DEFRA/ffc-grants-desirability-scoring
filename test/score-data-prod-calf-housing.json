@@ -258,7 +258,7 @@
 				}
 			},
 			{
-				"key": "living-space",
+				"key": "floor-space",
 				"title": "What will be the minimum living space per calf?",
 				"scoreType": "userInput",
 				"maxScore": 100,

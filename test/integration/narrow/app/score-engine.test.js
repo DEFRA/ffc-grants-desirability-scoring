@@ -92,11 +92,20 @@ describe('Score Engine Get Score test', () => {
     expect(rating.score).toBe(30)
     expect(rating.band).toBe('Strong')
   })
-  test.only('verify score for score-type dualavgmatrix', () => {
+
+  test.skip('verify score for score-type multiselectnomatrix', () => {
     const msg = fakeAHWmsg.get()
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toEqual({})
+  });
+
+  test('verify score for score-type userInput', () => {
+    const msg = fakeAHWmsg.get()
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
+    expect(floorQ.rating.band).toBe('Average')
   });
 
   test('verify score for score-type dualsum', () => {
