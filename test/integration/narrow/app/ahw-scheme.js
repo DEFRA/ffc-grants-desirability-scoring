@@ -115,7 +115,7 @@ module.exports = {
 								title: "How many calves will you have per automatic feeder?",
 								input: [
 									{
-										key: "automatic-calf-feeder",
+										key: "2",
 										value: "5"
 									}
 								]

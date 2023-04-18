@@ -69,12 +69,6 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
 
-  
-  if(!question) {
-    console.log('missing key: ', qanswer.key);
-    throw new Error('missing key: ' + qanswer.key)
-  }
-
   if (question.dependentValueQuestions) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
@@ -199,7 +193,7 @@ function inputQuestion(question, answers) {
 
   const clavesNumber = Number(livingSpaceAnswer[0].value)
   const clavesPageKey = Number(livingSpaceAnswer[0].key)
-  const score = (((clavesNumber - clavesPageKey) * 100) / 2) * 10;
+  const score = (((clavesNumber - clavesPageKey) * 100) / clavesNumber) * 10;
   const scoreBand = score / question.maxScore;
 
   let band = bandMedium;

@@ -107,7 +107,7 @@ describe('Score Engine Get Score test', () => {
       { "key": "permanent-sick-pen-A2", "value": "A separate air space" },
       { "key": "permanent-sick-pen-A3", "value": "A permanent heat source" },
     ];
-    let msg = fakeAHWmsg.get()
+    const msg = fakeAHWmsg.get()
     msg.desirability.questions.map(m => {
       if (m.key === 'permanent-sick-pen') {
         m.answers[ 0 ].input = fakeInput;
@@ -121,7 +121,7 @@ describe('Score Engine Get Score test', () => {
   });
 
   test('verify score for score-type multiselectnomatrix - Weak', () => {
-    let msg = fakeAHWmsg.get()
+    const msg = fakeAHWmsg.get()
     msg.desirability.questions.map(m => {
       m.answers.map(mi => {
         const firstInputVal = mi.input[ 0 ]
@@ -137,8 +137,42 @@ describe('Score Engine Get Score test', () => {
     expect(sickPenQ.rating.band).toBe('Weak')
   });
 
-  test('verify score for score-type userInput', () => {
+  test('verify score for score-type userInput - Strong', () => {
     const msg = fakeAHWmsg.get()
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
+    expect(floorQ.rating.band).toBe('Strong')
+  });
+
+  test('verify score for score-type userInput - Weak', () => {
+    const fakeInput = [
+      { "key": "2", "value": "0" },
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'floor-space') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
+    expect(floorQ.rating.band).toBe('Weak')
+  });
+
+  test('verify score for score-type userInput - Average', () => {
+    const fakeInput = [
+      { "key": "100", "value": "104" },
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'floor-space') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
     let floorQ = first(scoreResult.desirability.questions.filter(q => q.key === 'floor-space'))
