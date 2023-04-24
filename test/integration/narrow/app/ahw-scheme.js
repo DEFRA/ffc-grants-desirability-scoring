@@ -48,26 +48,6 @@ module.exports = {
 						}
 					},
 					{
-						key: "number-of-calves",
-						answers: [
-							{
-								key: "number-of-calves",
-								title: "What will be the maximum number of calves in the calf housing?",
-								input: [
-									{
-										key: "number-of-calves-A2",
-										value: "51 to 100"
-									}
-								]
-							}
-						],
-						rating: {
-							score: null,
-							band: null,
-							importance: null
-						}
-					},
-					{
 						key: "automatic-calf-feeder",
 						answers: [
 							{
