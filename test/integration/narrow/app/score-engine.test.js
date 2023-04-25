@@ -147,7 +147,7 @@ describe('Score Engine Get Score test', () => {
 
   test('verify score for score-type userInput - Weak', () => {
     const fakeInput = [
-      { "key": "2", "value": "0" },
+      { "key": "3", "value": "3" },
     ];
     const msg = fakeAHWmsg.get()
     msg.desirability.questions.map(m => {
@@ -164,7 +164,7 @@ describe('Score Engine Get Score test', () => {
 
   test('verify score for score-type userInput - Average', () => {
     const fakeInput = [
-      { "key": "100", "value": "104" },
+      { "key": "3", "value": "3.3" },
     ];
     const msg = fakeAHWmsg.get()
     msg.desirability.questions.map(m => {

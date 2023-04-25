@@ -169,14 +169,14 @@ function dualSumWeightAvgBand(question, answers) {
 //   return new ScoreResult(score, band)
 // }
 
-function getDependantValue(question, answers) {
-  const score = first(question.answer
-    .filter(x =>
-      first(answers).input.some(y => y.key === x.key)
-    )).weight
-  console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
-  return new ScoreResult(score, null)
-}
+// function getDependantValue(question, answers) {
+//   const score = first(question.answer
+//     .filter(x =>
+//       first(answers).input.some(y => y.key === x.key)
+//     )).weight
+//   console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
+//   return new ScoreResult(score, null)
+// }
 
 // water source scoring
 function answerValNoBand(question, answers) {
@@ -193,15 +193,22 @@ function inputQuestion(question, answers) {
 
   const clavesNumber = Number(livingSpaceAnswer[0].value)
   const clavesPageKey = Number(livingSpaceAnswer[0].key)
-  const score = (((clavesNumber - clavesPageKey) * 100) / clavesNumber) * 10;
-  const scoreBand = score / question.maxScore;
+  let score = (((clavesNumber - clavesPageKey) * 100) / clavesPageKey) * 10;
+
+  if (score >= question.maxScore) {
+    score = question.maxScore
+  }
 
   let band = bandMedium;
-  if (scoreBand >= 0.7) {
-    band = bandHigh;
-  } else if (scoreBand <= 0.3) {
-    band = bandLow;
-  }
+  let scoreBand = score / question.maxScore;
+
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+      
   return new ScoreResult(score, band);
 }
 // AHW multianswer scoring
@@ -212,15 +219,17 @@ function handleMultiSelect(question, answers) {
     .some(givenAnswer => givenAnswer.key === answer.key))
   
   const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
-  const scoreBand = score / question.maxScore;
 
   let band = bandMedium;
+  let scoreBand = score / question.maxScore;
 
-  if (scoreBand >= 0.7) {
-    band = bandHigh;
-  } else if (scoreBand <= 0.3) {
-    band = bandLow;
-  }
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+
   return new ScoreResult(score, band)
 }
 
