@@ -137,6 +137,40 @@ describe('Score Engine Get Score test', () => {
     expect(sickPenQ.rating.band).toBe('Weak')
   });
 
+  test('verify score for score-type boolvaluescore - Strong', () => {
+    const fakeInput = [
+      { "key": "housing-A1", "value": "Yes" }
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'housing') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let housingQ = first(scoreResult.desirability.questions.filter(q => q.key === 'housing'))
+    expect(housingQ.rating.band).toBe('Strong')
+  });
+
+  test('verify score for score-type boolvaluescore - Weak', () => {
+    const fakeInput = [
+      { "key": "housing-A2", "value": "No" }
+    ];
+    const msg = fakeAHWmsg.get()
+    msg.desirability.questions.map(m => {
+      if (m.key === 'housing') {
+        m.answers[ 0 ].input = fakeInput;
+      }
+      return m
+    })
+    const scoreEngine = new ScoreEngine(msg, ahwScoreData)
+    const scoreResult = scoreEngine.getScore()
+    let housingQ = first(scoreResult.desirability.questions.filter(q => q.key === 'housing'))
+    expect(housingQ.rating.band).toBe('Weak')
+  });
+
   test('verify score for score-type userInput - Strong', () => {
     const msg = fakeAHWmsg.get()
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
