@@ -122,6 +122,9 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'multiselectnomatrix':
       result = handleMultiSelect(question, answers)
       break;
+    case 'boolvaluescore':
+      result = boolValueScore(question, answers)
+      break
     case 'dualsumnopercentband':
       result = dualSumNoPercentBand(question, answers)
       break
@@ -221,6 +224,27 @@ function handleMultiSelect(question, answers) {
   } else if (scoreBand <= 0.3) {
     band = bandLow;
   }
+  return new ScoreResult(score, band)
+}
+
+// AHW bool question
+function boolValueScore(question, answers) {
+  const answerList = question.answer.filter(answer => first(
+    answers
+      .filter(selectedAnswer => selectedAnswer.key === question.key)).input
+    .some(givenAnswer => givenAnswer.key === answer.key))
+  
+  const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+
+  let band
+
+  if (score == first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  else {
+    band = bandHigh
+  }
+
   return new ScoreResult(score, band)
 }
 
