@@ -28,7 +28,7 @@
 				"maxScore": 200,
 				"weight": 14.76,
 				"showResult": true,
-				"scoreType": "BoolWeightScore",
+				"scoreType": "BoolvalueScore",
 				"answer": [
 					{
 						"key": "housing-A1",
