@@ -28,7 +28,7 @@
 				"maxScore": 200,
 				"weight": 14.76,
 				"showResult": true,
-				"scoreType": "BoolvalueScore",
+				"scoreType": "BoolvalueWeightScore",
 				"answer": [
 					{
 						"key": "housing-A1",
@@ -67,7 +67,7 @@
 				"maxScore": 70,
 				"weight": 5.17,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "calf-group-size-A1",
@@ -121,7 +121,7 @@
 				"maxScore": 150,
 				"weight": 11.07,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "moisture-control-A1",
@@ -175,7 +175,7 @@
 				"maxScore": 175,
 				"weight": 12.92,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "permanent-sick-pen-A1",
@@ -260,7 +260,7 @@
 				"maxScore": 30,
 				"weight": 2.21,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "automatic-calf-feeder-A1",
@@ -319,7 +319,7 @@
 				"maxScore": 150,
 				"weight": 11.07,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "environmental-impact-A1",
@@ -368,7 +368,7 @@
 				"maxScore": 220,
 				"weight": 16.24,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "sustainable-materials-A1",
@@ -442,7 +442,7 @@
 				"maxScore": 135,
 				"weight": 9.96,
 				"showResult": true,
-				"scoreType": "MultiSelectNoMatrix",
+				"scoreType": "multiSelectSumThenWeight",
 				"answer": [
 					{
 						"key": "introducing-innovation-A1",

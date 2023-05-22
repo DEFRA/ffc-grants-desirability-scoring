@@ -120,11 +120,11 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'userinput':
       result = inputQuestion(question, answers)
       break
-    case 'multiselectnomatrix':
-      result = handleMultiSelect(question, answers)
+    case 'multiselectsumthenweight':
+      result = multiSelectSumThenWeight(question, answers)
       break;
-    case 'boolvaluescore':
-      result = boolValueScore(question, answers)
+    case 'boolvalueweightscore':
+      result = boolValueWeightScore(question, answers)
       break
     case 'dualsumnopercentband':
       result = dualSumNoPercentBand(question, answers)
@@ -215,8 +215,8 @@ function inputQuestion(question, answers) {
       
   return new ScoreResult(score, band);
 }
-// AHW multianswer scoring
-function handleMultiSelect(question, answers) {
+// AHW - Sum answers for band, then multiply by weight for overall score
+function multiSelectSumThenWeight(question, answers) {
   const answerList = question.answer.filter(answer => first(
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
@@ -240,8 +240,8 @@ function handleMultiSelect(question, answers) {
   return new ScoreResult(score, band)
 }
 
-// AHW bool question
-function boolValueScore(question, answers) {
+// AHW - value of answer for band, then multiply by weight for overall score
+function boolValueWeightScore(question, answers) {
   const answerList = question.answer.filter(answer => first(
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input

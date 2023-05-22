@@ -93,7 +93,7 @@ describe('Score Engine Get Score test', () => {
     expect(rating.band).toBe('Strong')
   })
 
-  test('verify score for score-type multiselectnomatrix - Average', () => {
+  test('verify score for score-type multiSelectSumThenWeight - Average', () => {
     const msg = fakeAHWmsg.get()
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
@@ -101,7 +101,7 @@ describe('Score Engine Get Score test', () => {
     expect(sickPenQ.rating.band).toBe('Average')
   });
 
-  test('verify score for score-type multiselectnomatrix - Strong', () => {
+  test('verify score for score-type multiSelectSumThenWeight - Strong', () => {
     const fakeInput = [
       { "key": "permanent-sick-pen-A1", "value": "A permanent sick pen" },
       { "key": "permanent-sick-pen-A2", "value": "A separate air space" },
@@ -120,7 +120,7 @@ describe('Score Engine Get Score test', () => {
     expect(sickPenQ.rating.band).toBe('Strong')
   });
 
-  test('verify score for score-type multiselectnomatrix - Weak', () => {
+  test('verify score for score-type multiSelectSumThenWeight - Weak', () => {
     const msg = fakeAHWmsg.get()
     msg.desirability.questions.map(m => {
       m.answers.map(mi => {
@@ -137,7 +137,7 @@ describe('Score Engine Get Score test', () => {
     expect(sickPenQ.rating.band).toBe('Weak')
   });
 
-  test('verify score for score-type boolvaluescore - Strong', () => {
+  test('verify score for score-type boolvalueweightscore - Strong', () => {
     const fakeInput = [
       { "key": "housing-A1", "value": "Yes" }
     ];
@@ -154,7 +154,7 @@ describe('Score Engine Get Score test', () => {
     expect(housingQ.rating.band).toBe('Strong')
   });
 
-  test('verify score for score-type boolvaluescore - Weak', () => {
+  test('verify score for score-type boolvalueweightscore - Weak', () => {
     const fakeInput = [
       { "key": "housing-A2", "value": "No" }
     ];
