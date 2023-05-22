@@ -33,6 +33,7 @@ class ScoreEngine {
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     let bandScore = actualScore
     const overallRating = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
+
     if (overallRating.toLowerCase() === 'percentile') { bandScore = (actualScore / maxScore * 100) }
 
     // remove noShowResult questions
@@ -221,7 +222,8 @@ function handleMultiSelect(question, answers) {
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
   
-  const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+  
 
   let band = bandMedium;
   let scoreBand = score / question.maxScore;
@@ -233,6 +235,8 @@ function handleMultiSelect(question, answers) {
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
 
+  score = score * question.weight
+
   return new ScoreResult(score, band)
 }
 
@@ -243,7 +247,7 @@ function boolValueScore(question, answers) {
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
   
-  const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
 
   let band
 
@@ -253,6 +257,8 @@ function boolValueScore(question, answers) {
   else {
     band = bandHigh
   }
+
+  score = score * question.weight
 
   return new ScoreResult(score, band)
 }
