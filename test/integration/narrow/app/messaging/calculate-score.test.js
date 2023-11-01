@@ -25,8 +25,12 @@ describe('Calculate Score test', () => {
   const scoreEngine = new ScoreEngine('', '')
   scoreEngine.getScore = jest.fn()
 
-  const msg = {
-    body: '',
+  let msg = {
+    body: {
+      grantScheme: {
+        key: ''
+      }
+    },
     correlationId: '1234567890',
     applicationProperties: {
       type: 'uk.gov.ffc.grants.desirability.calculate'
@@ -55,6 +59,46 @@ describe('Calculate Score test', () => {
     expect(calculateScoreReceiver.abandonMessage).toHaveBeenCalledTimes(1)
   })
   test('createScoreEngine NULL score-data returns error n handle', async () => {
+    scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
+      return { data: null } // Just to make error passing object in place of string.
+    })
+    const calScore = require('../../../../../app/messaging/calculate-score')
+    await expect(calScore(msg, calculateScoreReceiver)).resolves.toBe(undefined)
+    expect(appInsights.logException).toHaveBeenCalledTimes(1)
+    expect(calculateScoreReceiver.abandonMessage).toHaveBeenCalledTimes(1)
+  })
+
+  test('addvalue type works', async () => {
+    msg.applicationProperties.type = 'uk.gov.ffc.grants.addval.desirability.calculate'
+
+    scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
+      return { data: null } // Just to make error passing object in place of string.
+    })
+    const calScore = require('../../../../../app/messaging/calculate-score')
+    await expect(calScore(msg, calculateScoreReceiver)).resolves.toBe(undefined)
+    expect(appInsights.logException).toHaveBeenCalledTimes(1)
+    expect(calculateScoreReceiver.abandonMessage).toHaveBeenCalledTimes(1)
+  })
+
+  test('prod robotics type works', async () => {
+    msg.applicationProperties.type = 'uk.gov.ffc.grants.prod.desirability.calculate'
+
+    msg.body.grantScheme.key = 'PROD02'
+
+    scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
+      return { data: null } // Just to make error passing object in place of string.
+    })
+    const calScore = require('../../../../../app/messaging/calculate-score')
+    await expect(calScore(msg, calculateScoreReceiver)).resolves.toBe(undefined)
+    expect(appInsights.logException).toHaveBeenCalledTimes(1)
+    expect(calculateScoreReceiver.abandonMessage).toHaveBeenCalledTimes(1)
+  })
+
+  test('prod solar type works', async () => {
+    msg.applicationProperties.type = 'uk.gov.ffc.grants.prod.desirability.calculate'
+
+    msg.body.grantScheme.key = 'PROD01'
+
     scoreDataRepository.getScoreData = jest.fn(async (schemeType) => {
       return { data: null } // Just to make error passing object in place of string.
     })
