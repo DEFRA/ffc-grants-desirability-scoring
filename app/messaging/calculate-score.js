@@ -13,7 +13,7 @@ module.exports = async function (msg, calculateScoreReceiver) {
     switch (scoreMsgType) {
       case '.prod.desirability.calculate':
         senderMsgType = msgCfg.desirabilityProductivityScoreMsgType
-        scoreDataType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Slurry' : 'Prod Grant Robotics'
+        scoreDataType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Solar' : 'Prod Grant Robotics'
         break
       case '.addval.desirability.calculate':
         senderMsgType = msgCfg.desirabilityAddingValueScoreMsgType
