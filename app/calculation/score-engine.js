@@ -108,6 +108,9 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'dualsum':
       result = dualSum(question, answers)
       break
+    case 'dualsumcap':
+      result = dualSumCap(question, answers)
+      break
     case 'boolweightscore':
       result = boolWeightScore(question, answers)
       break
@@ -421,6 +424,30 @@ function dualSum(question, answers) {
       .filter(itemX => first(answers).input
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
+
+  const scoreBand = score / question.maxScore
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+
+  return new ScoreResult(score, band)
+}
+
+function dualSumCap(question, answers) {
+  const score =
+    question.answer
+      .filter(itemX => first(answers).input
+        .some(itemY => itemY.key === itemX.key))
+      .reduce((total, answer) => answer.weight + total, 0) * question.weight
+  
+  if (score > question.maxScore ) {
+    score === question.maxScore
+  }
 
   const scoreBand = score / question.maxScore
 
