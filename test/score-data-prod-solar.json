@@ -1,7 +1,7 @@
 {
     "grantScheme": {
         "key": "PROD001",
-        "name": "Prod Grant Slurry"
+        "name": "Prod Grant Solar"
     },
     "desirability": {
         "overallRatingCalcType": "NA",
