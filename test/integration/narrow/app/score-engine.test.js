@@ -1,6 +1,7 @@
 const { first } = require('lodash')
 const scoreData = require('../../../score-data.json')
 const ahwScoreData = require('../../../score-data-prod-calf-housing.json')
+const solarScoreData = require('../../../score-data-prod-solar.json')
 
 describe('Score Engine test', () => {
   afterAll(async (done) => {
@@ -17,6 +18,7 @@ describe('Score Engine test', () => {
 describe('Score Engine Get Score test', () => {
   const fakeMessage = require('./grant-scheme.js')
   const fakeAHWmsg = require('./ahw-scheme.js')
+  const fakeSolarmsg = require('./grant-scheme-prod-solar-strong.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
   test('createScoreEngine returns ScoreEngine', () => {
@@ -254,6 +256,35 @@ describe('Score Engine Get Score test', () => {
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'productivity')).rating
     expect(rating.score).toBe(1.5)
     expect(rating.band).toBe('Average')
+  })
+
+  test('verify score for score-type dualsumcap', () => {
+    const scoreEngine = new ScoreEngine(fakeSolarmsg.get(), solarScoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
+    expect(rating.score).toBe(80)
+    expect(rating.band).toBe('Strong')
+  })
+  test('verify score for score-type dualsumcap Medium', () => {
+    const msg = fakeSolarmsg.get()
+ 
+    solarScoreData.desirability.questions[1].answer[0].weight = 1
+
+    const scoreEngine = new ScoreEngine(msg, solarScoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
+    expect(rating.score).toBe(40)
+    expect(rating.band).toBe('Average')
+  })
+  test('verify score for score-type dualsumcap Low', () => {
+    const msg = fakeSolarmsg.get()
+
+    solarScoreData.desirability.questions[1].answer[0].weight = 0.03
+    const scoreEngine = new ScoreEngine(msg, solarScoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
+    expect(rating.score).toBe(1.2)
+    expect(rating.band).toBe('Weak')
   })
   test('verify score for score-type boolweightscore', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)

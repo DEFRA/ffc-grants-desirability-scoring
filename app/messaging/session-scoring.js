@@ -19,7 +19,7 @@ const processScoring = async (msg, scoreReciever) => {
     } else if (msgType === '.fetch.water.score.request') {
       grantType = 'Water Grant' // change this when applying scoring engine
     } else if (msgType === '.fetch.prod.score.request') {
-      grantType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Slurry' : 'Prod Grant Robotics'
+      grantType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Solar' : 'Prod Grant Robotics'
       console.log('[MADE IT TO HERE', grantType)
     }
 

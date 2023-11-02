@@ -3,7 +3,7 @@ module.exports = {
     {
       grantScheme: {
         key: 'PROD01',
-        name: 'Prod Grant Slurry'
+        name: 'Prod Grant Solar'
       },
       desirability: {
         questions: [

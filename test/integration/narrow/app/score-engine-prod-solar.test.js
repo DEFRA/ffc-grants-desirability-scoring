@@ -1,4 +1,4 @@
-const scoreData = require('../../../score-data-prod-slurry.json')
+const scoreData = require('../../../score-data-prod-solar.json')
 describe('Score Engine test', () => {
   afterAll(async (done) => {
     require('applicationinsights').dispose()
@@ -12,8 +12,8 @@ describe('Score Engine test', () => {
 })
 
 describe('Prod Slurry - Score Engine Get Score test', () => {
-  const fakeMessage = require('./grant-scheme-prod-slurry-average.js')
-  const fakeMessageHigh = require('./grant-scheme-prod-slurry-strong.js')
+  const fakeMessage = require('./grant-scheme-prod-solar-average.js')
+  const fakeMessageHigh = require('./grant-scheme-prod-solar-strong.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
   test('Prod Slurry - createScoreEngine returns ScoreEngine', () => {
@@ -31,7 +31,7 @@ describe('Prod Slurry - Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessageHigh.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(90)
+    expect(scoreResult.desirability.overallRating.score).toBe(100)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 })
