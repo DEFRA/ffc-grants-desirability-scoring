@@ -132,6 +132,9 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'dualsumnopercentband':
       result = dualSumNoPercentBand(question, answers)
       break
+    case 'multiinputitemcount':
+      result = multiInputItemCount(question, answers)
+      break
   }
   return result
 }
@@ -264,6 +267,40 @@ function boolValueWeightScore(question, answers) {
   score = score * question.weight
 
   return new ScoreResult(score, band)
+}
+
+// producitivity robotics eligibility criteria
+function multiInputItemCount(question, answers) {
+
+  const answerListLength = answers.length
+  let total = 0
+  for (answerObject in answers) {
+    let answersList = question.answer.filter(answer => first(
+      answers
+        .filter(selectedAnswer => selectedAnswer.key === question.key)).input
+      .some(givenAnswer => givenAnswer.key === answer.key))
+
+    let answerScore = answersList.reduce((total, answersList) => answersList.weight + total, 0)
+
+    total = total + question.scoreData.scorePerItemCount.filter(itemScore => itemScore.key === answerScore).value
+  }
+
+  let score = total / answerListLength
+
+  let band = bandMedium;
+  let scoreBand = score / question.maxScore;
+
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+
+  score = score * question.weight
+
+  return new ScoreResult(score, band)
+
 }
 
 // Q16
