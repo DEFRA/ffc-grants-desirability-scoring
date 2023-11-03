@@ -2,6 +2,7 @@ const { first } = require('lodash')
 const scoreData = require('../../../score-data.json')
 const ahwScoreData = require('../../../score-data-prod-calf-housing.json')
 const solarScoreData = require('../../../score-data-prod-solar.json')
+const roboticsScoreData = require('../../../score-data-prod-robotics.json')
 
 describe('Score Engine test', () => {
   afterAll(async (done) => {
@@ -19,6 +20,7 @@ describe('Score Engine Get Score test', () => {
   const fakeMessage = require('./grant-scheme.js')
   const fakeAHWmsg = require('./ahw-scheme.js')
   const fakeSolarmsg = require('./grant-scheme-prod-solar-strong.js')
+  const fakeRoboticsmsg = require('./grant-scheme-prod-robotics-strong.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
   test('createScoreEngine returns ScoreEngine', () => {
@@ -286,6 +288,39 @@ describe('Score Engine Get Score test', () => {
     expect(rating.score).toBe(1.2)
     expect(rating.band).toBe('Weak')
   })
+
+  test('verify score for score-type multiInputItemCount', () => {
+    const scoreEngine = new ScoreEngine(fakeRoboticsmsg.get(), roboticsScoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
+    expect(rating.score).toBe('100')
+    expect(rating.band).toBe('Strong')
+  })
+  test('verify score for score-type multiInputItemCount Medium', () => {
+    const msg = fakeRoboticsmsg.get()
+ 
+    roboticsScoreData.desirability.questions[5].answer[0].weight = 0
+
+    const scoreEngine = new ScoreEngine(msg, roboticsScoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
+    expect(rating.score).toBe(67)
+    expect(rating.band).toBe('Average')
+  })
+  test('verify score for score-type multiInputItemCount Low', () => {
+    const msg = fakeRoboticsmsg.get()
+
+    roboticsScoreData.desirability.questions[5].answer[0].weight = 0
+    roboticsScoreData.desirability.questions[5].answer[1].weight = 0
+
+    const scoreEngine = new ScoreEngine(msg, roboticsScoreData)
+    const scoreResult = scoreEngine.getScore()
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
+    expect(rating.score).toBe(34)
+    expect(rating.band).toBe('Weak')
+  })
+
+  
   test('verify score for score-type boolweightscore', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()

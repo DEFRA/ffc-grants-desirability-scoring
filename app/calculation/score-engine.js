@@ -270,19 +270,22 @@ function boolValueWeightScore(question, answers) {
 }
 
 // producitivity robotics eligibility criteria
-function multiInputItemCount(question, answers) {
+function multiInputItemCount(question, allAnswers) {
 
-  const answerListLength = answers.length
+  const answerListLength = allAnswers.length
   let total = 0
-  for (answerObject in answers) {
+  for (answerObject in allAnswers) {
+
     let answersList = question.answer.filter(answer => first(
-      answers
-        .filter(selectedAnswer => selectedAnswer.key === question.key)).input
+      allAnswers[answerObject].answers
+        .filter(selectedAnswer => selectedAnswer.key === answer.key)).input
       .some(givenAnswer => givenAnswer.key === answer.key))
 
     let answerScore = answersList.reduce((total, answersList) => answersList.weight + total, 0)
 
-    total = total + question.scoreData.scorePerItemCount.filter(itemScore => itemScore.key === answerScore).value
+    let lengthTotal = question.scoreData.scorePerItemCount.filter(itemScore => itemScore.key === answerScore)
+
+    total = total + lengthTotal[0].value
   }
 
   let score = total / answerListLength
