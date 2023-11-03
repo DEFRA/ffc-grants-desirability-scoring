@@ -293,7 +293,7 @@ describe('Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeRoboticsmsg.get(), roboticsScoreData)
     const scoreResult = scoreEngine.getScore()
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
-    expect(rating.score).toBe('100')
+    expect(rating.score).toBe(100)
     expect(rating.band).toBe('Strong')
   })
   test('verify score for score-type multiInputItemCount Medium', () => {
