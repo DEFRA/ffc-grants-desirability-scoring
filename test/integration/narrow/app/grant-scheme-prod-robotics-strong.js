@@ -91,6 +91,64 @@ module.exports = {
                 ]
               }
             ]
+          },
+          {
+            key: 'eligibility-criteria',
+            answers: [
+              {
+                answers: [
+                  {
+                    key: 'eligibility-criteria',
+                    value: 'Has sensing system that can understand its environment',
+                    input: [
+                      {
+                        key: 'eligibility-criteria-A1',
+                        value: 'Has sensing system that can understand its environment'
+                      },
+                      {
+                        key: 'eligibility-criteria-A4',
+                        value: 'Works in a continuous loop'
+                      },
+                      {
+                        key: 'eligibility-criteria-A2',
+                        value: 'Makes decisions and plans'
+                      },
+                      {
+                        key: 'eligibility-criteria-A3',
+                        value: 'Can control its actuators (the devices that move robotic joints)'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                answers: [
+                  {
+                    key: 'eligibility-criteria',
+                    value: 'Makes decisions and plans',
+                    input: [
+                      {
+                        key: 'eligibility-criteria-A2',
+                        value: 'Makes decisions and plans'
+                      },
+                      {
+                        key: 'eligibility-criteria-A3',
+                        value: 'Can control its actuators (the devices that move robotic joints)'
+                      },
+                      {
+                        key: 'eligibility-criteria-A1',
+                        value: 'Has sensing system that can understand its environment'
+                      },
+                      {
+                        key: 'eligibility-criteria-A4',
+                        value: 'Works in a continuous loop'
+                      }
+                    ]
+                  }
+                ]
+              }
+
+            ]
           }
         ],
         overallRating: {

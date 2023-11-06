@@ -242,7 +242,75 @@
                         "type": "numeric"
                     }]
                 }
-            }
+            },
+            {
+                "key": "eligibility-criteria",
+                "title": "Eligibility criteria",
+                "maxScore": 100,
+                "weight": 1,
+                "showResult": true,
+                "scoreType": "multiInputItemCount",
+                "answer": [
+                    {
+                        "key": "eligibility-criteria-A1",
+                        "weight": 1,
+                        "value": "Has sensing system that can understand its environment"
+                    },
+                    {
+                        "key": "eligibility-criteria-A2",
+                        "weight": 1,
+                        "value": "Makes decisions and plans"
+                    },
+                    {
+                        "key": "eligibility-criteria-A3",
+                        "weight": 1,
+                        "value": "Can control its actuators (the devices that move robotic joints)"
+                    },
+                    {
+                        "key": "eligibility-criteria-A4",
+                        "weight": 1,
+                        "value": "Works in a continuous loop"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0.66",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": null,
+                        "type": "else"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "1",
+                        "type": "numeric"
+                    }],
+                    "scorePerItemCount": [
+                        {
+                            "key": 2,
+                            "value": 34
+                        },
+                        {
+                            "key": 3,
+                            "value": 67
+                        },
+                        {
+                            "key": 4,
+                            "value": 100
+                        }
+                    ]
+                }
+            }    
+
         ],
         "overallRating": {
             "score": null,

@@ -75,7 +75,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
   }
 
   if (question.dependentQuestions) {
-    const answers = allQanswers.filter(x => question.dependentQuestions.some(d => d === x.key))
+    const answers = allQanswers.filter(answer => question.dependentQuestions.some(dependantQues => dependantQues === answer.key))
     answers.forEach(dqa => {
       dependentQuestionRatingScore.push(dqa.rating.score)
     })
@@ -131,6 +131,9 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
       break
     case 'dualsumnopercentband':
       result = dualSumNoPercentBand(question, answers)
+      break
+    case 'multiinputitemcount':
+      result = multiInputItemCount(question, answers)
       break
   }
   return result
@@ -206,8 +209,8 @@ function inputQuestion(question, answers) {
     score = question.maxScore
   }
 
-  let band = bandMedium;
-  let scoreBand = score / question.maxScore;
+  let band = bandMedium
+  let scoreBand = score / question.maxScore
 
   if (scoreBand <= first(
     question.scoreData.scoreBand
@@ -215,7 +218,6 @@ function inputQuestion(question, answers) {
   if (scoreBand >= first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
-      
   return new ScoreResult(score, band);
 }
 // AHW - Sum answers for band, then multiply by weight for overall score
@@ -249,7 +251,7 @@ function boolValueWeightScore(question, answers) {
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
-  
+
   let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
 
   let band
@@ -264,6 +266,40 @@ function boolValueWeightScore(question, answers) {
   score = score * question.weight
 
   return new ScoreResult(score, band)
+}
+
+// producitivity robotics eligibility criteria
+function multiInputItemCount(question, allAnswers) {
+  const answerListLength = allAnswers.length
+  let total = 0
+  // for (answerObject in allAnswers)
+  allAnswers.forEach((answerObject) => {
+    const answersList = question.answer.filter(answer => first(
+      answerObject.answers
+        .filter(selectedAnswer => selectedAnswer.key === question.key)).input
+      .some(givenAnswer => givenAnswer.key === answer.key))
+
+    const answerScore = answersList.reduce((total, answersList) => answersList.weight + total, 0)
+    const lengthTotal = question.scoreData.scorePerItemCount.filter(itemScore => itemScore.key === answerScore)
+    total = total + lengthTotal[0].value
+  })
+
+  let score = total / answerListLength
+
+  let band = bandMedium
+  let scoreBand = score / question.maxScore
+
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+
+  score = score * question.weight
+
+  return new ScoreResult(score, band)
+
 }
 
 // Q16
