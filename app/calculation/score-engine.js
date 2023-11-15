@@ -475,14 +475,14 @@ function dualSum(question, answers) {
 }
 
 function dualSumCap(question, answers) {
-  const score =
+  let score =
     question.answer
       .filter(itemX => first(answers).input
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
   
   if (score > question.maxScore ) {
-    score === question.maxScore
+    score = question.maxScore
   }
 
   const scoreBand = score / question.maxScore
