@@ -261,6 +261,8 @@ describe('Score Engine Get Score test', () => {
   })
 
   test('verify score for score-type dualsumcap', () => {
+    solarScoreData.desirability.questions[1].answer[0].weight = 1000
+
     const scoreEngine = new ScoreEngine(fakeSolarmsg.get(), solarScoreData)
     const scoreResult = scoreEngine.getScore()
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
