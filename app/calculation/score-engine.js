@@ -284,7 +284,7 @@ function multiInputItemCount(question, allAnswers) {
     total = total + lengthTotal[0].value
   })
 
-  let score = total / answerListLength
+  let score = answerListLength > 0 ? total / answerListLength : 100
 
   let band = bandMedium
   let scoreBand = score / question.maxScore
