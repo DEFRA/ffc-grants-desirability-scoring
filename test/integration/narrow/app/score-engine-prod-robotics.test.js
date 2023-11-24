@@ -35,11 +35,20 @@ describe('Prod Robotics - Score Engine Get Score test', () => {
     expect(scoreResult.desirability.overallRating.score).toBe(200)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
+
   test('Prod Robotics - createScoreEngine Call Get Score returns ScoreResult Weak', () => {
     const scoreEngine = new ScoreEngine(fakeMessageLow.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
     expect(scoreResult.desirability.overallRating.score).toBe(40)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
+  })
+
+  test('Prod Robotics with no eligibility - createScoreEngine Call Get Score returns ScoreResult Strong', () => {
+    const scoreEngine = new ScoreEngine(fakeMessageStrong.noEligGet(), scoreData)
+    const scoreResult = scoreEngine.getScore()
+    expect(scoreResult).toBeDefined()
+    expect(scoreResult.desirability.overallRating.score).toBe(200)
+    expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 })
