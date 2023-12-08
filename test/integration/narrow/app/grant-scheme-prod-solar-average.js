@@ -1,47 +1,61 @@
 module.exports = {
-  get: () => (
+  get: () => ({
+    grantScheme:
     {
-      grantScheme: {
-        key: 'PROD01',
-        name: 'Prod Grant Solar'
-      },
-      desirability: {
-        questions: [
-          {
-            key: 'project-subject',
-            answers: [
-              {
-                key: 'project-subject-A2',
-                value: 'Slurry acidification',
-                input: [
-                  {
-                    key: 'project-subject-A2',
-                    value: 'Slurry acidification'
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            key: 'project-impacts',
-            answers: [
-              {
-                key: 'project-impacts-A2',
-                value: 'Increasing Acidification',
-                input: [
-                  {
-                    key: 'project-impacts-A2',
-                    value: 'Increasing Acidification'
-                  }
-                ]
-              }
-            ]
+      key: 'PROD01',
+      name: 'Prod Grant Solar'
+    },
+    desirability: {
+      questions: [
+        {
+          key: 'solar-technologies',
+          answers: [
+            {
+              key: 'solar-technologies',
+              title: 'Solar technology',
+              input: [
+                {
+                  key: 'solar-technologies-A2',
+                  value: 'Solar PV panels'
+                }, {
+                  key: 'solar-technologies-A5',
+                  value: 'A battery'
+                }]
+            }],
+          rating: {
+            score: null, band: null, importance: null
           }
-        ],
-        overallRating: {
-          score: null,
-          band: null
-        }
-      }
-    })
+        },
+        {
+          key: 'solar-output',
+          answers: [
+            {
+              key: 'solar-output',
+              title: 'Solar PV system size',
+              input: [
+                {
+                  key: 'solar-output-A5',
+                  value: 'More than 201kW'
+                }]
+            }],
+          rating:
+            { score: null, band: null, importance: null }
+        },
+        {
+          key: 'agricultural-sector-solar',
+          answers: [
+            {
+              key: 'agricultural-sector-solar',
+              title: 'Agricultural Sector',
+              input: [
+                {
+                  key: 'agricultural-sector-solar-A8',
+                  value: 'Sheep'
+                }]
+            }],
+          rating: { score: null, band: null, importance: null }
+        }],
+      overallRating: { score: null, band: null }
+    }
+  })
 }

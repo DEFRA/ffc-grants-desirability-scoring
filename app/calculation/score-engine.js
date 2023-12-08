@@ -147,7 +147,7 @@ function dualSumWeightAvgBand(question, answers) {
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
   score = score / first(answers).input.length
-  const scoreBand = score
+  const scoreBand = score / question.maxScore // to calculate banding we have to divide by max score
 
   let band = bandMedium
   if (question.scoreData.scoreBand
@@ -253,18 +253,16 @@ function boolValueWeightScore(question, answers) {
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
 
-  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.weight
 
   let band
-
-  if (score == first(
+  const bandScore = score / question.maxScore
+  if (score === first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandLow)).value) { band = bandLow }
   else {
     band = bandHigh
   }
-
-  score = score * question.weight
 
   return new ScoreResult(score, band)
 }

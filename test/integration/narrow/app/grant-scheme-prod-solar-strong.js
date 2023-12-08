@@ -8,40 +8,70 @@ module.exports = {
       desirability: {
         questions: [
           {
-            key: 'project-subject',
+            key: 'solar-technologies',
             answers: [
               {
-                key: 'project-subject-A1',
-                value: 'Slurry acidification',
+                key: 'solar-technologies',
+                title: 'Solar technology',
                 input: [
                   {
-                    key: 'project-subject-A1',
-                    value: 'Slurry acidification'
+                    key: 'solar-technologies-A2',
+                    value: 'Solar PV panels'
+                  },
+                  {
+                    key: 'solar-technologies-A5',
+                    value: 'A battery'
+                  },
+                  {
+                    key: 'solar-technologies-A6',
+                    value: 'Power diverter'
                   }
                 ]
-              }
-            ]
+              }],
+            rating: {
+              score: null, band: null, importance: null
+            }
           },
           {
-            key: 'project-impacts',
+            key: 'solar-output',
             answers: [
               {
-                key: 'project-impacts-A1',
-                value: 'Introducing Acidification',
+                key: 'solar-output',
+                title: 'Solar PV system size',
                 input: [
                   {
-                    key: 'project-impacts-A1',
-                    value: 'Introducing Acidification'
+                    key: 'solar-output-A2', value: '51kW to 100kW'
                   }
                 ]
-              }
-            ]
-          }
-        ],
-        overallRating: {
-          score: null,
-          band: null
-        }
+              }],
+            rating: {
+              score: null,
+              band: null,
+              importance:
+                null
+            }
+          },
+          {
+            key: 'agricultural-sector-solar',
+            answers: [
+              {
+                key: 'agricultural-sector-solar',
+                title: 'Agricultural Sector',
+                input: [
+                  {
+                    key: 'agricultural-sector-solar-A2',
+                    value: 'Beef'
+                  },
+                  {
+                    key: 'agricultural-sector-solar-A4',
+                    value: 'Horticulture'
+                  }]
+              }],
+            rating: {
+              score: null, band: null, importance: null
+            }
+          }],
+        overallRating: { score: null, band: null }
       }
     })
 }
