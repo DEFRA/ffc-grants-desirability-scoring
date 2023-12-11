@@ -4,7 +4,7 @@ const bandHigh = 'Strong'
 const bandLow = 'Weak'
 const bandMedium = 'Average'
 
-const UNSUSTAINABLE_WATER_SOURCE_ID = [ 'WS4', 'WS5' ]
+const UNSUSTAINABLE_WATER_SOURCE_ID = ['WS4', 'WS5']
 
 class ScoreEngine {
   constructor(desirabilityAssessment, scoreData) {
@@ -282,11 +282,9 @@ function multiInputItemCount(question, allAnswers) {
     const lengthTotal = question.scoreData.scorePerItemCount.filter(itemScore => itemScore.key === answerScore)
     total = total + lengthTotal[0].value
   })
-
-  let score = answerListLength > 0 ? total / answerListLength : 100
-
+  const score = (answerListLength > 0 ? total / answerListLength : 100) * question.weight
   let band = bandMedium
-  let scoreBand = score / question.maxScore
+  const scoreBand = score / question.maxScore
 
   if (scoreBand <= first(
     question.scoreData.scoreBand
@@ -295,10 +293,7 @@ function multiInputItemCount(question, allAnswers) {
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
 
-  score = score * question.weight
-
   return new ScoreResult(score, band)
-
 }
 
 // Q16
