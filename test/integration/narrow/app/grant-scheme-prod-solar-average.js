@@ -17,10 +17,20 @@ module.exports = {
                 {
                   key: 'solar-technologies-A2',
                   value: 'Solar PV panels'
-                }, {
-                  key: 'solar-technologies-A5',
+                },
+                {
+                  key: 'solar-technologies-A4',
                   value: 'A battery'
-                }]
+                },
+                {
+                  key: 'solar-technologies-A5',
+                  value: 'A utility meter'
+                },
+                {
+                  key: 'solar-technologies-A6',
+                  value: 'Power diverter'
+                }
+              ]
             }],
           rating: {
             score: null, band: null, importance: null
@@ -34,8 +44,8 @@ module.exports = {
               title: 'Solar PV system size',
               input: [
                 {
-                  key: 'solar-output-A5',
-                  value: 'More than 201kW'
+                  key: 'solar-output-A4',
+                  value: '151kW to 200kW'
                 }]
             }],
           rating:

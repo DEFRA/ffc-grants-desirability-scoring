@@ -15,8 +15,8 @@ module.exports = {
                 title: 'Solar technology',
                 input: [
                   {
-                    key: 'solar-technologies-A2',
-                    value: 'Solar PV panels'
+                    key: 'solar-technologies-A1',
+                    value: 'An electrical grid connection'
                   },
                   {
                     key: 'solar-technologies-A5',

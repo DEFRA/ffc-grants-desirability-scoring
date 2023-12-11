@@ -52,7 +52,7 @@ function getOverAllRatingBand(bandScore, sectionScoringData) {
     return bandHigh
   }
   if (sectionScoringData.overallRatingScoreData
-    .filter(x => x.name === bandLow).length > 0 && bandScore <
+    .filter(x => x.name === bandLow).length > 0 && bandScore <=
     first(
       sectionScoringData.overallRatingScoreData
         .filter(x => x.name === bandLow)).value) {
@@ -471,10 +471,11 @@ function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
 }
 
 function dualSumConditional(question, answers, allQanswers) {
-  const score = checkConditions(question.dependentQuestions, question.scoreData.scoreCondition, allQanswers)
+  let score = checkConditions(question.dependentQuestions, question.scoreData.scoreCondition, allQanswers)
   if (score === false) {
     return dualSum(question, answers)
   }
+  score = score * question.weight
   const band = getScoreBand(score, question)
   return new ScoreResult(score, band)
 }
