@@ -4,11 +4,10 @@
         "name": "Prod Grant Robotics"
     },
     "desirability": {
-        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",
-                "value": "80",
+                "value": "76.5",
                 "type": "numeric"
             },
             {
@@ -18,28 +17,38 @@
             },
             {
                 "name": "Weak",
-                "value": 50,
+                "value": "53.5",
                 "type": "numeric"
             }
         ],
         "questions": [
             {
-                "key": "project-subject",
-                "title": "Project Subject",
-                "maxScore": 20,
-                "weight": 10,
+                "key": "energy-source",
+                "title": "Energy source",
+                "maxScore": 10,
+                "weight": 0.10,
                 "showResult": true,
-                "scoreType": "boolWeightScore",
+                "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
-                        "key": "project-subject-A1",
-                        "weight": 1,
-                        "value": "Robotics and innovation"
+                        "key": "robotics-energy-source-A1",
+                        "weight": 25,
+                        "value": "Mains Electricity"
                     },
                     {
-                        "key": "project-subject-A2",
-                        "weight": 2,
-                        "value": "Slurry acidification"
+                        "key": "robotics-energy-source-A2",
+                        "weight": 100,
+                        "value": "Renewable electricity generated on the farm"
+                    },
+                    {
+                        "key": "robotics-energy-source-A3",
+                        "weight": 25,
+                        "value": "Biofuels"
+                    },
+                    {
+                        "key": "robotics-energy-source-A4",
+                        "weight": 0,
+                        "value": "Fossil fuels"
                     }
                 ],
                 "rating": {
@@ -48,30 +57,103 @@
                     "importance": null
                 },
                 "scoreData": {
-                    "scoreBand": []
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0.24",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": null,
+                        "type": "else"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "1",
+                        "type": "numeric"
+                    }]
                 }
             },
             {
-                "key": "robotics-technology",
-                "title": "Technology",
-                "maxScore": 22,
-                "weight": 22,
+                "key": "agricultural-sector",
+                "title": "Agricultural sector",
+                "maxScore": 30,
+                "weight": 0.30,
                 "showResult": true,
-                "scoreType": "boolWeightScore",
+                "scoreType": "dualsumWeightavgband",
                 "answer": [
                     {
-                        "key": "robotics-technology-A1",
+                        "key": "robotics-agricultural-sector-A2",
+                        "weight": 65,
+                        "value": "Arable"
+                    },
+                    {
+                        "key": "robotics-agricultural-sector-A3",
+                        "weight": 75,
+                        "value": "Dairy livestock"
+                    },
+                    {
+                        "key": "robotics-agricultural-sector-A1",
+                        "weight": 100,
+                        "value": "Horticulture"
+                    },
+                    {
+                        "key": "robotics-agricultural-sector-A4",
+                        "weight": 65,
+                        "value": "Non-dairy livestock"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0.6",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": null,
+                        "type": "else"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "1",
+                        "type": "numeric"
+                    }]
+                }
+            },
+            {
+                "key": "technology-use",
+                "title": "Technology use",
+                "maxScore": 15,
+                "weight": 0.15,
+                "showResult": true,
+                "scoreType": "dualSum",
+                "answer": [
+                    {
+                        "key": "technology-use-A1",
                         "weight": 0,
                         "value": "Yes, we’re using it now"
                     },
                     {
-                        "key": "robotics-technology-A2",
-                        "weight": 1,
+                        "key": "technology-use-A2",
+                        "weight": 25,
+                        "value": "Yes, we’re using it now but want to upgrade"
+                    },
+                    {
+                        "key": "technology-use-A3",
+                        "weight": 100,
                         "value": "Yes, as a pilot, demonstration or trial"
                     },
                     {
-                        "key": "robotics-technology-A3",
-                        "weight": 1,
+                        "key": "technology-use-A4",
+                        "weight": 100,
                         "value": "No, we haven’t used it yet"
                     }
                 ],
@@ -81,38 +163,102 @@
                     "importance": null
                 },
                 "scoreData": {
-                    "scoreBand": [{
+                    "scoreBand": [
+                        {
                         "name": "Weak",
-                        "value": "0",
+                        "value": "0.24",
                         "type": "numeric"
                         },
                         {
+                        "name": "Average",
+                        "value": null,
+                        "type": "else"
+                        },
+                        {
                         "name": "Strong",
-                        "value": "22",
+                        "value": "1",
                         "type": "numeric"
-                        }]
+                    }]
                 }
             },
             {
-                "key": "robotics-data-analytics",
+                "key": "labour-replaced",
+                "title": "Labour replaced",
+                "maxScore": 20,
+                "weight": 0.20,
+                "showResult": true,
+                "scoreType": "dualSum",
+                "answer": [
+                    {
+                        "key": "labour-replaced-A1",
+                        "weight": 35,
+                        "value": "1 to 2 jobs"
+                    },
+                    {
+                        "key": "labour-replaced-A2",
+                        "weight": 65,
+                        "value": "3 to 4 jobs"
+                    },
+                    {
+                        "key": "labour-replaced-A3",
+                        "weight": 100,
+                        "value": "5 or more jobs"
+                    },
+                    {
+                        "key": "labour-replaced-A4",
+                        "weight": 0,
+                        "value": "None of the above"
+                    },
+                    {
+                        "key": "labour-replaced-A5",
+                        "weight": 100,
+                        "value": "Not Applicable"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "band": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                        "name": "Weak",
+                        "value": "0.35",
+                        "type": "numeric"
+                        },
+                        {
+                        "name": "Average",
+                        "value": null,
+                        "type": "else"
+                        },
+                        {
+                        "name": "Strong",
+                        "value": "1",
+                        "type": "numeric"
+                    }]
+                }
+            },
+            {
+                "key": "data-analytics",
                 "title": "Data analytics",
-                "maxScore": 7,
-                "weight": 7,
+                "maxScore": 5,
+                "weight": 0.05,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
                 "answer": [
                     {
-                        "key": "robotics-data-analytics-A1",
-                        "weight": 1,
+                        "key": "data-analytics-A1",
+                        "weight": 100,
                         "value": "Yes, we have the technology already"
                     },
                     {
-                        "key": "robotics-data-analytics-A2",
-                        "weight": 1,
+                        "key": "data-analytics-A2",
+                        "weight": 100,
                         "value": "Yes, we’ll buy the technology as part of the project"
                     },
                     {
-                        "key": "robotics-data-analytics-A3",
+                        "key": "data-analytics-A3",
                         "weight": 0,
                         "value": "No, we will not use any data analytics"
                     }
@@ -130,124 +276,23 @@
                         "type": "numeric"
                         },
                         {
+                            "name": "Average",
+                            "value": null,
+                            "type": "else"
+                        },
+                        {
                         "name": "Strong",
-                        "value": "5",
+                        "value": "1",
                         "type": "numeric"
                         }
                     ]
                 }
             },
             {
-                "key": "robotics-energy-source",
-                "title": "Energy source",
-                "maxScore": 16,
-                "weight": 4,
-                "showResult": true,
-                "scoreType": "dualsumWeightavgband",
-                "answer": [
-                    {
-                        "key": "robotics-energy-source-A2",
-                        "weight": 4,
-                        "value": "Electricity – derived from renewable generation on farm"
-                    },
-                    {
-                        "key": "robotics-energy-source-A3",
-                        "weight": 1,
-                        "value": "Biofuels"
-                    },
-                    {
-                        "key": "robotics-energy-source-A1",
-                        "weight": 1,
-                        "value": "Mains Electricity"
-                    },
-                    {
-                        "key": "robotics-energy-source-A4",
-                        "weight": 0,
-                        "value": "Fossil fuels"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                        "name": "Weak",
-                        "value": "0",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Average",
-                        "value": "4",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Strong",
-                        "value": "16",
-                        "type": "numeric"
-                    }]
-                }
-            },
-            {
-                "key": "robotics-agricultural-sector",
-                "title": "Agricultural sector",
-                "maxScore": 45,
-                "weight": 15,
-                "showResult": true,
-                "scoreType": "dualsumWeightavgband",
-                "answer": [
-                    {
-                        "key": "robotics-agricultural-sector-A1",
-                        "weight": 3,
-                        "value": "Horticulture"
-                    },
-                    {
-                        "key": "robotics-agricultural-sector-A2",
-                        "weight": 2,
-                        "value": "Arable"
-                    },
-                    {
-                        "key": "robotics-agricultural-sector-A4",
-                        "weight": 2,
-                        "value": "Dairy livestock"
-                    },
-                    {
-                        "key": "robotics-agricultural-sector-A3",
-                        "weight": 2,
-                        "value": "Non-dairy livestock"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-                        "name": "Average",
-                        "value": "0",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Average",
-                        "value": "30",
-                        "type": "numeric"
-                        },
-                        {
-                        "name": "Strong",
-                        "value": "45",
-                        "type": "numeric"
-                    }]
-                }
-            },
-            {
                 "key": "eligibility-criteria",
                 "title": "Eligibility criteria",
-                "maxScore": 100,
-                "weight": 1,
+                "maxScore": 20,
+                "weight": 0.20,
                 "showResult": true,
                 "scoreType": "multiInputItemCount",
                 "answer": [
@@ -270,7 +315,13 @@
                         "key": "eligibility-criteria-A4",
                         "weight": 1,
                         "value": "Works in a continuous loop"
+                    },
+                    {
+                        "key": "eligibility-criteria-A5",
+                        "weight": 0,
+                        "value": "Not applicable"
                     }
+ 
                 ],
                 "rating": {
                     "score": null,
@@ -296,6 +347,10 @@
                     }],
                     "scorePerItemCount": [
                         {
+                            "key": 0,
+                            "value": 100
+                        },
+                        {
                             "key": 2,
                             "value": 34
                         },
@@ -310,7 +365,7 @@
                     ]
                 }
             }    
-
+ 
         ],
         "overallRating": {
             "score": null,

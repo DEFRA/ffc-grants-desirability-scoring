@@ -14,6 +14,7 @@ describe('Score Engine test', () => {
 describe('Prod Slurry - Score Engine Get Score test', () => {
   const fakeMessage = require('./grant-scheme-prod-solar-average.js')
   const fakeMessageHigh = require('./grant-scheme-prod-solar-strong.js')
+  const fakeMessageLow = require('./grant-scheme-prod-solar-weak.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
   test('Prod Slurry - createScoreEngine returns ScoreEngine', () => {
@@ -24,14 +25,22 @@ describe('Prod Slurry - Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(80)
-    expect(scoreResult.desirability.overallRating.band).toBe('Strong')
+    expect(scoreResult.desirability.overallRating.score).toBe(74.2)
+    expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
   test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult High', () => {
     const scoreEngine = new ScoreEngine(fakeMessageHigh.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(100)
+    expect(scoreResult.desirability.overallRating.score).toBe(81)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
+  })
+
+  test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult Low', () => {
+    const scoreEngine = new ScoreEngine(fakeMessageLow.get(), scoreData)
+    const scoreResult = scoreEngine.getScore()
+    expect(scoreResult).toBeDefined()
+    expect(scoreResult.desirability.overallRating.score).toBe(4)
+    expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
 })

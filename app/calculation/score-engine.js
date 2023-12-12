@@ -4,7 +4,7 @@ const bandHigh = 'Strong'
 const bandLow = 'Weak'
 const bandMedium = 'Average'
 
-const UNSUSTAINABLE_WATER_SOURCE_ID = [ 'WS4', 'WS5' ]
+const UNSUSTAINABLE_WATER_SOURCE_ID = ['WS4', 'WS5']
 
 class ScoreEngine {
   constructor(desirabilityAssessment, scoreData) {
@@ -38,7 +38,6 @@ class ScoreEngine {
 
     // remove noShowResult questions
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))
-
     // get overall rating band
     this.desirabilityAssessment.desirability.overallRating.band = getOverAllRatingBand(bandScore, this.scoringData.desirability)
     return this.desirabilityAssessment
@@ -53,7 +52,7 @@ function getOverAllRatingBand(bandScore, sectionScoringData) {
     return bandHigh
   }
   if (sectionScoringData.overallRatingScoreData
-    .filter(x => x.name === bandLow).length > 0 && bandScore <
+    .filter(x => x.name === bandLow).length > 0 && bandScore <=
     first(
       sectionScoringData.overallRatingScoreData
         .filter(x => x.name === bandLow)).value) {
@@ -108,6 +107,9 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
     case 'dualsum':
       result = dualSum(question, answers)
       break
+    case 'dualsumconditional':
+      result = dualSumConditional(question, answers, allQanswers)
+      break
     case 'dualsumcap':
       result = dualSumCap(question, answers)
       break
@@ -125,7 +127,7 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
       break
     case 'multiselectsumthenweight':
       result = multiSelectSumThenWeight(question, answers)
-      break;
+      break
     case 'boolvalueweightscore':
       result = boolValueWeightScore(question, answers)
       break
@@ -145,7 +147,7 @@ function dualSumWeightAvgBand(question, answers) {
       first(answers).input.some(itemY => itemY.key === itemX.key))
     .reduce((total, answer) => answer.weight + total, 0) * question.weight
   score = score / first(answers).input.length
-  const scoreBand = score
+  const scoreBand = score / question.maxScore // to calculate banding we have to divide by max score
 
   let band = bandMedium
   if (question.scoreData.scoreBand
@@ -228,10 +230,9 @@ function multiSelectSumThenWeight(question, answers) {
     .some(givenAnswer => givenAnswer.key === answer.key))
   
   let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
-  
 
-  let band = bandMedium;
-  let scoreBand = score / question.maxScore;
+  let band = bandMedium
+  let scoreBand = score / question.maxScore
 
   if (scoreBand <= first(
     question.scoreData.scoreBand
@@ -252,18 +253,16 @@ function boolValueWeightScore(question, answers) {
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
 
-  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
+  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.weight
 
   let band
-
-  if (score == first(
+  const bandScore = score / question.maxScore
+  if (score === first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandLow)).value) { band = bandLow }
   else {
     band = bandHigh
   }
-
-  score = score * question.weight
 
   return new ScoreResult(score, band)
 }
@@ -283,11 +282,9 @@ function multiInputItemCount(question, allAnswers) {
     const lengthTotal = question.scoreData.scorePerItemCount.filter(itemScore => itemScore.key === answerScore)
     total = total + lengthTotal[0].value
   })
-
-  let score = answerListLength > 0 ? total / answerListLength : 100
-
+  const score = (answerListLength > 0 ? total / answerListLength : 100) * question.weight
   let band = bandMedium
-  let scoreBand = score / question.maxScore
+  const scoreBand = score / question.maxScore
 
   if (scoreBand <= first(
     question.scoreData.scoreBand
@@ -296,10 +293,7 @@ function multiInputItemCount(question, allAnswers) {
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
 
-  score = score * question.weight
-
   return new ScoreResult(score, band)
-
 }
 
 // Q16
@@ -453,6 +447,52 @@ function dualAvgMatrix(question, answers) {
   return new ScoreResult(score, band)
 }
 
+function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
+  let score = false
+  const dependantQuestionAnswers = allQanswers.filter(qAnswer => dependentQuestions.some(dQues => dQues === qAnswer.key))
+  scoreCondition.forEach(condition => {
+    const hasConditionAnswer = dependantQuestionAnswers[0].answers[0].input.some((answer) => answer.key === condition.key)
+    const hasStandAloneAdditionalAnswer = dependantQuestionAnswers[0].answers[0].input.length === 1 && dependantQuestionAnswers[0].answers[0].input.some((answer) => answer.key === condition?.standAloneAdditionalAnswer)
+
+    switch (condition.condition) {
+      case 'ONLY':
+        if (dependantQuestionAnswers[0].answers[0].input.length === 1 && hasConditionAnswer) {
+          score = Number(condition.weight)
+        }
+        break
+      case 'NOT_INCLUDES':
+        if (!hasConditionAnswer && !hasStandAloneAdditionalAnswer) {
+          score = Number(condition.weight)
+        }
+        break
+    }
+  })
+  return score
+}
+
+function dualSumConditional(question, answers, allQanswers) {
+  let score = checkConditions(question.dependentQuestions, question.scoreData.scoreCondition, allQanswers)
+  if (score === false) {
+    return dualSum(question, answers)
+  }
+  score = score * question.weight
+  const band = getScoreBand(score, question)
+  return new ScoreResult(score, band)
+}
+
+function getScoreBand (score, question) {
+  const scoreBand = score / question.maxScore
+
+  let band = bandMedium
+  if (scoreBand <= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandLow)).value) { band = bandLow }
+  if (scoreBand >= first(
+    question.scoreData.scoreBand
+      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+  return band
+}
+
 // Q19
 function dualSum(question, answers) {
   const score =
@@ -461,39 +501,22 @@ function dualSum(question, answers) {
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
 
-  const scoreBand = score / question.maxScore
-
-  let band = bandMedium
-  if (scoreBand <= first(
-    question.scoreData.scoreBand
-      .filter(r => r.name === bandLow)).value) { band = bandLow }
-  if (scoreBand >= first(
-    question.scoreData.scoreBand
-      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+  const band = getScoreBand(score, question)
 
   return new ScoreResult(score, band)
 }
 
-function dualSumCap(question, answers) {
+function dualSumCap (question, answers) {
   let score =
     question.answer
       .filter(itemX => first(answers).input
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
-  
-  if (score > question.maxScore ) {
+
+  if (score > question.maxScore) {
     score = question.maxScore
   }
-
-  const scoreBand = score / question.maxScore
-
-  let band = bandMedium
-  if (scoreBand <= first(
-    question.scoreData.scoreBand
-      .filter(r => r.name === bandLow)).value) { band = bandLow }
-  if (scoreBand >= first(
-    question.scoreData.scoreBand
-      .filter(r => r.name === bandHigh)).value) { band = bandHigh }
+  const band = getScoreBand(score, question)
 
   return new ScoreResult(score, band)
 }

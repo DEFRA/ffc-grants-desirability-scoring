@@ -4,125 +4,238 @@
         "name": "Prod Grant Solar"
     },
     "desirability": {
-        "overallRatingCalcType": "NA",
+	    "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",
-                "value": "60",
+                "value": "79",
+                "type": "numeric"
+            },
+            {
+                "name": "Weak",
+                "value": "40",
                 "type": "numeric"
             },
             {
                 "name": "Average",
                 "value": null,
                 "type": "else"
-            },
-            {
-                "name": "Weak",
-                "value": 50,
-                "type": "numeric"
             }
         ],
         "questions": [
             {
-                "key": "project-subject",
-                "title": "Project Subject",
-                "maxScore": 20,
-                "weight": 10,
-                "showResult": true,
-                "scoreType": "boolWeightScore",
-                "answer": [
-                    {
-                        "key": "project-subject-A1",
-                        "weight": 2,
-                        "value": "Robotics and innovation"
-                    },
-                    {
-                        "key": "project-subject-A2",
-                        "weight": 2,
-                        "value": "Slurry acidification"
-                    },
-                    {
-                        "key": "project-subject-A3",
-                        "weight": 0.5,
-                        "value": "Slurry acidification"
-                    },
-                    {
-                        "key": "project-subject-A4",
-                        "weight": 0.002,
-                        "value": "Slurry acidification"
-                    },
-                    {
-                        "key": "project-subject-A5",
-                        "weight": 0.002,
-                        "value": "Slurry acidification"
-                    }
-                ],
-                "rating": {
-                    "score": null,
-                    "band": null,
-                    "importance": null
-                },
-                "scoreData": {
-                    "scoreBand": [
-                        {
-							"name": "Strong",
-							"value": "0.7",
-							"type": "numeric"
-						},
-						{
-							"name": "Weak",
-							"value": "0.3",
-							"type": "numeric"
-						},
-						{
-							"name": "Average",
-							"value": null,
-							"type": "else"
-						}
-                    ]
-                }
-            },
-            {
-                "key": "project-impacts",
-                "title": "Project Impacts",
-                "maxScore": 80,
-                "weight": 40,
+                "key": "solar-technologies",
+                "title": "Solar Technologies",
+                "maxScore": 30,
+                "weight": 0.30,
                 "showResult": true,
                 "scoreType": "dualSumCap",
                 "answer": [
                     {
-                        "key": "project-impacts-A1",
-                        "weight": 2,
-                        "value": "Introducing Acidification"
+                        "key": "solar-technologies-A1",
+                        "weight": 0,
+                        "value": "An electrical grid connection"
                     },
                     {
-                        "key": "project-impacts-A2",
-                        "weight": 1.5,
-                        "value": "Increasing Acidification"
+                        "key": "solar-technologies-A2",
+                        "weight": 0,
+                        "value": "Solar panels"
+                    },
+                    {
+                        "key": "solar-technologies-A3",
+                        "weight": 0,
+                        "value": "An inverter"   
+                    },
+                    {
+                        "key": "solar-technologies-A4",
+                        "weight": 0,
+                        "value": "A utility meter"
+                    },
+                    {
+                        "key": "solar-technologies-A5",
+                        "weight": 100,
+                        "value": "A battery"
+                    },
+                    {
+                        "key": "solar-technologies-A6",
+                        "weight": 33.33,
+                        "value": "Limit-loading power diverter to heat stores"
                     }
                 ],
                 "rating": {
                     "score": null,
-                    "band": null,
+                    "rating": null,
                     "importance": null
                 },
                 "scoreData": {
                     "scoreBand": [
                         {
-							"name": "Strong",
-							"value": "0.7",
-							"type": "numeric"
-						},
-						{
-							"name": "Weak",
-							"value": "0.3",
-							"type": "numeric"
-						},
-						{
-							"name": "Average",
-							"value": null,
-							"type": "else"
-						}
+                            "name": "Strong",
+                            "value": "0.9",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Weak",
+                            "value": "0.3",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Average",
+                            "value": null,
+                            "type": "else"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "solar-output",
+                "title": "Solar Output",
+                "maxScore": 60,
+	   			"dependentQuestions": ["solar-technologies"],
+                "weight": 0.6,
+                "showResult": true,
+                "scoreType": "dualSumConditional",
+                "answer": [
+                    {
+                        "key": "solar-output-A1",
+                        "weight": 100,
+                        "value": "Up to 50kW"
+                    },
+                    {
+                        "key": "solar-output-A2",
+                        "weight": 92,
+                        "value": "51kW to 100kW"
+                    },
+                    {
+                        "key": "solar-output-A3",
+                        "weight": 83,
+                        "value": "101kW to 150kW"
+                    },
+                    {
+                        "key": "solar-output-A4",
+                        "weight": 67,
+                        "value": "151kW to 200kW"
+                    },
+                    {
+                        "key": "solar-output-A5",
+                        "weight": 50,
+                        "value": "More than 201kW"
+                    },
+                    {
+                        "key": "solar-output-A6",
+                        "weight": 75,
+                        "value": "Solar panels not chosen"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "rating": null,
+                    "importance": null
+                },
+                "scoreData": {
+	   "scoreCondition":[
+	   				{
+	   					"key": "solar-technologies-A1",
+	   					"condition": "ONLY",
+	   					"weight": "0"	   
+				     },
+	   	   				{
+	   					"key": "solar-technologies-A2",
+	   					"condition": "NOT_INCLUDES",
+	   	   				"standAloneAdditionalAnswer": "solar-technologies-A1",
+	   					"weight": "75"	   
+				   }
+				   ],
+                    "scoreBand": [
+                        {
+                            "name": "Strong",
+                            "value": "0.9",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Weak",
+                            "value": "0.7",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Average",
+                            "value": null,
+                            "type": "else"
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "agricultural-sector-solar",
+                "title": "Agricultural Sector",
+                "maxScore": 10,
+                "weight": 0.10,
+                "showResult": true,
+                "scoreType": "dualsumweightavgband",
+                "answer": [
+                    {
+                        "key": "agricultural-sector-solar-A1",
+                        "weight": 60,
+                        "value": "Arable"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A2",
+                        "weight": 40,
+                        "value": "Beef"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A3",
+                        "weight": 100,
+                        "value": "Dairy livestock"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A4",
+                        "weight": 80,
+                        "value": "Horticulture"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A5",
+                        "weight": 50,
+                        "value": "Mixed livestock"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A6",
+                        "weight": 100,
+                        "value": "Pig"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A7",
+                        "weight": 100,
+                        "value": "Poultry"
+                    },
+                    {
+                        "key": "agricultural-sector-solar-A8",
+                        "weight": 40,
+                        "value": "Sheep"
+                    }
+                ],
+                "rating": {
+                    "score": null,
+                    "rating": null,
+                    "importance": null
+                },
+                "scoreData": {
+                    "scoreBand": [
+                        {
+                            "name": "Strong",
+                            "value": "0.9",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Weak",
+                            "value": "0.6",
+                            "type": "numeric"
+                        },
+                        {
+                            "name": "Average",
+                            "value": null,
+                            "type": "else"
+                        }
                     ]
                 }
             }

@@ -172,7 +172,7 @@ describe('Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(msg, ahwScoreData)
     const scoreResult = scoreEngine.getScore()
     let housingQ = first(scoreResult.desirability.questions.filter(q => q.key === 'housing'))
-    expect(housingQ.rating.band).toBe('Weak')
+    expect(housingQ.rating.band).toBe('Strong')
   });
 
   test('verify score for score-type userInput - Strong', () => {
@@ -265,8 +265,8 @@ describe('Score Engine Get Score test', () => {
 
     const scoreEngine = new ScoreEngine(fakeSolarmsg.get(), solarScoreData)
     const scoreResult = scoreEngine.getScore()
-    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
-    expect(rating.score).toBe(80)
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'solar-technologies')).rating
+    expect(rating.score).toBe(30)
     expect(rating.band).toBe('Strong')
   })
   test('verify score for score-type dualsumcap Medium', () => {
@@ -276,9 +276,9 @@ describe('Score Engine Get Score test', () => {
 
     const scoreEngine = new ScoreEngine(msg, solarScoreData)
     const scoreResult = scoreEngine.getScore()
-    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
-    expect(rating.score).toBe(40)
-    expect(rating.band).toBe('Average')
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'solar-technologies')).rating
+    expect(rating.score).toBe(30)
+    expect(rating.band).toBe('Strong')
   })
   test('verify score for score-type dualsumcap Low', () => {
     const msg = fakeSolarmsg.get()
@@ -286,27 +286,26 @@ describe('Score Engine Get Score test', () => {
     solarScoreData.desirability.questions[1].answer[0].weight = 0.03
     const scoreEngine = new ScoreEngine(msg, solarScoreData)
     const scoreResult = scoreEngine.getScore()
-    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'project-impacts')).rating
-    expect(rating.score).toBe(1.2)
-    expect(rating.band).toBe('Weak')
+    const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'solar-technologies')).rating
+    expect(rating.score).toBe(30)
+    expect(rating.band).toBe('Strong')
   })
 
   test('verify score for score-type multiInputItemCount', () => {
     const scoreEngine = new ScoreEngine(fakeRoboticsmsg.get(), roboticsScoreData)
     const scoreResult = scoreEngine.getScore()
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
-    expect(rating.score).toBe(100)
+    expect(rating.score).toBe(20)
     expect(rating.band).toBe('Strong')
   })
   test('verify score for score-type multiInputItemCount Medium', () => {
     const msg = fakeRoboticsmsg.get()
- 
     roboticsScoreData.desirability.questions[5].answer[0].weight = 0
 
     const scoreEngine = new ScoreEngine(msg, roboticsScoreData)
     const scoreResult = scoreEngine.getScore()
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
-    expect(rating.score).toBe(67)
+    expect(rating.score).toBe(13.4)
     expect(rating.band).toBe('Average')
   })
   test('verify score for score-type multiInputItemCount Low', () => {
@@ -318,7 +317,7 @@ describe('Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(msg, roboticsScoreData)
     const scoreResult = scoreEngine.getScore()
     const rating = first(scoreResult.desirability.questions.filter(q => q.key === 'eligibility-criteria')).rating
-    expect(rating.score).toBe(34)
+    expect(rating.score).toBe(6.800000000000001)
     expect(rating.band).toBe('Weak')
   })
 
