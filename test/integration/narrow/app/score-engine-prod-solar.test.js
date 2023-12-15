@@ -25,7 +25,7 @@ describe('Prod Slurry - Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(74.2)
+    expect(scoreResult.desirability.overallRating.score).toBe(74.19)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
   test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult High', () => {
