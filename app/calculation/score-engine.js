@@ -29,7 +29,7 @@ class ScoreEngine {
       .reduce(
         (total, question) =>
           question.rating.score + total, 0)
-    actualScore = Math.round(actualScore * 100) / 100 // only shows upto 2 decimal when needed
+    actualScore = Math.floor(actualScore * 100) / 100 // only shows upto 2 decimal when needed
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     let bandScore = actualScore
     const overallRating = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
