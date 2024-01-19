@@ -63,7 +63,7 @@ overridden by build and release pipelines.
 Running the integration tests locally requires access to ASB, this can be
 achieved by setting the following environment variables:
 `SERVICE_BUS_HOST`, `SERVICE_BUS_USER`, `SERVICE_BUS_PASSWORD`.
-`CALCULATE_SCORE_QUEUE_ADDRESS`, `DESIRABILITY_SCORE_TOPIC_ADDRESS` must be set to a valid, developer specific queue that is
+`COST_REQUEST_QUEUE_ADDRESS`, `COST_RESPONSE_QUEUE_ADDRESS`, `SCORE_REQUEST_QUEUE_ADDRESS`, `SCORE_RESPONSE_QUEUE_ADDRESS`, `DESIRABILITY_SCORE_TOPIC_ADDRESS` must be set to a valid, developer specific queue that is
 available on ASB e.g. `ffc-grants-desirability-scroing-<initials>` where `<initials>` are the
 initials of the developer.
 
