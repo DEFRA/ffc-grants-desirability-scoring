@@ -19,8 +19,8 @@ const processCost = async (msg, costReciever) => {
     }
 
     const grantData = await scoreDataRepository.getScoreData(grantType)
-    console.log(grantData.data, '[GRANT DATA RECEIVED]')
-    if (grantData && grantData.data) {
+    console.log(grantData?.data, '[GRANT DATA RECEIVED]')
+    if (grantData?.data) {
       await sendResponseToSession({ costData: 'success', data: JSON.parse(grantData.data) }, sessionId, msgType)
     } else {
       console.log('[ERROR WITH GRANT DATA - NO DATA]')
