@@ -86,7 +86,6 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
 function calculateQScore(question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
   //
   let result = new ScoreResult('', '')
-  // console.log('here: ', String(question.scoreType).toLowerCase());
   switch (String(question.scoreType).toLowerCase()) {
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
@@ -162,33 +161,6 @@ function dualSumWeightAvgBand(question, answers) {
 
   return new ScoreResult(score, band)
 }
-// Q14 replaced by multiavgmatrix in water
-// function dualSumWeightBand (question, answers) {
-//   const score = question.answer
-//     .filter(itemX =>
-//       first(answers).input.some(itemY => itemY.key === itemX.key))
-//     .reduce((total, answer) => answer.weight + total, 0) * question.weight
-//   const scoreBand = score / question.maxScore
-
-//   let band = bandMedium
-//   if (scoreBand <= first(
-//     question.scoreData.scoreBand
-//       .filter(x => x.name === bandLow)).value) { band = bandLow }
-//   if (scoreBand >= first(
-//     question.scoreData.scoreBand
-//       .filter(x => x.name === bandHigh)).value) { band = bandHigh }
-
-//   return new ScoreResult(score, band)
-// }
-
-// function getDependantValue(question, answers) {
-//   const score = first(question.answer
-//     .filter(x =>
-//       first(answers).input.some(y => y.key === x.key)
-//     )).weight
-//   console.log(score, 'SSSSSSSSSSSSSSSSSSSS')
-//   return new ScoreResult(score, null)
-// }
 
 // water source scoring
 function answerValNoBand(question, answers) {
@@ -256,7 +228,6 @@ function boolValueWeightScore(question, answers) {
   let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.weight
 
   let band
-  const bandScore = score / question.maxScore
   if (score === first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandLow)).value) { band = bandLow }
@@ -559,12 +530,10 @@ function SingleValueWeightedMatrixScore(question, answers, allQanswers, sectionS
 
   return new ScoreResult(score, questionBand)
 }
-class ScoreResult {
-  constructor(score, band, importance = null) {
-    this.score = score
-    this.band = band
-    this.importance = importance
-  }
+function ScoreResult(score, band, importance = null) {
+  this.score = score
+  this.band = band
+  this.importance = importance
 }
 
 module.exports = ScoreEngine

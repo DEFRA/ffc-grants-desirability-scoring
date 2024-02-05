@@ -25,7 +25,7 @@ const processScoring = async (msg, scoreReciever) => {
 
     const scoreData = await scoreDataRepository.getScoreData(grantType)
     console.log('[SCORE DATA RECEIVED]')
-    if (scoreData && scoreData.data) {
+    if (scoreData?.data) {
       const scoreEngine = new ScoreEngine(body, JSON.parse(scoreData.data))
       const scoreResult = scoreEngine.getScore()
       await sendResponseToSession(scoreResult, sessionId, msgType)
