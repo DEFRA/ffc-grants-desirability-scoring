@@ -22,7 +22,6 @@ const start = async () => {
 const stop = async () => {
   await costReceiver.closeConnection()
   await scoreReceiver.closeConnection()
-
 }
 
 module.exports = { start, stop }

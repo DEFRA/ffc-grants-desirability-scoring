@@ -200,7 +200,6 @@ function multiSelectSumThenWeight(question, answers) {
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
-  
   let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
 
   let band = bandMedium
@@ -477,13 +476,16 @@ function dualSum(question, answers) {
   return new ScoreResult(score, band)
 }
 
-function dualSumCap (question, answers) {
+function dualSumCap(question, answers) {
+  const hasGraceScore = question.scoreData?.graceScore
   let score =
     question.answer
       .filter(itemX => first(answers).input
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
-
+  if (hasGraceScore) {
+    score = score + hasGraceScore
+  }
   if (score > question.maxScore) {
     score = question.maxScore
   }
