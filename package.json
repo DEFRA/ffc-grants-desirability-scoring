@@ -15,7 +15,7 @@
   "dependencies": {
     "@hapi/hapi": "^20.2.2",
     "applicationinsights": "^2.3.5",
-    "ffc-messaging": "^2.5.1",
+    "ffc-messaging": "^2.9.0",
     "ffc-protective-monitoring": "^1.0.3",
     "lodash": "^4.17.21",
     "pg": "^8.8.0",
