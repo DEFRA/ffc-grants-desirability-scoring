@@ -21,15 +21,14 @@ const processScoring = async (msg, scoreReciever) => {
     } else if (msgType === '.fetch.prod.score.request') {
       grantType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Solar' : 'Prod Grant Robotics'
       console.log('[MADE IT TO HERE', grantType)
-    } else if (msgType === '.fetch.layingHens.score.request') {
+    } else if (msgType === '.fetch.layinghens.score.request') {
       grantType = body.grantScheme.key === 'LAYINGHENS01' ? 'Laying Hens Grant' : 'Pullet Grant'
-      console.log('[LAYING HENS]')
-      console.log('[MADE IT TO SCORE ', grantType)
     }
 
     const scoreData = await scoreDataRepository.getScoreData(grantType)
     console.log('[SCORE DATA RECEIVED]')
     if (scoreData?.data) {
+      console.log(scoreData.data, '[HEREE')
       const scoreEngine = new ScoreEngine(body, JSON.parse(scoreData.data))
       const scoreResult = scoreEngine.getScore()
       await sendResponseToSession(scoreResult, sessionId, msgType)

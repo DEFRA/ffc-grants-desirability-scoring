@@ -65,6 +65,8 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
   const dependentQuestionRatingScore = []
   let dependantQuestionAnswers
   // get question
+
+  console.log('checking this bit', qanswer.key, 'now this bit', sectionScoringData.questions)
   const question = first(
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
@@ -86,6 +88,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
 function calculateQScore(question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
   //
   let result = new ScoreResult('', '')
+  console.log('am here', question)
   switch (String(question.scoreType).toLowerCase()) {
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
