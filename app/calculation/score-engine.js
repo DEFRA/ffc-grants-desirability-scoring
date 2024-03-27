@@ -458,7 +458,7 @@ function getScoreBand (score, question) {
 
   let band = bandMedium
   if (scoreBand <= first(
-    question.scoreData.scoreBand
+    question.scoreData?.scoreBand
       .filter(r => r.name === bandLow)).value) { band = bandLow }
   if (scoreBand >= first(
     question.scoreData.scoreBand
