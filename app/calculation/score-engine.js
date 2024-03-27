@@ -33,8 +33,12 @@ class ScoreEngine {
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     let bandScore = actualScore
     const overallRating = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
+    console.log(overallRating,'=====Ratting')
 
-    if (overallRating.toLowerCase() === 'percentile') { bandScore = (actualScore / maxScore * 100) }
+    if (overallRating.toLowerCase() === 'percentile') {
+      bandScore = (actualScore / maxScore * 100)
+      console.log(bandScore,'=====percentile score')
+    }
 
     // remove noShowResult questions
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))
@@ -425,7 +429,7 @@ function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
   scoreCondition.forEach(condition => {
     const hasConditionAnswer = dependantQuestionAnswers.some(dependantQuestAns => dependantQuestAns.answers[0].input.some((answer) => answer.key === condition.key))
     const hasStandAloneAdditionalAnswer = dependantQuestionAnswers[0].answers[0].input.length === 1 && dependantQuestionAnswers[0].answers[0].input.some((answer) => answer.key === condition?.standAloneAdditionalAnswer)
-    console.log(hasConditionAnswer,'PPPP')
+    console.log(hasConditionAnswer,'PPPP for this', condition)
     switch (condition.condition) {
       case 'ONLY':
         if (dependantQuestionAnswers[0].answers[0].input.length === 1 && hasConditionAnswer) {
@@ -489,7 +493,7 @@ function dualSumCap(question, answers) {
       .filter(itemX => first(answers).input
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
-  if (hasGraceScore) {
+  if (hasGraceScore && score > 0) {
     score = score + hasGraceScore - 2
   }
   if (score > question.maxScore) {
