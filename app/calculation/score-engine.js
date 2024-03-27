@@ -37,6 +37,7 @@ class ScoreEngine {
 
     if (overallRating.toLowerCase() === 'percentile') {
       bandScore = (actualScore / maxScore * 100)
+      this.desirabilityAssessment.desirability.overallRating.score = bandScore
       console.log(bandScore,'=====percentile score')
     }
 
