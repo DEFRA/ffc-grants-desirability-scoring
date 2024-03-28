@@ -18,10 +18,9 @@ describe('Score Repository test', () => {
     )
   }, 30000)
 
-  afterAll(async (done) => {
+  afterAll(async () => {
     await dbHelper.truncate()
     await dbHelper.close()
-    done()
   }, 30000)
 
   test('test connection with db', () => {
