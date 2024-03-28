@@ -1,8 +1,4 @@
 describe('Calculate Score test', () => {
-  afterAll(async (done) => {
-    require('applicationinsights').dispose()
-    done()
-  }, 30000)
 
   afterEach(() => {
     jest.clearAllMocks()

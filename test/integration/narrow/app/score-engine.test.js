@@ -5,10 +5,6 @@ const solarScoreData = require('../../../score-data-prod-solar.json')
 const roboticsScoreData = require('../../../score-data-prod-robotics.json')
 
 describe('Score Engine test', () => {
-  afterAll(async (done) => {
-    require('applicationinsights').dispose()
-    done()
-  }, 30000)
 
   test('createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')
