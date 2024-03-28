@@ -33,12 +33,10 @@ class ScoreEngine {
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     let bandScore = actualScore
     const overallRating = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
-    console.log(overallRating,'=====Ratting')
 
     if (overallRating.toLowerCase() === 'percentile') {
       bandScore = (actualScore / maxScore * 100)
-      this.desirabilityAssessment.desirability.overallRating.score = bandScore
-      console.log(bandScore,'=====percentile score')
+      this.desirabilityAssessment.desirability.overallRating.score = Math.floor(bandScore * 100) / 100 // only shows upto 2 decimal when needed
     }
 
     // remove noShowResult questions
