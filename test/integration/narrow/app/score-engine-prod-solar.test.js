@@ -1,9 +1,5 @@
 const scoreData = require('../../../score-data-prod-solar.json')
 describe('Score Engine test', () => {
-  afterAll(async (done) => {
-    require('applicationinsights').dispose()
-    done()
-  }, 30000)
 
   test('Prod Slurry - createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')

@@ -1,5 +1,3 @@
-
-afterEach(async (done) => {
+afterEach(async () => {
   require('applicationinsights').dispose()
-  done()
-}, 30000)
+})

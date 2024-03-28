@@ -1,9 +1,5 @@
 const scoreData = require('../../../score-data-prod-robotics.json')
 describe('Score Engine test', () => {
-  afterAll(async (done) => {
-    require('applicationinsights').dispose()
-    done()
-  }, 30000)
 
   test('Prod Robotics - createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')

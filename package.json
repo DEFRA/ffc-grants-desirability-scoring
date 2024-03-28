@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-desirability-scoring",
-  "version": "1.22.4",
+  "version": "1.23.0",
   "description": "FFC Grants desirability scoring microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-desirability-scoring",
   "main": "app/index.js",
@@ -13,15 +13,17 @@
   "contributors": [],
   "license": "OGL-UK-3.0",
   "dependencies": {
+    "@azure/identity": "^4.0.1",
+    "@azure/msal-node": "^2.6.6",
     "@hapi/hapi": "^20.2.2",
     "applicationinsights": "^2.3.5",
-    "ffc-messaging": "^2.5.1",
+    "ffc-messaging": "^2.9.0",
     "ffc-protective-monitoring": "^1.0.3",
     "lodash": "^4.17.21",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "7.0.0-alpha.9"
-    },
+  },
   "overrides": {
     "minimatch": "^5.1.0",
     "chokidar": "^3.5.3",
@@ -29,7 +31,7 @@
     "semver": "^7.5.3"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
+    "jest": "^29.5.0",
     "jest-junit": "^13.0.0",
     "lint": "^1.1.2",
     "liquibase": "^1.0.1",

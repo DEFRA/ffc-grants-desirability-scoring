@@ -4,6 +4,7 @@
         "name": "Water Management"
     },
     "desirability": {
+        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",
