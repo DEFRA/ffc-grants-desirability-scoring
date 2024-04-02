@@ -74,7 +74,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
 
-  if (question.dependentValueQuestions) {
+  if (question?.dependentValueQuestions) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
 
