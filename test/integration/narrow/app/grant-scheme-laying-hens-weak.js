@@ -54,8 +54,8 @@ module.exports = {
               title: 'Does your current building include a multi-tier aviary systems?',
               input: [
                 {
-                  key: 'current-multi-tier-system-A1',
-                  value: 'Yes'
+                  key: 'current-multi-tier-system-A2',
+                  value: 'No'
                 }
               ]
             }
@@ -74,8 +74,8 @@ module.exports = {
               title: 'Will every level of the multi-tier system be connected to another level by a ramp?',
               input: [
                 {
-                  key: 'ramp-connection-A1',
-                  value: 'Yes'
+                  key: 'ramp-connection-A2',
+                  value: 'No'
                 }
               ]
             }
@@ -174,8 +174,8 @@ module.exports = {
               title: 'Will the perches have a design feature that help the hens grip the perches?',
               input: [
                 {
-                  key: 'easy-grip-perches-A1',
-                  value: 'Yes'
+                  key: 'easy-grip-perches-A2',
+                  value: 'No'
                 }
               ]
             }

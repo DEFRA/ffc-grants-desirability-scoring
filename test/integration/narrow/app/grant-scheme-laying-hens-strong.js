@@ -34,8 +34,8 @@ module.exports = {
               title: 'What type of hen housing system do you currently use in the building?',
               input: [
                 {
-                  key: 'current-system-A3',
-                  value: 'Barn'
+                  key: 'current-system-A1',
+                  value: 'Colony cage'
                 }
               ]
             }
@@ -54,8 +54,7 @@ module.exports = {
               title: 'Does your current building include a multi-tier aviary systems?',
               input: [
                 {
-                  key: 'current-multi-tier-system-A1',
-                  value: 'Yes'
+                  value: null
                 }
               ]
             }

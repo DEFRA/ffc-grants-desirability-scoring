@@ -1,4 +1,4 @@
-const scoreData = require('../../../score-data-prod-solar.json')
+const scoreData = require('../../../score-data-laying-hens.json')
 describe('Score Engine test', () => {
   test('Laying Hens - createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')
@@ -20,14 +20,14 @@ describe('Laying Hens - Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(74.19)
+    expect(scoreResult.desirability.overallRating.score).toBe(40.27)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
   test('Laying Hens - createScoreEngine Call Get Score returns ScoreResult High', () => {
     const scoreEngine = new ScoreEngine(fakeMessageHigh.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(81)
+    expect(scoreResult.desirability.overallRating.score).toBe(86.45)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 
@@ -35,7 +35,7 @@ describe('Laying Hens - Score Engine Get Score test', () => {
     const scoreEngine = new ScoreEngine(fakeMessageLow.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(4)
+    expect(scoreResult.desirability.overallRating.score).toBe(30.9)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
 })
