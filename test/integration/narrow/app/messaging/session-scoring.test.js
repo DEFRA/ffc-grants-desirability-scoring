@@ -182,7 +182,7 @@ describe('Session scoring test', () => {
       },
       body: {
         grantScheme: {
-          key: 'LAYINGHENS02'
+          key: 'LAYINGHENS01'
         }
       }
     }
@@ -198,6 +198,44 @@ describe('Session scoring test', () => {
     expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
     expect(scoreRepository.getScoreData).toHaveBeenCalledWith(
       'Laying Hens Grant'
+    )
+
+    expect(sendResponseToSession).toHaveBeenCalledTimes(1)
+    expect(sendResponseToSession).toHaveBeenCalledWith(
+      '',
+      '12345',
+      '.fetch.layingHens.score.request'
+    )
+    expect(mockGetScore).toHaveBeenCalledTimes(1)
+  })
+
+  test('message properly processed pullets score', async () => {
+    mockGetScore.mockImplementationOnce(() => {
+      return ''
+    })
+    const msg = {
+      sessionId: '12345',
+      applicationProperties: {
+        type: 'uk.gov.ffc.grants.fetch.layingHens.score.request'
+      },
+      body: {
+        grantScheme: {
+          key: 'LAYINGHENS02'
+        }
+      }
+    }
+
+    jest
+      .spyOn(scoreRepository, 'getScoreData')
+      .mockResolvedValue({ data: '{"test": "Ahaa Pullets"}' })
+
+    sendResponseToSession.mockResolvedValue(true)
+
+    await processScoring(msg, scoreReciever)
+
+    expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
+    expect(scoreRepository.getScoreData).toHaveBeenCalledWith(
+      'Pullet Grant'
     )
 
     expect(sendResponseToSession).toHaveBeenCalledTimes(1)
