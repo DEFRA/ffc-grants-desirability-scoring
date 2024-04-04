@@ -1,4 +1,4 @@
-const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType } = require('../../../../../app/config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType, fetchProdScoreRequestMsgType, fetchHensScoreRequestMsgType } = require('../../../../../app/config/messaging')
 
 const processCostMessage = require('../../../../../app/messaging/process-message')
 
@@ -76,6 +76,50 @@ describe('Process Message test', () => {
             },
             applicationProperties: {
                 type: fetchWaterScoreRequestMsgType
+            },
+            sessionId
+        }
+
+
+        await processCostMessage(message, receiver)
+        expect(processScoring).toHaveBeenCalledTimes(1)
+        expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
+    })
+
+    test(`${fetchProdScoreRequestMsgType} message calls processScoring`, async () => {
+        const message = {
+            body: {
+                cattle: 'yes',
+                pigs: 'yes',
+                organisation: {
+                    name: 'test-org',
+                    email: 'test-email'
+                }
+            },
+            applicationProperties: {
+                type: fetchProdScoreRequestMsgType
+            },
+            sessionId
+        }
+
+
+        await processCostMessage(message, receiver)
+        expect(processScoring).toHaveBeenCalledTimes(1)
+        expect(receiver.completeMessage).toHaveBeenCalledTimes(1)
+    })
+
+    test(`${fetchHensScoreRequestMsgType} message calls processScoring`, async () => {
+        const message = {
+            body: {
+                cattle: 'yes',
+                pigs: 'yes',
+                organisation: {
+                    name: 'test-org',
+                    email: 'test-email'
+                }
+            },
+            applicationProperties: {
+                type: fetchHensScoreRequestMsgType
             },
             sessionId
         }
