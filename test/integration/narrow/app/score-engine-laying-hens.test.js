@@ -1,41 +1,41 @@
-const scoreData = require('../../../score-data-prod-solar.json')
+const scoreData = require('../../../score-data-laying-hens.json')
 describe('Score Engine test', () => {
-  test('Prod Slurry - createScoreEngine returns ScoreEngine', () => {
+  test('Laying Hens - createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')
     expect(scoreEngine).toBeDefined()
   })
 })
 
-describe('Prod Slurry - Score Engine Get Score test', () => {
-  const fakeMessage = require('./grant-scheme-prod-solar-average.js')
-  const fakeMessageHigh = require('./grant-scheme-prod-solar-strong.js')
-  const fakeMessageLow = require('./grant-scheme-prod-solar-weak.js')
+describe('Laying Hens - Score Engine Get Score test', () => {
+  const fakeMessage = require('./grant-scheme-laying-hens-average.js')
+  const fakeMessageHigh = require('./grant-scheme-laying-hens-strong.js')
+  const fakeMessageLow = require('./grant-scheme-laying-hens-weak.js')
   const ScoreEngine = require('../../../../app/calculation/score-engine')
 
-  test('Prod Slurry - createScoreEngine returns ScoreEngine', () => {
+  test('Laying Hens - createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     expect(scoreEngine).toBeDefined()
   })
-  test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult Average', () => {
+  test('Laying Hens - createScoreEngine Call Get Score returns ScoreResult Average', () => {
     const scoreEngine = new ScoreEngine(fakeMessage.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(74.19)
+    expect(scoreResult.desirability.overallRating.score).toBe(40.27)
     expect(scoreResult.desirability.overallRating.band).toBe('Average')
   })
-  test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult High', () => {
+  test('Laying Hens - createScoreEngine Call Get Score returns ScoreResult High', () => {
     const scoreEngine = new ScoreEngine(fakeMessageHigh.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(81)
+    expect(scoreResult.desirability.overallRating.score).toBe(86.45)
     expect(scoreResult.desirability.overallRating.band).toBe('Strong')
   })
 
-  test('Prod Slurry - createScoreEngine Call Get Score returns ScoreResult Low', () => {
+  test('Laying Hens - createScoreEngine Call Get Score returns ScoreResult Low', () => {
     const scoreEngine = new ScoreEngine(fakeMessageLow.get(), scoreData)
     const scoreResult = scoreEngine.getScore()
     expect(scoreResult).toBeDefined()
-    expect(scoreResult.desirability.overallRating.score).toBe(4)
+    expect(scoreResult.desirability.overallRating.score).toBe(30.9)
     expect(scoreResult.desirability.overallRating.band).toBe('Weak')
   })
 })

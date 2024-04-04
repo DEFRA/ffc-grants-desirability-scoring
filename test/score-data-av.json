@@ -4,6 +4,7 @@
         "name": "Adding Value Grant"
     },
     "desirability": {
+        "overallRatingCalcType": "NA",
         "overallRatingScoreData": [
             {
                 "name": "Strong",

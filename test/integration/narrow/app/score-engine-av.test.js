@@ -1,9 +1,5 @@
 const scoreData = require('../../../score-data-av.json')
 describe('Score Engine test', () => {
-  afterAll(async (done) => {
-    require('applicationinsights').dispose()
-    done()
-  }, 30000)
 
   test('Adding Value - createScoreEngine returns ScoreEngine', () => {
     const scoreEngine = require('../../../../app/calculation/score-engine')

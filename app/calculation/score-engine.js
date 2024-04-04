@@ -34,7 +34,10 @@ class ScoreEngine {
     let bandScore = actualScore
     const overallRating = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
 
-    if (overallRating.toLowerCase() === 'percentile') { bandScore = (actualScore / maxScore * 100) }
+    if (overallRating.toLowerCase() === 'percentile') {
+      bandScore = (actualScore / maxScore * 100)
+      this.desirabilityAssessment.desirability.overallRating.score = Math.floor(bandScore * 100) / 100 // only shows upto 2 decimal when needed
+    }
 
     // remove noShowResult questions
     this.desirabilityAssessment.desirability.questions = this.desirabilityAssessment.desirability.questions.filter(question => noShowResultQuestions.every(noShow => noShow.key !== question.key))
@@ -65,11 +68,13 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
   const dependentQuestionRatingScore = []
   let dependantQuestionAnswers
   // get question
+
+  // console.log('checking this bit', qanswer.key, 'now this bit', sectionScoringData.questions)
   const question = first(
     sectionScoringData.questions
       .filter(q => q.key === qanswer.key))
 
-  if (question.dependentValueQuestions) {
+  if (question?.dependentValueQuestions) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
 
@@ -86,6 +91,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
 function calculateQScore(question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
   //
   let result = new ScoreResult('', '')
+  // console.log('am here', question)
   switch (String(question.scoreType).toLowerCase()) {
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
@@ -200,7 +206,6 @@ function multiSelectSumThenWeight(question, answers) {
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
-  
   let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
 
   let band = bandMedium
@@ -358,10 +363,9 @@ function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
     let maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'nochange' : 'start'
     // if unsustainable option is a decrease
     if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
-      maintainOrStart = dependantQuestionAnswers[ 0 ].answers.find(dqa => dqa.title === toBeAnswer.desc).input[ 0 ].value.toLowerCase().replace(' ', '')
+      maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[ 0 ].value.toLowerCase().replace(' ', '')
       console.log(maintainOrStart, 'nochange or dec')
     }
-
 
     const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
     matrixScoreArray.push(matrixVal)
@@ -422,9 +426,9 @@ function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
   let score = false
   const dependantQuestionAnswers = allQanswers.filter(qAnswer => dependentQuestions.some(dQues => dQues === qAnswer.key))
   scoreCondition.forEach(condition => {
-    const hasConditionAnswer = dependantQuestionAnswers[0].answers[0].input.some((answer) => answer.key === condition.key)
+    const hasConditionAnswer = dependantQuestionAnswers.some(dependantQuestAns => dependantQuestAns.answers[0].input.some((answer) => answer.key === condition.key))
     const hasStandAloneAdditionalAnswer = dependantQuestionAnswers[0].answers[0].input.length === 1 && dependantQuestionAnswers[0].answers[0].input.some((answer) => answer.key === condition?.standAloneAdditionalAnswer)
-
+    console.log(hasConditionAnswer,'PPPP for this', condition)
     switch (condition.condition) {
       case 'ONLY':
         if (dependantQuestionAnswers[0].answers[0].input.length === 1 && hasConditionAnswer) {
@@ -433,6 +437,11 @@ function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
         break
       case 'NOT_INCLUDES':
         if (!hasConditionAnswer && !hasStandAloneAdditionalAnswer) {
+          score = Number(condition.weight)
+        }
+        break
+      case 'INCLUDES':
+        if (hasConditionAnswer) {
           score = Number(condition.weight)
         }
         break
@@ -453,10 +462,9 @@ function dualSumConditional(question, answers, allQanswers) {
 
 function getScoreBand (score, question) {
   const scoreBand = score / question.maxScore
-
   let band = bandMedium
   if (scoreBand <= first(
-    question.scoreData.scoreBand
+    question.scoreData?.scoreBand
       .filter(r => r.name === bandLow)).value) { band = bandLow }
   if (scoreBand >= first(
     question.scoreData.scoreBand
@@ -477,13 +485,16 @@ function dualSum(question, answers) {
   return new ScoreResult(score, band)
 }
 
-function dualSumCap (question, answers) {
+function dualSumCap(question, answers) {
+  const hasGraceScore = question.scoreData?.graceScore
   let score =
     question.answer
       .filter(itemX => first(answers).input
         .some(itemY => itemY.key === itemX.key))
       .reduce((total, answer) => answer.weight + total, 0) * question.weight
-
+  if (hasGraceScore && score > 0) {
+    score = score + hasGraceScore - 2
+  }
   if (score > question.maxScore) {
     score = question.maxScore
   }

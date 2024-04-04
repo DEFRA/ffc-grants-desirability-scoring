@@ -1,0 +1,715 @@
+{
+  "grantScheme": {
+"key": "LAYINGHENS01",
+"name": "Laying Hens Grant"
+},
+"desirability": {
+"overallRatingScoreData": [
+  {
+    "name": "Strong",
+    "value": "45",
+    "type": "numeric"
+  },
+  {
+    "name": "Average",
+    "value": null,
+    "type": "else"
+  },
+  {
+    "name": "Weak",
+    "value": "32.99",
+    "type": "numeric"
+  }
+],
+"questions": [
+  {
+    "key": "poultry-type",
+    "title": "Poultry Type",
+    "maxScore": 15,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolweightscore",
+    "answer": [
+      {
+        "key": "poultry-type-A1",
+        "weight": 0,
+        "value": "hen"
+      },
+      {
+        "key": "poultry-type-A2",
+        "weight": 15,
+        "value": "pullet"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "current-system",
+    "title": "Current System",
+    "maxScore": 140,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "dualSumConditional",
+    "dependentQuestions": ["current-system", "current-multi-tier-system"],
+    "answer": [
+      {
+        "key": "current-system-A1",
+        "weight": 140,
+        "value": "Colony cage"
+      },
+      {
+        "key": "current-system-A2",
+        "weight": 0,
+        "value": "Combi-cage"
+      },
+      {
+        "key": "current-system-A3",
+        "weight": 0,
+        "value": "Barn"
+      },
+      {
+        "key": "current-system-A4",
+        "weight": 0,
+        "value": "Free range"
+      },
+      {
+        "key": "current-system-A5",
+        "weight": 0,
+        "value": "Organic"
+      },
+      {
+        "key": "current-system-A6",
+        "weight": 0,
+        "value": "None of the above"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreCondition":[
+        {
+          "key": "current-system-A1",
+          "condition": "ONLY",
+          "weight": "140"    
+        },
+          {
+          "key": "current-system-A2",
+          "condition": "ONLY",
+          "weight": "0"      
+        },
+        {
+          "key": "current-multi-tier-system-A1",
+          "condition": "INCLUDES",
+          "weight": "7"      
+        }
+      ],
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Average",
+          "value": "0.05",
+          "type": "numeric"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "current-multi-tier-system",
+    "title": "current-multi-tier-system",
+    "maxScore": 0,
+    "showResult": false,
+    "scoreType": "GetDependantValue", 
+    "answer": [
+      {
+        "key": "current-multi-tier-system-A1",
+        "weight": 0,
+        "value": "Yes"
+      },
+      {
+        "key": "current-multi-tier-system-A2",
+        "weight": 0,
+        "value": "No"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    }
+  },
+  {
+    "key": "ramp-connection",
+    "title": "Ramp connection",
+    "maxScore": 5,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolWeightScore",
+    "answer": [
+      {
+        "key": "ramp-connection-A1",
+        "weight": 5,
+        "value": "Yes"
+      },
+      {
+        "key": "ramp-connection-A2",
+        "weight": 0,
+        "value": "No"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "maximum-tier-height",
+    "title": "Maximum tier height",
+    "maxScore": 5,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolWeightScore",
+    "answer": [
+      {
+        "key": "maximum-tier-height-A1",
+        "weight": 5,
+        "value": "Yes"
+      },
+      {
+        "key": "maximum-tier-height-A2",
+        "weight": 0,
+        "value": "No"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "three-tiers",
+    "title": "Three tiers",
+    "maxScore": 5,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolWeightScore",
+    "answer": [
+      {
+        "key": "three-tiers-A1",
+        "weight": 5,
+        "value": "Yes"
+      },
+      {
+        "key": "three-tiers-A2",
+        "weight": 0,
+        "value": "No"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }
+      ]
+    }
+  },
+  {
+    "key": "hen-multi-tier",
+    "title": "Hen multi-tier",
+    "maxScore": 10,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolWeightScore",
+    "answer": [
+      {
+        "key": "hen-multi-tier-A1",
+        "weight": 10,
+        "value": "Yes"
+      },
+      {
+        "key": "hen-multi-tier-A2",
+        "weight": 0,
+        "value": "No"
+      },
+      {
+        "key": "hen-multi-tier-A3",
+        "weight": 0,
+        "value": "I don’t know"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "natural-light",
+    "title": "Natural light",
+    "maxScore": 10,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolWeightScore",
+    "answer": [
+      {
+        "key": "natural-light-A1",
+        "weight": 10,
+        "value": "Yes"
+      },
+      {
+        "key": "natural-light-A2",
+        "weight": 0,
+        "value": "No"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "easy-grip-perches",
+    "title": "Easy grip perches",
+    "maxScore": 15,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "boolWeightScore",
+    "answer": [
+      {
+        "key": "easy-grip-perches-A1",
+        "weight": 15,
+        "value": "Yes"
+      },
+      {
+        "key": "easy-grip-perches-A2",
+        "weight": 0,
+        "value": "No"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "building-biosecurity",
+    "title": "Building biosecurity",
+    "maxScore": 12,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "dualSum",
+    "answer": [
+      {
+        "key": "building-biosecurity-A1",
+        "weight": 7,
+        "value": "Shower-in-facilities in the lobby or changing room area"
+      },
+      {
+        "key": "building-biosecurity-A2",
+        "weight": 5,
+        "value": "An externally accessible storage room with a separate air space"
+      },
+      {
+        "key": "building-biosecurity-A3",
+        "weight": 0,
+        "value": "None of the above"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Average",
+          "value": "0.41",
+          "type": "numeric"
+        },
+        {
+          "name": "Strong",
+          "value": "0.58",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "pollution-mitigation",
+    "title": "Pollution mitigation",
+    "maxScore": 22,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "dualSum",
+    "answer": [
+      {
+        "key": "pollution-mitigation-A1",
+        "weight": 7,
+        "value": "Manure drying"
+      },
+      {
+        "key": "pollution-mitigation-A2",
+        "weight": 5,
+        "value": "Air filtration at inlets"
+      },
+      {
+        "key": "pollution-mitigation-A3",
+        "weight": 5,
+        "value": "Air filtration at outlets, for example using wet or dry scrubbers"
+      },
+      {
+        "key": "pollution-mitigation-A4",
+        "weight": 5,
+        "value": "A tree shelter belt near air outlets"
+      },
+      {
+        "key": "pollution-mitigation-A5",
+        "weight": 0,
+        "value": "None of the above"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Average",
+          "value": "0.227",
+          "type": "numeric"
+        },
+        {
+          "name": "Strong",
+          "value": "0.318",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "renewable-energy",
+    "title": "Renewable energy",
+    "maxScore": 25,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "dualSum",
+    "answer": [
+      {
+        "key": "renewable-energy-A1",
+        "weight": 5,
+        "value": "Solar PV system"
+      },
+      {
+        "key": "renewable-energy-A2",
+        "weight": 10,
+        "value": "A heat exchanger (heating only)"
+      },
+      {
+        "key": "renewable-energy-A3",
+        "weight": 15,
+        "value": "A heat exchanger (heating and cooling)"
+      },
+      {
+        "key": "renewable-energy-A4",
+        "weight": 5,
+        "value": "Biomass boiler"
+      },
+      {
+        "key": "renewable-energy-A5",
+        "weight": 0,
+        "value": "None of the above"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Average",
+          "value": "0.2",
+          "type": "numeric"
+        },
+        {
+          "name": "Strong",
+          "value": "0.44",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "bird-data-type",
+    "title": "Bird data type",
+    "maxScore": 14,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "dualSumCap",
+    "answer": [
+      {
+        "key": "bird-data-type-A1",
+        "weight": 2,
+        "value": "Bird performance data"
+      },
+      {
+        "key": "bird-data-type-A2",
+        "weight": 2,
+        "value": "Body weight"
+      },
+      {
+        "key": "bird-data-type-A3",
+        "weight": 2,
+        "value": "Disease detection"
+      },
+      {
+        "key": "bird-data-type-A4",
+        "weight": 2,
+        "value": "Feed data or conversion ratios"
+      },
+      {
+        "key": "bird-data-type-A5",
+        "weight": 2,
+        "value": "Location data"
+      },
+      {
+        "key": "bird-data-type-A6",
+        "weight": 2,
+        "value": "Locomotion or movement data"
+      },
+      {
+        "key": "bird-data-type-A7",
+        "weight": 2,
+        "value": "Next use"
+      },
+      {
+        "key": "bird-data-type-A8",
+        "weight": 2,
+        "value": "Sound analysis"
+      },
+      {
+        "key": "bird-data-type-A9",
+        "weight": 0,
+        "value": "Other"
+      },
+      {
+        "key": "bird-data-type-A10",
+        "weight": 0,
+        "value": "I will not monitor any poultry management data"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "graceScore": 8,
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Average",
+          "value": "0.57",
+          "type": "numeric"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  },
+  {
+    "key": "environmental-data-type",
+    "title": "Environmental data type",
+    "maxScore": 10,
+    "weight": 1,
+    "showResult": true,
+    "scoreType": "dualSumCap",
+    "answer": [
+      {
+        "key": "environmental-data-type-A1",
+        "weight": 2,
+        "value": "Ammonia"
+      },
+      {
+        "key": "environmental-data-type-A2",
+        "weight": 2,
+        "value": "Carbon monoxide"
+      },
+      {
+        "key": "environmental-data-type-A3",
+        "weight": 2,
+        "value": "Inhalable dust"
+      },
+      {
+        "key": "environmental-data-type-A4",
+        "weight": 2,
+        "value": "Other"
+      },
+      {
+        "key": "environmental-data-type-A5",
+        "weight": 0,
+        "value": "I will not collect and store additional environmental data"
+      }
+    ],
+    "rating": {
+      "score": null,
+      "band": null,
+      "importance": null
+    },
+    "scoreData": {
+      "graceScore": 8,
+      "scoreBand": [
+        {
+          "name": "Weak",
+          "value": null,
+          "type": "else"
+        },
+        {
+          "name": "Average",
+          "value": "0.8",
+          "type": "numeric"
+        },
+        {
+          "name": "Strong",
+          "value": "1",
+          "type": "numeric"
+        }]
+    }
+  }
+],
+"overallRating": {
+  "score": null,
+  "band": null
+  }
+}
+}
