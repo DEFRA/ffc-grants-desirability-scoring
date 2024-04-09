@@ -1,5 +1,5 @@
 const { sendResponseToSession } = require('../../../../../../app/messaging/application')
-const { costResponseQueue, fetchCostResponseMsgType, fetchScoreResponseMsgType, scoreResponseQueue, fetchWaterScoreResponseMsgType, fetchProdScoreResponseMsgType, fetchHensScoreResponseMsgType } = require('../../../../../../app/config/messaging.js')
+const { costResponseQueue, fetchCostResponseMsgType, fetchScoreResponseMsgType, scoreResponseQueue, fetchWaterScoreResponseMsgType, fetchProdScoreResponseMsgType, fetchHensScoreResponseMsgType, fetchAddValScoreResponseMsgType } = require('../../../../../../app/config/messaging.js')
 
 jest.mock('../../../../../../app/messaging')
 const { sendMessage } = require('../../../../../../app/messaging')
@@ -49,6 +49,14 @@ describe('application messaging tests', () => {
 
     expect(sendMessage).toHaveBeenCalledTimes(1)
     expect(sendMessage).toHaveBeenCalledWith({}, fetchHensScoreResponseMsgType, scoreResponseQueue, { sessionId })
+  })
+
+  test('getApplication sends and receives message with add val msgType', async () => {
+
+    await sendResponseToSession({}, sessionId, '.fetch.addval.score.request') 
+
+    expect(sendMessage).toHaveBeenCalledTimes(1)
+    expect(sendMessage).toHaveBeenCalledWith({}, fetchAddValScoreResponseMsgType, scoreResponseQueue, { sessionId })
   })
 
   test('get application send and receives messages with default or no message type', async () => {
