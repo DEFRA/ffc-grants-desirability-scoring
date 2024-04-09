@@ -1,4 +1,4 @@
-const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType, fetchProdScoreRequestMsgType, fetchHensScoreRequestMsgType } = require('../config/messaging')
+const { fetchCostRequestMsgType, fetchScoreRequestMsgType, fetchWaterScoreRequestMsgType, fetchProdScoreRequestMsgType, fetchHensScoreRequestMsgType, fetchAddValScoreRequestMsgType } = require('../config/messaging')
 
 const processCost = require('./standardised-costs')
 const processScoring = require('./session-scoring')
@@ -29,6 +29,11 @@ const processCostMessage = async (message, receiver) => {
 
     if (properties.type === fetchHensScoreRequestMsgType) {
       console.log(message.body, '[BODY OF SCORING FOR HENS]')
+      await processScoring(message)
+    }
+
+    if (properties.type === fetchAddValScoreRequestMsgType) {
+      console.log(message.body, '[BODY OF SCORING FOR AddVal]')
       await processScoring(message)
     }
 

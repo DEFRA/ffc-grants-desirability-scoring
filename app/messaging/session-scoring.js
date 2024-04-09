@@ -15,14 +15,14 @@ const processScoring = async (msg, scoreReciever) => {
 
     if (msgType === '.fetch.score.request') {
       grantType = 'Calf Housing Grant' // change this when applying scoring engine
-      console.log('[CATTLE HOUSING]')
     } else if (msgType === '.fetch.water.score.request') {
       grantType = 'Water Grant' // change this when applying scoring engine
     } else if (msgType === '.fetch.prod.score.request') {
       grantType = body.grantScheme.key === 'PROD01' ? 'Prod Grant Solar' : 'Prod Grant Robotics'
-      console.log('[MADE IT TO HERE', grantType)
     } else if (msgType === '.fetch.layingHens.score.request') {
       grantType = body.grantScheme.key === 'LAYINGHENS01' ? 'Laying Hens Grant' : 'Pullet Grant'
+    } else if (msgType === '.fetch.addval.score.request') {
+      grantType = 'Adding Value Grant'
     }
 
     const scoreData = await scoreDataRepository.getScoreData(grantType)
