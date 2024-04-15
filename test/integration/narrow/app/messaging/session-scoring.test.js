@@ -247,6 +247,44 @@ describe('Session scoring test', () => {
     expect(mockGetScore).toHaveBeenCalledTimes(1)
   })
 
+  test('message properly processed adding value score', async () => {
+    mockGetScore.mockImplementationOnce(() => {
+      return ''
+    })
+    const msg = {
+      sessionId: '12345',
+      applicationProperties: {
+        type: 'uk.gov.ffc.grants.fetch.addval.score.request'
+      },
+      body: {
+        grantScheme: {
+          key: 'ADDVAL01'
+        }
+      }
+    }
+
+    jest
+      .spyOn(scoreRepository, 'getScoreData')
+      .mockResolvedValue({ data: '{"test": "Ahaa add val"}' })
+
+    sendResponseToSession.mockResolvedValue(true)
+
+    await processScoring(msg, scoreReciever)
+
+    expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
+    expect(scoreRepository.getScoreData).toHaveBeenCalledWith(
+      'Adding Value Grant'
+    )
+
+    expect(sendResponseToSession).toHaveBeenCalledTimes(1)
+    expect(sendResponseToSession).toHaveBeenCalledWith(
+      '',
+      '12345',
+      '.fetch.addval.score.request'
+    )
+    expect(mockGetScore).toHaveBeenCalledTimes(1)
+  })
+
   test('message processed but not right type', async () => {
     const msg = {
       sessionId: '12345',
