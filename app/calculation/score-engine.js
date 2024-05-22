@@ -7,12 +7,12 @@ const bandMedium = 'Average'
 const UNSUSTAINABLE_WATER_SOURCE_ID = ['WS4', 'WS5']
 
 class ScoreEngine {
-  constructor(desirabilityAssessment, scoreData) {
+  constructor (desirabilityAssessment, scoreData) {
     this.scoringData = scoreData
     this.desirabilityAssessment = desirabilityAssessment
   }
 
-  getScore() {
+  getScore () {
     // calculate each question result
     this.desirabilityAssessment.desirability.questions
       .map((qanswer, index, allQanswers) => calculate(qanswer, this.scoringData.desirability, allQanswers))
@@ -47,7 +47,7 @@ class ScoreEngine {
   }
 }
 
-function getOverAllRatingBand(bandScore, sectionScoringData) {
+function getOverAllRatingBand (bandScore, sectionScoringData) {
   if (bandScore >=
     first(
       sectionScoringData.overallRatingScoreData
@@ -64,7 +64,7 @@ function getOverAllRatingBand(bandScore, sectionScoringData) {
   return bandMedium
 }
 
-function calculate(qanswer, sectionScoringData, allQanswers) {
+function calculate (qanswer, sectionScoringData, allQanswers) {
   const dependentQuestionRatingScore = []
   let dependantQuestionAnswers
   // get question
@@ -78,7 +78,7 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
     dependantQuestionAnswers = allQanswers.filter(qAnswer => question.dependentValueQuestions.some(dQues => dQues === qAnswer.key))
   }
 
-  if (question.dependentQuestions) {
+  if (question?.dependentQuestions) {
     const answers = allQanswers.filter(answer => question.dependentQuestions.some(dependantQues => dependantQues === answer.key))
     answers.forEach(dqa => {
       dependentQuestionRatingScore.push(dqa.rating.score)
@@ -88,10 +88,10 @@ function calculate(qanswer, sectionScoringData, allQanswers) {
   return qanswer
 }
 
-function calculateQScore(question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
+function calculateQScore (question, answers, dependentQuestionRatingScore, dependantQuestionAnswers, allQanswers, sectionScoringData) {
   //
   let result = new ScoreResult('', '')
-  // console.log('am here', question)
+  // console.log('I am here', question)
   switch (String(question.scoreType).toLowerCase()) {
     case 'answervalnoband':
       result = answerValNoBand(question, answers)
@@ -146,7 +146,7 @@ function calculateQScore(question, answers, dependentQuestionRatingScore, depend
   return result
 }
 
-function dualSumWeightAvgBand(question, answers) {
+function dualSumWeightAvgBand (question, answers) {
   let score = question.answer
     .filter(itemX =>
       first(answers).input.some(itemY => itemY.key === itemX.key))
@@ -169,28 +169,28 @@ function dualSumWeightAvgBand(question, answers) {
 }
 
 // water source scoring
-function answerValNoBand(question, answers) {
+function answerValNoBand (question, answers) {
   const score = first(question.answer
     .filter(x =>
       first(answers).input.some(y => y.key === x.key)
-    )).weight
+    ))?.weight
   return new ScoreResult(score, null)
 }
 
 // AHW living space scoring
-function inputQuestion(question, answers) {
+function inputQuestion (question, answers) {
   const livingSpaceAnswer = answers.filter(x => x.key === question.key)[0].input
 
   const clavesNumber = Number(livingSpaceAnswer[0].value)
   const clavesPageKey = Number(livingSpaceAnswer[0].key)
-  let score = (((clavesNumber - clavesPageKey) * 100) / clavesPageKey) * 10;
+  let score = (((clavesNumber - clavesPageKey) * 100) / clavesPageKey) * 10
 
   if (score >= question.maxScore) {
     score = question.maxScore
   }
 
   let band = bandMedium
-  let scoreBand = score / question.maxScore
+  const scoreBand = score / question.maxScore
 
   if (scoreBand <= first(
     question.scoreData.scoreBand
@@ -198,10 +198,10 @@ function inputQuestion(question, answers) {
   if (scoreBand >= first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
-  return new ScoreResult(score, band);
+  return new ScoreResult(score, band)
 }
 // AHW - Sum answers for band, then multiply by weight for overall score
-function multiSelectSumThenWeight(question, answers) {
+function multiSelectSumThenWeight (question, answers) {
   const answerList = question.answer.filter(answer => first(
     answers
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
@@ -209,7 +209,7 @@ function multiSelectSumThenWeight(question, answers) {
   let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.maxScore
 
   let band = bandMedium
-  let scoreBand = score / question.maxScore
+  const scoreBand = score / question.maxScore
 
   if (scoreBand <= first(
     question.scoreData.scoreBand
@@ -230,13 +230,12 @@ function boolValueWeightScore(question, answers) {
       .filter(selectedAnswer => selectedAnswer.key === question.key)).input
     .some(givenAnswer => givenAnswer.key === answer.key))
 
-  let score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.weight
+  const score = answerList.reduce((total, answerList) => answerList.weight + total, 0) * question.weight
 
   let band
   if (score === first(
     question.scoreData.scoreBand
-      .filter(r => r.name === bandLow)).value) { band = bandLow }
-  else {
+      .filter(r => r.name === bandLow)).value) { band = bandLow } else {
     band = bandHigh
   }
 
@@ -244,7 +243,7 @@ function boolValueWeightScore(question, answers) {
 }
 
 // producitivity robotics eligibility criteria
-function multiInputItemCount(question, allAnswers) {
+function multiInputItemCount (question, allAnswers) {
   const answerListLength = allAnswers.length
   let total = 0
   // for (answerObject in allAnswers)
@@ -273,7 +272,7 @@ function multiInputItemCount(question, allAnswers) {
 }
 
 // Q16
-function dualQuestionHectorScore(question, answers, dependentQuestionRatingScore) {
+function dualQuestionHectorScore (question, answers, dependentQuestionRatingScore) {
   const q15Score = first(dependentQuestionRatingScore)
   const q16bAnsVal = first(
     first(answers.filter(answer => answer.key === `${question.key}-b`)).input).value
@@ -293,6 +292,7 @@ function dualQuestionHectorScore(question, answers, dependentQuestionRatingScore
 
 // Q20
 function boolWeightScore(question, answers) {
+  console.log(answers[0].input,'answwwwwwww')
   const score = first(question.answer
     .filter(answer =>
       first(answers).input
@@ -321,7 +321,7 @@ const getBand = (question, score) => {
 const getMatrixValue = (scoreMatrix, matrixId, matrixValue) => {
   return +first(
     scoreMatrix
-      .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[ String(matrixValue) ]
+      .filter(scoreMatrix => scoreMatrix.id === String(matrixId)))[String(matrixValue)]
 }
 
 const getTotalAvg = (matrixScoreArray, unSustainableStop, maxScore) => {
@@ -334,7 +334,7 @@ const getTotalAvg = (matrixScoreArray, unSustainableStop, maxScore) => {
   return totalAverage
 }
 
-function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
+function multiAvgMatrix (question, answers, dependantQuestionAnswers = []) {
   const asIsAnswers =
     question.answer
       .filter(answer => first(
@@ -363,7 +363,7 @@ function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
     let maintainOrStart = asIsAnswers.find(ansIsanswer => ansIsanswer.wsId === toBeAnswer.wsId) ? 'nochange' : 'start'
     // if unsustainable option is a decrease
     if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
-      maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[ 0 ].value.toLowerCase().replace(' ', '')
+      maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[0].value.toLowerCase().replace(' ', '')
       console.log(maintainOrStart, 'nochange or dec')
     }
 
@@ -387,7 +387,7 @@ function multiAvgMatrix(question, answers, dependantQuestionAnswers = []) {
 }
 
 // Q18/17
-function dualAvgMatrix(question, answers) {
+function dualAvgMatrix (question, answers) {
   const asIsAnswers =
     question.answer
       .filter(answer => first(
@@ -406,7 +406,7 @@ function dualAvgMatrix(question, answers) {
 
   const matrixVal = first(
     question.scoreData.scoreMatrix
-      .filter(r => r.id === String(asIsAverage)))[ String(tobeAverage) ]
+      .filter(r => r.id === String(asIsAverage)))[String(tobeAverage)]
 
   const score = matrixVal * question.weight
   const scoreBand = matrixVal / question.maxScore
@@ -422,13 +422,13 @@ function dualAvgMatrix(question, answers) {
   return new ScoreResult(score, band)
 }
 
-function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
+function checkConditions (dependentQuestions, scoreCondition, allQanswers) {
   let score = false
   const dependantQuestionAnswers = allQanswers.filter(qAnswer => dependentQuestions.some(dQues => dQues === qAnswer.key))
   scoreCondition.forEach(condition => {
     const hasConditionAnswer = dependantQuestionAnswers.some(dependantQuestAns => dependantQuestAns.answers[0].input.some((answer) => answer.key === condition.key))
     const hasStandAloneAdditionalAnswer = dependantQuestionAnswers[0].answers[0].input.length === 1 && dependantQuestionAnswers[0].answers[0].input.some((answer) => answer.key === condition?.standAloneAdditionalAnswer)
-    console.log(hasConditionAnswer,'PPPP for this', condition)
+    console.log(hasConditionAnswer, 'PPPP for this', condition)
     switch (condition.condition) {
       case 'ONLY':
         if (dependantQuestionAnswers[0].answers[0].input.length === 1 && hasConditionAnswer) {
@@ -450,7 +450,7 @@ function checkConditions(dependentQuestions, scoreCondition, allQanswers) {
   return score
 }
 
-function dualSumConditional(question, answers, allQanswers) {
+function dualSumConditional (question, answers, allQanswers) {
   let score = checkConditions(question.dependentQuestions, question.scoreData.scoreCondition, allQanswers)
   if (score === false) {
     return dualSum(question, answers)
@@ -473,7 +473,7 @@ function getScoreBand (score, question) {
 }
 
 // Q19
-function dualSum(question, answers) {
+function dualSum (question, answers) {
   const score =
     question.answer
       .filter(itemX => first(answers).input
@@ -485,7 +485,7 @@ function dualSum(question, answers) {
   return new ScoreResult(score, band)
 }
 
-function dualSumCap(question, answers) {
+function dualSumCap (question, answers) {
   const hasGraceScore = question.scoreData?.graceScore
   let score =
     question.answer
@@ -503,7 +503,7 @@ function dualSumCap(question, answers) {
   return new ScoreResult(score, band)
 }
 
-function dualSumNoPercentBand(question, answers) {
+function dualSumNoPercentBand (question, answers) {
   const score =
     question.answer
       .filter(itemX => first(answers).input
@@ -523,25 +523,24 @@ function dualSumNoPercentBand(question, answers) {
   return new ScoreResult(score, band)
 }
 
-function SingleValueWeightedMatrixScore(question, answers, allQanswers, sectionScoringData) {
-  const currentQuestionWeight = question.answer
-    .filter(itemX => first(answers).input
-      .some(itemY => itemY.key === itemX.key))[ 0 ].weight
+function SingleValueWeightedMatrixScore (question, answers, allQanswers, sectionScoringData) {
+  const metrixXWeight = question.answer
+    .filter(metrixX => first(answers).input
+      .some(answerX => answerX.key === metrixX.key))[0].weight
 
-  const tobeQuestion = first(
+  const metrixYquestion = first(
     sectionScoringData.questions
-      .filter(q => q.key === question.matrixAxis.filter(axis => axis !== question.key)[ 0 ]))
+      .filter(scoringQues => question.key === question.matrixAxis.filter(axis => axis !== scoringQues.key)[0]))
 
-  const tobeAnswers = allQanswers.filter(x => tobeQuestion.key === x.key)[ 0 ]
-  const tobeQuestionScoreResult = calculateQScore(tobeQuestion, tobeAnswers.answers, null, allQanswers, sectionScoringData)
-  const rowIndex = question.key === question.matrixAxis[ 0 ] ? currentQuestionWeight : tobeQuestionScoreResult.score
-  const columnIndex = question.key === question.matrixAxis[ 1 ] ? currentQuestionWeight : tobeQuestionScoreResult.score
-  const score = question.scoreData.scoreMatrix.filter(x => x.id === String(rowIndex))[ 0 ][ String(columnIndex) ] * question.weight
+  const matrixYanswers = allQanswers.filter(x => metrixYquestion.key === x.key)[0]
+  const metrixYquestionScoreResult = calculateQScore(metrixYquestion, matrixYanswers.answers, null, allQanswers, sectionScoringData)
+  const rowIndex = question.key === question.matrixAxis[0] ? metrixXWeight : metrixYquestionScoreResult.score
+  const columnIndex = question.key === question.matrixAxis[1] ? metrixXWeight : metrixYquestionScoreResult.score
+  const score = question.scoreData.scoreMatrix.filter(x => x.id === String(rowIndex))[0][String(columnIndex)] * question.weight
   const questionBand = getBand(question, score)
-
   return new ScoreResult(score, questionBand)
 }
-function ScoreResult(score, band, importance = null) {
+function ScoreResult (score, band, importance = null) {
   this.score = score
   this.band = band
   this.importance = importance
