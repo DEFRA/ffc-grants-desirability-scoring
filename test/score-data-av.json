@@ -462,6 +462,7 @@
                 "key": "processed-sold",
                 "title": "Where are the processed products being sold?",
                 "maxScore": 5,
+                "countMax": true,
                 "weight": 5,
                 "showResult": true,
                 "scoreType": "boolWeightScore",
