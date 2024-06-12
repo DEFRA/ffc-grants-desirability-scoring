@@ -12,13 +12,20 @@ class ScoreEngine {
     this.desirabilityAssessment = desirabilityAssessment
   }
 
-  getScore () {
+  getScore() {
     // calculate each question result
     this.desirabilityAssessment.desirability.questions
       .map((qanswer, index, allQanswers) => calculate(qanswer, this.scoringData.desirability, allQanswers))
     const maxScore =
       this.scoringData.desirability.questions
-        .reduce((total, question) => question.maxScore + total, 0)
+        .reduce((total, question) => {
+          console.log(total,'I AM TOTAL')
+          if (!question?.countMax) {
+            return question.maxScore + total
+          }
+          return total
+        }, 0)
+
     const noShowResultQuestions =
       this.scoringData.desirability.questions
         .filter(question => question.showResult === false)
@@ -33,7 +40,6 @@ class ScoreEngine {
     this.desirabilityAssessment.desirability.overallRating.score = actualScore
     let bandScore = actualScore
     const overallRating = this.scoringData.desirability.overallRatingCalcType ?? 'percentile'
-
     if (overallRating.toLowerCase() === 'percentile') {
       bandScore = (actualScore / maxScore * 100)
       this.desirabilityAssessment.desirability.overallRating.score = Math.floor(bandScore * 100) / 100 // only shows upto 2 decimal when needed
@@ -292,7 +298,6 @@ function dualQuestionHectorScore (question, answers, dependentQuestionRatingScor
 
 // Q20
 function boolWeightScore(question, answers) {
-  console.log(answers[0].input,'answwwwwwww')
   const score = first(question.answer
     .filter(answer =>
       first(answers).input
@@ -364,7 +369,6 @@ function multiAvgMatrix (question, answers, dependantQuestionAnswers = []) {
     // if unsustainable option is a decrease
     if (UNSUSTAINABLE_WATER_SOURCE_ID.includes(toBeAnswer.wsId) && maintainOrStart === 'nochange') {
       maintainOrStart = dependantQuestionAnswers[0].answers.find(dqa => dqa.title === toBeAnswer.desc).input[0].value.toLowerCase().replace(' ', '')
-      console.log(maintainOrStart, 'nochange or dec')
     }
 
     const matrixVal = getMatrixValue(question.scoreData.scoreMatrix, maintainOrStart, toBeAnswer.wsId)
@@ -382,7 +386,6 @@ function multiAvgMatrix (question, answers, dependantQuestionAnswers = []) {
   if (scoreBand >= first(
     question.scoreData.scoreBand
       .filter(r => r.name === bandHigh)).value) { band = bandHigh }
-  console.log(matrixScoreArray, 'AVVVGGG = ', totalAverage, 'BBBBBB', scoreBand)
   return new ScoreResult(score, band)
 }
 
