@@ -19,7 +19,6 @@ class ScoreEngine {
     const maxScore =
       this.scoringData.desirability.questions
         .reduce((total, question) => {
-          console.log(total,'I AM TOTAL')
           if (!question?.countMax) {
             return question.maxScore + total
           }
