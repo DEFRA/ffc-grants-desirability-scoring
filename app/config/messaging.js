@@ -54,6 +54,8 @@ module.exports = {
   fetchProdScoreResponseMsgType: `${msgTypePrefix}.fetch.prod.score.response`,
   fetchHensScoreRequestMsgType: `${msgTypePrefix}.fetch.layingHens.score.request`,
   fetchHensScoreResponseMsgType: `${msgTypePrefix}.fetch.layingHens.score.response`,
+  fetchAdultCattleHousingScoreRequestMsgType: `${msgTypePrefix}.fetch.adultCattleHousing.score.request`,
+  fetchAdultCattleHousingScoreResponseMsgType: `${msgTypePrefix}.fetch.adultCattleHousing.score.response`,
   fetchAddValScoreRequestMsgType: `${msgTypePrefix}.fetch.addval.score.request`,
   fetchAddValScoreResponseMsgType: `${msgTypePrefix}.fetch.addval.score.response`
 
