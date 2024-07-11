@@ -24,7 +24,7 @@ const processScoring = async (msg, scoreReciever) => {
     } else if (msgType === '.fetch.addval.score.request') {
       grantType = 'Adding Value Grant'
     } else if (msgType === '.fetch.adultCattleHousing.score.request') {
-      grantType = 'Cattle Housing Grant'
+      grantType = 'Adult Cattle Housing'
     }
 
     const scoreData = await scoreDataRepository.getScoreData(grantType)

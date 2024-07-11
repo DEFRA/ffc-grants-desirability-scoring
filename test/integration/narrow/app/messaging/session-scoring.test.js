@@ -235,7 +235,7 @@ describe('Session scoring test', () => {
 
     expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
     expect(scoreRepository.getScoreData).toHaveBeenCalledWith(
-      'Cattle Housing Grant'
+      'Adult Cattle Housing'
     )
 
     expect(sendResponseToSession).toHaveBeenCalledTimes(1)
