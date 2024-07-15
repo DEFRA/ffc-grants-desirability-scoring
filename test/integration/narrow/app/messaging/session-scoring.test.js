@@ -61,7 +61,7 @@ describe('Session scoring test', () => {
     expect(mockGetScore).toHaveBeenCalledTimes(1)
   })
 
-  test('message properly processed calf housing score', async () => {
+  test('message properly processed cattle housing score', async () => {
     mockGetScore.mockImplementationOnce(() => {
       return ''
     })
@@ -91,44 +91,6 @@ describe('Session scoring test', () => {
       '',
       '12345',
       '.fetch.score.request'
-    )
-    expect(mockGetScore).toHaveBeenCalledTimes(1)
-  })
-
-  test('message properly processed cattle housing score', async () => {
-    mockGetScore.mockImplementationOnce(() => {
-      return ''
-    })
-    const msg = {
-      sessionId: '12345',
-      applicationProperties: {
-        type: 'uk.gov.ffc.grants.fetch.adultCattleHousing.score.request'
-      },
-      body: {
-        grantScheme: {
-          key: 'ADULTCATTLEHOUSING01'
-        }
-      }
-    }
-
-    jest
-      .spyOn(scoreRepository, 'getScoreData')
-      .mockResolvedValue({ data: '{"test": "Ahaa Adult Cattle Housing"}' })
-
-    sendResponseToSession.mockResolvedValue(true)
-
-    await processScoring(msg, scoreReciever)
-
-    expect(scoreRepository.getScoreData).toHaveBeenCalledTimes(1)
-    expect(scoreRepository.getScoreData).toHaveBeenCalledWith(
-      'Adult Cattle Housing'
-    )
-
-    expect(sendResponseToSession).toHaveBeenCalledTimes(1)
-    expect(sendResponseToSession).toHaveBeenCalledWith(
-      '',
-      '12345',
-      '.fetch.adultCattleHousing.score.request'
     )
     expect(mockGetScore).toHaveBeenCalledTimes(1)
   })
