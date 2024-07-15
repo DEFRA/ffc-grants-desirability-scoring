@@ -30,12 +30,4 @@ describe('messaging tests', () => {
     await expect(senders.sendScoreCalculated('', '')).resolves.not.toThrow()
     expect(mockSendEvent).toHaveBeenCalledTimes(1)
   })
-  test('Receiver Should be defined', () => {
-    const receivers = require('../../../../../app/messaging/receivers')
-    expect(receivers).toBeDefined()
-  })
-  test('Receiver startCalculateScoreReceiver Should not throw error', async () => {
-    const receivers = require('../../../../../app/messaging/receivers')
-    await expect(receivers.startCalculateScoreReceiver('')).resolves.not.toThrow()
-  })
 })

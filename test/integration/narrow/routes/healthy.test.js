@@ -5,7 +5,6 @@ describe('Healthy test', () => {
   sequelize.authenticate = jest.fn()
   jest.mock('../../../../app/messaging/calculate-score')
   jest.mock('../../../../app/messaging/senders')
-  jest.mock('../../../../app/messaging/receivers')
 
   test('GET /healthy returns 200', async () => {
     const options = {
