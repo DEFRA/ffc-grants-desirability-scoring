@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-desirability-scoring",
-  "version": "1.26.0",
+  "version": "1.26.2",
   "description": "FFC Grants desirability scoring microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-desirability-scoring",
   "main": "app/index.js",
@@ -10,7 +10,12 @@
     "start:watch": "nodemon --inspect=0.0.0.0 --ext js --legacy-watch app/index.js"
   },
   "author": "Defra",
-  "contributors": [],
+  "contributors": [
+    {"name":"Andrew Folga","url":"https://github.com/Andrew-Folga"},
+    {"name":"David Barker","url":"https://github.com/DavidBarker-EE"},
+    {"name":"Andrew Deacon","url":"https://github.com/ScenarioFactory"},
+    {"name":"Alan Platt","url":"https://github.com/alanplatt"}
+  ],
   "license": "OGL-UK-3.0",
   "dependencies": {
     "@azure/identity": "^4.0.1",
