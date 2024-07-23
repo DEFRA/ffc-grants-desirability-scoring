@@ -61,7 +61,7 @@ describe('Session scoring test', () => {
     expect(mockGetScore).toHaveBeenCalledTimes(1)
   })
 
-  test('message properly processed cattle housing score', async () => {
+  test('message properly processed calf housing score', async () => {
     mockGetScore.mockImplementationOnce(() => {
       return ''
     })
@@ -209,7 +209,7 @@ describe('Session scoring test', () => {
     expect(mockGetScore).toHaveBeenCalledTimes(1)
   })
 
-  test('message properly processed cattle housing score', async () => {
+  test('message properly processed adult cattle housing score', async () => {
     mockGetScore.mockImplementationOnce(() => {
       return ''
     })
