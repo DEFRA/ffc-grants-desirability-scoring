@@ -8,7 +8,6 @@ data:
   POSTGRES_PORT: {{ quote .Values.postgresService.postgresPort }}
   POSTGRES_SCHEMA_NAME: {{ quote .Values.postgresService.postgresSchema }}
   DESIRABILITY_SCORE_TOPIC_ADDRESS: {{ quote .Values.container.desirabilityScoreTopicAddress }}
-  CALCULATE_SCORE_QUEUE_ADDRESS: {{ quote .Values.container.calculateScoreQueueAddress }}
   SERVICE_BUS_HOST: {{ quote .Values.container.messageQueueHost }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
   COST_REQUEST_QUEUE_ADDRESS: {{ .Values.container.costRequestQueueAddress | quote }}
